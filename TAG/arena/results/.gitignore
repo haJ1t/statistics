@@ -1,0 +1,2 @@
+# Keep the summary logs of the benchmark runs (TAG/.gitignore ignores *.log)
+!*.log

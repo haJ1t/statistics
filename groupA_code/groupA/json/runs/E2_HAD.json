@@ -1,0 +1,9 @@
+{
+  "game": "SushiGo",
+  "nPlayers": 4,
+  "playerDirectory": "src/main/java/groupA/json/opponents/H_fm10k",
+  "focusPlayer": "src/main/java/groupA/json/agents/HAD.json",
+  "matchups": 500,
+  "destDir": "results/E2_HAD",
+  "listener": "json/listeners/basiclistener.json"
+}

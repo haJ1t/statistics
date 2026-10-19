@@ -1,0 +1,37 @@
+RESULT abl_noR | n=3 games=500 | win=45.2% [40.9, 49.6] (chance 33.3%) | score=43.03 | diffBest=-0.22 +- 0.46 | ms/dec(all)=110 | 273s
+    abl_noR.json [focus]                          win 45.2% over 500 seats
+    ref.json                                      win 21.0% over 500 seats
+    tagmcts.json                                  win 33.8% over 500 seats
+RESULT abl_noP | n=3 games=500 | win=43.1% [38.8, 47.5] (chance 33.3%) | score=42.99 | diffBest=-0.71 +- 0.44 | ms/dec(all)=110 | 273s
+    abl_noP.json [focus]                          win 43.1% over 500 seats
+    ref.json                                      win 23.4% over 500 seats
+    tagmcts.json                                  win 33.5% over 500 seats
+RESULT abl_noB | n=3 games=500 | win=45.7% [41.4, 50.1] (chance 33.3%) | score=42.16 | diffBest=-0.90 +- 0.49 | ms/dec(all)=105 | 259s
+    abl_noB.json [focus]                          win 45.7% over 500 seats
+    ref.json                                      win 22.6% over 500 seats
+    tagmcts.json                                  win 31.7% over 500 seats
+RESULT abl_noD | n=3 games=500 | win=41.9% [37.7, 46.3] (chance 33.3%) | score=42.62 | diffBest=-0.85 +- 0.47 | ms/dec(all)=104 | 256s
+    abl_noD.json [focus]                          win 41.9% over 500 seats
+    ref.json                                      win 22.5% over 500 seats
+    tagmcts.json                                  win 35.6% over 500 seats
+RESULT abl_plusA | n=3 games=500 | win=48.1% [43.8, 52.5] (chance 33.3%) | score=43.04 | diffBest=-0.13 +- 0.44 | ms/dec(all)=110 | 271s
+    abl_plusA.json [focus]                        win 48.1% over 500 seats
+    ref.json                                      win 20.8% over 500 seats
+    tagmcts.json                                  win 31.1% over 500 seats
+RESULT abl_plusO | n=3 games=500 | win=28.3% [24.5, 32.4] (chance 33.3%) | score=40.69 | diffBest=-2.83 +- 0.52 | ms/dec(all)=104 | 257s
+    abl_plusO.json [focus]                        win 28.3% over 500 seats
+    ref.json                                      win 26.8% over 500 seats
+    tagmcts.json                                  win 44.9% over 500 seats
+RESULT abl_K1.41 | n=3 games=500 | win=39.9% [35.7, 44.3] (chance 33.3%) | score=42.61 | diffBest=-1.09 +- 0.46 | ms/dec(all)=108 | 266s
+    abl_K1.41.json [focus]                        win 39.9% over 500 seats
+    ref.json                                      win 23.7% over 500 seats
+    tagmcts.json                                  win 36.4% over 500 seats
+RESULT abl_T4 | n=3 games=500 | win=50.1% [45.7, 54.5] (chance 33.3%) | score=43.48 | diffBest=0.02 +- 0.44 | ms/dec(all)=104 | 258s
+    abl_T4.json [focus]                           win 50.1% over 500 seats
+    ref.json                                      win 16.9% over 500 seats
+    tagmcts.json                                  win 33.0% over 500 seats
+RESULT abl_noH | n=3 games=500 | win=25.2% [21.6, 29.2] (chance 33.3%) | score=40.86 | diffBest=-5.51 +- 0.65 | ms/dec(all)=103 | 255s
+    abl_noH.json [focus]                          win 25.2% over 500 seats
+    ref.json                                      win 32.6% over 500 seats
+    tagmcts.json                                  win 42.2% over 500 seats
+BATCH DONE

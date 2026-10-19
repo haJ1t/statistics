@@ -1,0 +1,369 @@
+package games.toads;
+
+import core.AbstractGameState;
+import core.AbstractParameters;
+import core.components.Component;
+import core.components.Deck;
+import core.components.PartialObservableDeck;
+import games.GameType;
+import games.toads.components.ToadCard;
+import utilities.DeterminisationUtilities;
+
+import java.util.*;
+
+import static games.toads.ToadConstants.ToadGamePhase.PLAY;
+
+
+public class ToadGameState extends AbstractGameState {
+
+
+    public ToadGameState(AbstractParameters gameParameters, int nPlayers) {
+        super(gameParameters, nPlayers);
+    }
+
+    List<PartialObservableDeck<ToadCard>> playerDecks;
+    List<PartialObservableDeck<ToadCard>> playerHands;
+    int discardOptions;
+    int[][] battlesWon;
+    int[] battlesTied;
+    int[][] shrineFlags;
+    int nextBattle = 0;
+    protected int[][] roundWinners;
+    List<Deck<ToadCard>> playerDiscards;
+    ToadCard[] hiddenFlankCards;
+    ToadCard[] fieldCards;
+    ToadCard[] tieBreakers;
+    Set<ToadConstants.ToadCardType> cardTypesInPlay;
+    // the Attacker in the current Battle, set once they have played their face-up card; -1 before that
+    int attacker = -1;
+
+    @Override
+    protected GameType _getGameType() {
+        return GameType.WarOfTheToads;
+    }
+
+    @Override
+    protected List<Component> _getAllComponents() {
+        List<Component> components = new ArrayList<>();
+        components.addAll(playerDecks.get(0).stream().toList());
+        components.addAll(playerDecks.get(1).stream().toList());
+        components.addAll(playerHands.get(0).stream().toList());
+        components.addAll(playerHands.get(1).stream().toList());
+        components.addAll(playerDiscards.get(0).stream().toList());
+        components.addAll(playerDiscards.get(1).stream().toList());
+        if (hiddenFlankCards[0] != null)
+            components.add(hiddenFlankCards[0]);
+        if (hiddenFlankCards[1] != null)
+            components.add(hiddenFlankCards[1]);
+        if (fieldCards[0] != null)
+            components.add(fieldCards[0]);
+        if (fieldCards[1] != null)
+            components.add(fieldCards[1]);
+        if (tieBreakers[0] != null)
+            components.add(tieBreakers[0]);
+        if (tieBreakers[1] != null)
+            components.add(tieBreakers[1]);
+        return components;
+    }
+
+    @Override
+    protected ToadGameState _copy(int playerId) {
+        ToadGameState copy = new ToadGameState(gameParameters, getNPlayers());
+        copy.playerDecks = new ArrayList<>();
+        for (PartialObservableDeck<ToadCard> deck : playerDecks) {
+            copy.playerDecks.add(deck.copy());
+        }
+        copy.playerHands = new ArrayList<>();
+        for (PartialObservableDeck<ToadCard> hand : playerHands) {
+            copy.playerHands.add(hand.copy());
+        }
+        copy.playerDiscards = new ArrayList<>();
+        for (Deck<ToadCard> discard : playerDiscards) {
+            copy.playerDiscards.add(discard.copy());
+        }
+        copy.battlesWon = new int[2][2];
+        for (int i = 0; i < 2; i++) {
+            copy.battlesWon[i] = Arrays.copyOf(battlesWon[i], 2);
+        }
+        copy.battlesTied = Arrays.copyOf(battlesTied, 2);
+        copy.shrineFlags = new int[2][];
+        for (int i = 0; i < 2; i++) {
+            copy.shrineFlags[i] = Arrays.copyOf(shrineFlags[i], 2);
+        }
+        copy.discardOptions = discardOptions;
+        copy.cardTypesInPlay = cardTypesInPlay; // from the card file, and unmodifiable
+        copy.nextBattle = nextBattle;
+
+        // battlesWon tracks the win/loss rates over all 8 Battles
+        copy.roundWinners = new int[8][2];
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 2; j++) {
+                copy.roundWinners[i][j] = roundWinners[i][j];
+            }
+        }
+
+        copy.hiddenFlankCards = new ToadCard[hiddenFlankCards.length];
+        copy.fieldCards = new ToadCard[fieldCards.length];
+        copy.tieBreakers = new ToadCard[tieBreakers.length];
+
+        for (int i = 0; i < hiddenFlankCards.length; i++) {
+            if (hiddenFlankCards[i] != null)
+                copy.hiddenFlankCards[i] = hiddenFlankCards[i].copy();
+        }
+        for (int i = 0; i < fieldCards.length; i++) {
+            if (fieldCards[i] != null)
+                copy.fieldCards[i] = fieldCards[i].copy();
+        }
+        for (int i = 0; i < tieBreakers.length; i++) {
+            if (tieBreakers[i] != null)
+                copy.tieBreakers[i] = tieBreakers[i].copy();
+        }
+        copy.attacker = attacker;
+        // Hidden information (the opponent's deck, hand and choices this Battle) is dealt with in redeterminise(),
+        return copy;
+    }
+
+    @Override
+    public void redeterminise(int playerId) {
+        int opponent = 1 - playerId;
+        // The Attacker's hidden card and both the Defender's cards are chosen at once, so undo any of these choices
+        // the opponent has already made.  We do not change the cards we played.
+        // It is the responsibility of the deciding agent to model the opponent's simukltaneous choice.
+        if (getGamePhase() == PLAY && attacker != -1 && !isActionInProgress()) {
+            if (opponent == attacker) {
+                // a hidden card stays in the hand until it is revealed
+                hiddenFlankCards[opponent] = null;
+            } else if (fieldCards[opponent] != null) {
+                playerHands.get(opponent).add(fieldCards[opponent]);
+                fieldCards[opponent] = null;
+                hiddenFlankCards[opponent] = null;
+            }
+        }
+
+        // shuffle the other player's deck and hand
+        DeterminisationUtilities.reshuffle(playerId,
+                List.of(
+                        playerDecks.get(opponent),
+                        playerHands.get(opponent)
+                ),
+                i -> true,  // no special conditions
+                redeterminisationRnd);
+        // and their tiebreaker is shuffled with *our* as yet undrawn deck
+        if (tieBreakers[opponent] != null)
+            playerDecks.get(playerId).add(tieBreakers[opponent]);
+        // cards the player knows, such as one they returned to the bottom, stay in place
+        playerDecks.get(playerId).redeterminiseUnknown(redeterminisationRnd, playerId);
+        if (tieBreakers[opponent] != null)
+            tieBreakers[opponent] = playerDecks.get(playerId).draw();
+
+        // Both players still to choose do so at once, so each of them sees themselves as the current player.
+        // This is what the 2-argument computeAvailableActions() reads.
+        if (getCurrentSimultaneousPlayers().contains(playerId))
+            setTurnOwner(playerId);
+    }
+
+    @Override
+    public List<Integer> getCurrentSimultaneousPlayers() {
+        if (isActionInProgress() || !isNotTerminal() || getGamePhase() != PLAY || attacker == -1) {
+            return super.getCurrentSimultaneousPlayers();
+        }
+        List<Integer> retValue = new ArrayList<>(2);
+        for (int p = 0; p < getNPlayers(); p++) {
+            boolean done = p == attacker ? hiddenFlankCards[p] != null : fieldCards[p] != null;
+            if (!done)
+                retValue.add(p);
+        }
+        return retValue;
+    }
+
+    /**
+     * The Attacker in the current Battle, or -1 outside the PLAY phase. Before any card is played this is the
+     * player about to play the face-up card that opens the Battle.
+     */
+    public int getAttacker() {
+        if (attacker != -1)
+            return attacker;
+        return getGamePhase() == PLAY && !isActionInProgress() ? getCurrentPlayer() : -1;
+    }
+
+    public PartialObservableDeck<ToadCard> getPlayerHand(int playerId) {
+        return playerHands.get(playerId);
+    }
+
+    public PartialObservableDeck<ToadCard> getPlayerDeck(int playerId) {
+        return playerDecks.get(playerId);
+    }
+
+    public void seeOpponentsHand(int player, ToadConstants.ToadCardType exception) {
+        PartialObservableDeck<ToadCard> handToSee = playerHands.get(1 - player);
+        for (int i = 0; i < handToSee.getSize(); i++) {
+            if (exception != null && handToSee.peek(i).type == exception)
+                continue;
+            handToSee.setVisibilityOfComponent(i, player, true);
+        }
+    }
+
+    public Set<ToadConstants.ToadCardType> getCardTypesInPlay() {
+        return cardTypesInPlay;
+    }
+
+    public ToadCard getFieldCard(int playerId) {
+        return fieldCards[playerId];
+    }
+
+    public ToadCard getHiddenFlankCard(int playerId) {
+        return hiddenFlankCards[playerId];
+    }
+
+    public ToadCard getTieBreaker(int playerId) {
+        return tieBreakers[playerId];
+    }
+
+    public int getBattlesWon(int round, int playerId) {
+        return battlesWon[round][playerId];
+    }
+
+    public int getBattlesTied(int round) {
+        return battlesTied[round];
+    }
+
+    /**
+     * The Flags a player has in the Shrine in the given War (round).
+     */
+    public int getShrineFlags(int round, int playerId) {
+        return shrineFlags[round][playerId];
+    }
+
+    public int getScoreInBattle(int battle, int playerId) {
+        return roundWinners[battle][playerId];
+    }
+
+    /**
+     * The number of Battles fought so far in the game (both Wars).
+     */
+    public int getBattlesFought() {
+        return nextBattle;
+    }
+
+    public Deck<ToadCard> getDiscards(int playerId) {
+        return playerDiscards.get(playerId);
+    }
+
+    public void playFieldCard(int playerId, ToadCard card) {
+        if (fieldCards[playerId] != null)
+            throw new AssertionError("Field card already played");
+        fieldCards[playerId] = card;
+        if (playerHands.get(playerId).contains(card))
+            playerHands.get(playerId).remove(card);
+        else
+            throw new AssertionError("Card not in hand");
+    }
+
+    public void playFlankCard(int playerId, ToadCard card) {
+        if (hiddenFlankCards[playerId] != null)
+            throw new AssertionError("Flank card already played");
+        hiddenFlankCards[playerId] = card;
+        if (!playerHands.get(playerId).contains(card))
+            throw new AssertionError("Card not in hand");
+    }
+
+    public void revealFlankCards() {
+        for (int i = 0; i < 2; i++) {
+            if (hiddenFlankCards[i] != null) {
+                playerHands.get(i).remove(hiddenFlankCards[i]);
+            }
+        }
+    }
+
+    @Override
+    protected double _getHeuristicScore(int playerId) {
+        return getGameScore(playerId);
+    }
+
+    @Override
+    public double getGameScore(int playerId) {
+        // if the game is not over, our score is battles won in the current round
+        if (isNotTerminal())
+            return battlesWon[roundCounter][playerId];
+        // otherwise we give a score of 10 for winning; 0 for losing; 5 for a tie
+        // this is on the same scale of the battles won...and 10 is larger than any possible number of battles
+        int[] roundsWon = new int[2];
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                if (battlesWon[j][i] > battlesWon[j][1 - i])
+                    roundsWon[i]++;
+            }
+        }
+        if (roundsWon[playerId] > roundsWon[1 - playerId])
+            return 10;
+        if (roundsWon[playerId] < roundsWon[1 - playerId])
+            return 0;
+        // if tied on rounds, winner of the second wins
+        if (battlesWon[roundCounter][playerId] > battlesWon[roundCounter][1 - playerId])
+            return 10;
+        if (battlesWon[roundCounter][playerId] < battlesWon[roundCounter][1 - playerId])
+            return 0;
+        // otherwise we tie (and tiebreaker is used)
+        return 5;
+    }
+
+
+    @Override
+    public double getTiebreak(int playerId, int tier) {
+        if (tieBreakers[playerId] == null)
+            return 0;
+        // the lowest Casualty wins
+        return -tieBreakers[playerId].value;
+    }
+
+    @Override
+    public int getTiebreakLevels() {
+        return 1;
+    }
+
+
+    @Override
+    protected boolean _equals(Object o) {
+        if (o instanceof ToadGameState toadGameState) {
+            return playerDecks.equals(toadGameState.playerDecks) &&
+                    playerHands.equals(toadGameState.playerHands) &&
+                    discardOptions == toadGameState.discardOptions &&
+                    nextBattle == toadGameState.nextBattle &&
+                    attacker == toadGameState.attacker &&
+                    Arrays.deepEquals(battlesWon, toadGameState.battlesWon) &&
+                    playerDiscards.equals(toadGameState.playerDiscards) &&
+                    Arrays.equals(hiddenFlankCards, toadGameState.hiddenFlankCards) &&
+                    Arrays.equals(tieBreakers, toadGameState.tieBreakers) &&
+                    Arrays.equals(battlesTied, toadGameState.battlesTied) &&
+                    Arrays.deepEquals(shrineFlags, toadGameState.shrineFlags) &&
+                    Arrays.deepEquals(roundWinners, toadGameState.roundWinners) &&
+                    Arrays.equals(fieldCards, toadGameState.fieldCards);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return 31 * super.hashCode() + Objects.hash(playerDecks, playerHands, playerDiscards, discardOptions, nextBattle, attacker) +
+                Arrays.deepHashCode(battlesWon) + 17 * Arrays.deepHashCode(roundWinners) +
+                Arrays.hashCode(hiddenFlankCards) + Arrays.hashCode(fieldCards) + Arrays.hashCode(tieBreakers) + Arrays.hashCode(battlesTied) +
+                31 * Arrays.deepHashCode(shrineFlags);
+    }
+
+    @Override
+    public String toString() {
+        return super.hashCode() + "|" +
+                playerDecks.hashCode() + "|" +
+                playerHands.hashCode() + "|" +
+                playerDiscards.hashCode() + "|" +
+                discardOptions + nextBattle * 31 + "|" +
+                Arrays.deepHashCode(battlesWon) + "|" +
+                Arrays.hashCode(battlesTied) + "|" +
+                Arrays.deepHashCode(shrineFlags) + "|" +
+                Arrays.deepHashCode(roundWinners) + "|" +
+                Arrays.hashCode(hiddenFlankCards) + "|" +
+                Arrays.hashCode(fieldCards) + "|" +
+                Arrays.hashCode(tieBreakers) + "|";
+    }
+
+}

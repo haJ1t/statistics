@@ -1,0 +1,496 @@
+package games.fmtester;
+
+import games.GameType;
+import core.AbstractParameters;
+import evaluation.ForwardModelTester;
+import games.agram.AgramParameters;
+import games.cuckoo.CuckooParameters;
+import games.euchre.EuchreParameters;
+import games.gofish.GoFishParameters;
+import games.golfsix.GolfSixParameters;
+import games.klaverjassen.KlaverjassenParameters;
+import games.lawnandorder.LawnAndOrderParameters;
+import games.schwimmen.SchwimmenParameters;
+import games.whist.WhistParameters;
+import games.blackjack.BlackjackParameters;
+import games.goofspiel.GoofspielParameters;
+import games.leducpoker.LeducPokerParameters;
+import games.toads.ToadParameters;
+import games.catan.CatanParameters;
+import games.crazyeights.CZEParameters;
+import games.cribbage.CribbageParameters;
+import games.descent2e.DescentParameters;
+import games.pitch.PitchParameters;
+import games.president.PresidentParameters;
+import games.rummy.RummyParameters;
+import games.scarto.ScartoParameters;
+import games.scopa.ScopaParameters;
+import games.skitgubbe.SkitgubbeParameters;
+import games.sueca.SuecaParameters;
+import games.dominion.DominionIParameters;
+import games.dominion.DominionParameters;
+import games.dominion.DominionSDParameters;
+import org.junit.Test;
+
+import java.util.List;
+
+public class ForwardModelTestsWithMCTS {
+
+    @Test
+    public void testSaboteur() {
+        new ForwardModelTester("game=Saboteur", "nGames=3", "nPlayers=5", "agent=json\\players\\gameSpecific\\Saboteur\\Saboteur.json", "budget=50");
+    }
+
+    @Test
+    public void testSkitgubbe() {
+        new ForwardModelTester("game=Skitgubbe", "nGames=2", "nPlayers=3", "agent=json\\players\\mcts.json");
+        SkitgubbeParameters params = new SkitgubbeParameters();
+        params.setParameterValue("completerLeads", true);
+        params.setParameterValue("exitOrderTiebreak", true);
+        params.setParameterValue("handSize", 2);
+        new ForwardModelTester(params, "game=Skitgubbe", "nGames=1", "nPlayers=4", "agent=json\\players\\mcts.json");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.Skitgubbe, "data/skitgubbe/Skitgubbe_Valet.json"),
+                "game=Skitgubbe", "nGames=1", "nPlayers=3", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testScopa() {
+        new ForwardModelTester("game=Scopa", "nGames=2", "nPlayers=2", "agent=json\\players\\mcts.json");
+        ScopaParameters params = new ScopaParameters();
+        params.setParameterValue("targetScore", 11);
+        params.setParameterValue("redealOnKings", true);
+        new ForwardModelTester(params, "game=Scopa", "nGames=1", "nPlayers=2", "agent=json\\players\\mcts.json");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.Scopa, "data/scopa/Scopa_Valet.json"),
+                "game=Scopa", "nGames=1", "nPlayers=2", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testScarto() {
+        new ForwardModelTester("game=Scarto", "nGames=2", "nPlayers=3", "agent=json\\players\\mcts.json");
+        ScartoParameters params = new ScartoParameters();
+        params.setParameterValue("nDeals", 3);
+        params.setParameterValue("dealerExchange", true);
+        new ForwardModelTester(params, "game=Scarto", "nGames=1", "nPlayers=3", "agent=json\\players\\mcts.json");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.Scarto, "data/scarto/Scarto_Valet.json"),
+                "game=Scarto", "nGames=1", "nPlayers=3", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testLawnAndOrder() {
+        new ForwardModelTester("game=LawnAndOrder", "nGames=1", "nPlayers=3", "agent=json\\players\\mcts.json");
+        LawnAndOrderParameters params = new LawnAndOrderParameters();
+        params.setParameterValue("targetScore", 5);
+        params.setParameterValue("maxRounds", 4);
+        params.setParameterValue("zeroToleranceReduction", 2);
+        new ForwardModelTester(params, "game=LawnAndOrder", "nGames=1", "nPlayers=5", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testSchwimmen() {
+        new ForwardModelTester("game=Schwimmen", "nGames=1", "nPlayers=4", "agent=json\\players\\mcts.json");
+        SchwimmenParameters params = new SchwimmenParameters();
+        params.setParameterValue("livesGame", true);
+        params.setParameterValue("startingChips", 1);
+        params.setParameterValue("maxCircuitsPerDeal", 3);
+        new ForwardModelTester(params, "game=Schwimmen", "nGames=1", "nPlayers=3", "agent=json\\players\\mcts.json");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.Schwimmen, "data/schwimmen/Schwimmen_Valet.json"),
+                "game=Schwimmen", "nGames=1", "nPlayers=4", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testPitch() {
+        new ForwardModelTester("game=Pitch", "nGames=2", "nPlayers=4", "agent=json\\players\\mcts.json");
+        PitchParameters params = new PitchParameters();
+        params.setParameterValue("targetScore", 11);
+        params.setParameterValue("countHighLowSeparately", true);
+        new ForwardModelTester(params, "game=Pitch", "nGames=1", "nPlayers=4", "agent=json\\players\\mcts.json");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.Pitch, "data/pitch/Pitch_Valet.json"),
+                "game=Pitch", "nGames=1", "nPlayers=4", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testSueca() {
+        new ForwardModelTester("game=Sueca", "nGames=2", "nPlayers=4", "agent=json\\players\\mcts.json");
+        SuecaParameters params = new SuecaParameters();
+        params.setParameterValue("playRubber", true);
+        params.setParameterValue("targetGames", 2);
+        new ForwardModelTester(params, "game=Sueca", "nGames=1", "nPlayers=4", "agent=json\\players\\mcts.json");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.Sueca, "data/sueca/Sueca_Valet.json"),
+                "game=Sueca", "nGames=1", "nPlayers=4", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testPresident() {
+        new ForwardModelTester("game=President", "nGames=2", "nPlayers=5", "agent=json\\players\\mcts.json");
+        PresidentParameters params = new PresidentParameters();
+        params.setParameterValue("targetScore", 5);
+        params.setParameterValue("exchangeCards", 2);
+        new ForwardModelTester(params, "game=President", "nGames=1", "nPlayers=4", "agent=json\\players\\mcts.json");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.President, "data/president/President_Valet.json"),
+                "game=President", "nGames=1", "nPlayers=5", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testRummy() {
+        new ForwardModelTester("game=Rummy", "nGames=2", "nPlayers=2", "agent=json\\players\\mcts.json");
+        RummyParameters params = new RummyParameters();
+        params.setParameterValue("targetScore", 50);
+        new ForwardModelTester(params, "game=Rummy", "nGames=1", "nPlayers=3", "agent=json\\players\\mcts.json");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.Rummy, "data/rummy/Rummy_Valet.json"),
+                "game=Rummy", "nGames=1", "nPlayers=2", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testRoot() {
+        new ForwardModelTester("game=Root", "nGames=2", "nPlayers=4", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testPickomino() {
+        new ForwardModelTester("game=Pickomino", "nGames=1", "nPlayers=2", "agent=json\\players\\mcts.json");
+        new ForwardModelTester("game=Pickomino", "nGames=1", "nPlayers=3", "agent=json\\players\\mcts.json");
+        new ForwardModelTester("game=Pickomino", "nGames=1", "nPlayers=4", "agent=json\\players\\mcts.json");
+        new ForwardModelTester("game=Pickomino", "nGames=1", "nPlayers=5", "agent=json\\players\\mcts.json");
+        new ForwardModelTester("game=Pickomino", "nGames=1", "nPlayers=6", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testBackgammon() {
+        new ForwardModelTester("game=Backgammon", "nGames=2", "nPlayers=2", "agent=json\\players\\gameSpecific\\Backgammon\\Backgammon.json", "budget=50");
+        new ForwardModelTester("game=XIIScripta", "nGames=2", "nPlayers=2", "agent=json\\players\\gameSpecific\\Backgammon\\Backgammon.json", "budget=50");
+    }
+
+    @Test
+    public void testBattleLore() {
+        new ForwardModelTester("game=Battlelore", "nGames=1", "nPlayers=2", "agent=json\\players\\gameSpecific\\Battlelore.json");
+    }
+
+    @Test
+    public void testDescent2e() {
+        DescentParameters params = new DescentParameters();
+        params.heroesToBePlayed = List.of("Widow Tarha", "Avric Albright");
+        ForwardModelTester fmt = new ForwardModelTester(params, "game=Descent2e", "nGames=1", "nPlayers=2", "agent=json\\players\\gameSpecific\\Descent.json");
+        params.heroesToBePlayed = List.of("Leoric of the Book", "Ashrian");
+        new ForwardModelTester(params, "game=Descent2e", "nGames=1", "nPlayers=2", "agent=json\\players\\gameSpecific\\Descent.json");
+        params.heroesToBePlayed = List.of("Syndrael", "Jain Fairwood");
+        new ForwardModelTester(params, "game=Descent2e", "nGames=1", "nPlayers=2", "agent=json\\players\\gameSpecific\\Descent.json");
+        params.heroesToBePlayed = List.of("Tomble Burrowell", "Grisban the Thirsty");
+        new ForwardModelTester(params, "game=Descent2e", "nGames=1", "nPlayers=2", "agent=json\\players\\gameSpecific\\Descent.json");
+    }
+
+    @Test
+    public void testCantStop() {
+        new ForwardModelTester("game=CantStop", "nGames=2", "nPlayers=3", "agent=json\\players\\gameSpecific\\CantStop.json");
+    }
+
+    @Test
+    public void testCatan() {
+        new ForwardModelTester("game=Catan", "nGames=1", "nPlayers=3", "agent=json\\players\\gameSpecific\\catan\\Catan_LearnedHeuristic.json");
+    }
+
+    @Test
+    public void testCatanNoTrading() {
+        CatanParameters cp = new CatanParameters();
+        cp.setParameterValue("tradingAllowed", false);
+        new ForwardModelTester(cp, "game=Catan", "nGames=1", "nPlayers=3", "agent=json\\players\\gameSpecific\\catan\\Catan_LearnedHeuristic.json");
+    }
+
+    @Test
+    public void testColtExpress() {
+        new ForwardModelTester("game=ColtExpress", "nGames=2", "nPlayers=3", "agent=json\\players\\gameSpecific\\ColtExpress\\ColtExpress_3P.json");
+    }
+
+    @Test
+    public void testConnect4() {
+        new ForwardModelTester("game=Connect4", "nGames=2", "nPlayers=2", "agent=json\\players\\gameSpecific\\Connect4.json", "budget=50");
+    }
+
+    @Test
+    public void testDiamant() {
+        new ForwardModelTester("game=Diamant", "nGames=2", "nPlayers=4", "agent=json\\players\\gameSpecific\\Diamant.json");
+    }
+
+
+    @Test
+    public void testDiamantDUCT() {
+        new ForwardModelTester("game=Diamant", "nGames=2", "nPlayers=4", "agent=json\\players\\gameSpecific\\Diamant_DUCT.json");
+    }
+
+    @Test
+    public void testDominion() {
+        new ForwardModelTester("game=Dominion", "nGames=2", "nPlayers=4", "agent=json\\players\\gameSpecific\\Dominion\\Dominion.json");
+        new ForwardModelTester(new DominionSDParameters(), "game=Dominion", "nGames=2", "nPlayers=4", "agent=json\\players\\gameSpecific\\Dominion\\Dominion.json");
+        new ForwardModelTester(new DominionIParameters(), "game=Dominion", "nGames=2", "nPlayers=4", "agent=json\\players\\gameSpecific\\Dominion\\Dominion.json");
+    }
+
+    @Test
+    public void testDotsAndBoxes() {
+        new ForwardModelTester("game=DotsAndBoxes", "nGames=2", "nPlayers=2", "agent=json\\players\\gameSpecific\\DotsAndBoxes.json");
+    }
+
+    @Test
+    public void testExplodingKittens() {
+        new ForwardModelTester("game=ExplodingKittens", "nGames=2", "nPlayers=3",
+                "agent=json\\players\\gameSpecific\\ExplodingKittens\\ExplodingKittens.json");
+    }
+
+    @Test
+    public void testLoveLetter() {
+        new ForwardModelTester("game=LoveLetter", "nGames=2", "nPlayers=3", "agent=json\\players\\gameSpecific\\LoveLetter\\LoveLetter_4P.json", "budget=50");
+    }
+
+    @Test
+    public void testPoker() {
+        new ForwardModelTester("game=Poker", "nGames=3", "nPlayers=4", "agent=json\\players\\gameSpecific\\Poker\\Poker_3+P.json");
+    }
+
+    @Test
+    public void testStratego() {
+        new ForwardModelTester("game=Stratego", "nGames=1", "nPlayers=2", "agent=json\\players\\gameSpecific\\Stratego.json");
+    }
+
+    @Test
+    public void testSushiGoWithSeqUCT() {
+        new ForwardModelTester("game=SushiGo", "nGames=2", "nPlayers=4", "agent=json\\players\\gameSpecific\\SushiGo\\SushiGo.json");
+    }
+
+    @Test
+    public void testSushiGoWithDUCT() {
+        new ForwardModelTester("game=SushiGo", "nGames=2", "nPlayers=4", "agent=json\\players\\gameSpecific\\SushiGo\\SushiGoDUCT.json");
+    }
+
+    @Test
+    public void testTicTacToe() {
+        new ForwardModelTester("game=TicTacToe", "nGames=2", "nPlayers=2", "agent=json\\players\\gameSpecific\\TicTacToe.json");
+    }
+
+    @Test
+    public void testUno() {
+        new ForwardModelTester("game=Uno", "nGames=1", "nPlayers=5", "agent=json\\players\\gameSpecific\\Virus\\Virus.json");
+    }
+
+    @Test
+    public void testResistance() {
+        new ForwardModelTester("game=Resistance", "nGames=2", "nPlayers=5", "agent=json\\players\\gameSpecific\\Dominion\\Dominion.json");
+    }
+
+    @Test
+    public void testVirus() {
+        new ForwardModelTester("game=Virus", "nGames=2", "nPlayers=4", "agent=json\\players\\gameSpecific\\Virus\\Virus.json");
+    }
+
+    @Test
+    public void testTerraformingMars() {
+        new ForwardModelTester("game=TerraformingMars", "nGames=2", "nPlayers=4", "agent=json\\players\\gameSpecific\\MonopolyDeal\\MonopolyDeal_64ms.json");
+    }
+
+    @Test
+    public void testSevenWonders() {
+        new ForwardModelTester("game=Wonders7", "nGames=1", "nPlayers=3", "agent=json\\players\\gameSpecific\\Wonders7\\Wonders7_3P.json", "budget=50");
+        new ForwardModelTester("game=Wonders7", "nGames=1", "nPlayers=4", "agent=json\\players\\gameSpecific\\Wonders7\\Wonders7_4-5P.json", "budget=50");
+        new ForwardModelTester("game=Wonders7", "nGames=1", "nPlayers=5", "agent=json\\players\\gameSpecific\\Wonders7\\Wonders7_4-5P.json", "budget=50");
+        new ForwardModelTester("game=Wonders7", "nGames=1", "nPlayers=6", "agent=json\\players\\gameSpecific\\Wonders7\\Wonders7_4-5P.json", "budget=50");
+        new ForwardModelTester("game=Wonders7", "nGames=1", "nPlayers=7", "agent=json\\players\\gameSpecific\\Wonders7\\Wonders7_4-5P.json", "budget=50");
+    }
+
+    @Test
+    public void testHearts() {
+        new ForwardModelTester("game=Hearts", "nGames=2", "nPlayers=4", "agent=json\\players\\gameSpecific\\Hearts\\Hearts.json", "budget=50");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.Hearts, "data/hearts/Hearts_Valet.json"),
+                "game=Hearts", "nGames=1", "nPlayers=4", "agent=json\\players\\gameSpecific\\Hearts\\Hearts.json", "budget=50");
+    }
+
+    @Test
+    public void testSpades() {
+        new ForwardModelTester("game=Spades", "nGames=2", "nPlayers=4", "agent=json\\players\\gameSpecific\\Hearts\\Hearts.json", "budget=50");
+    }
+
+
+    @Test
+    public void testMastermind() {
+        new ForwardModelTester("game=Mastermind", "nGames=2", "nPlayers=1", "agent=json\\players\\gameSpecific\\TicTacToe.json");
+    }
+
+    @Test
+    public void testSeaSaltPaper() {
+        new ForwardModelTester("game=SeaSaltPaper", "nGames=3", "nPlayers=4", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testMonopolyDeal() {
+        new ForwardModelTester("game=MonopolyDeal", "nGames=2", "nPlayers=4", "agent=json\\players\\gameSpecific\\MonopolyDeal\\MonopolyDeal_64ms.json");
+    }
+
+
+    @Test
+    public void testChess() {
+        new ForwardModelTester("game=Chess", "nGames=2", "nPlayers=2", "agent=json\\players\\gameSpecific\\TicTacToe.json");
+    }
+
+    @Test
+    public void testChineseCheckers() {
+        new ForwardModelTester("game=ChineseCheckers", "nGames=1", "nPlayers=2", "agent=json\\players\\gameSpecific\\ChineseCheckers.json");
+        new ForwardModelTester("game=ChineseCheckers", "nGames=1", "nPlayers=3", "agent=json\\players\\gameSpecific\\ChineseCheckers.json");
+        new ForwardModelTester("game=ChineseCheckers", "nGames=1", "nPlayers=4", "agent=json\\players\\gameSpecific\\ChineseCheckers.json");
+        new ForwardModelTester("game=ChineseCheckers", "nGames=1", "nPlayers=6", "agent=json\\players\\gameSpecific\\ChineseCheckers.json");
+    }
+
+    @Test
+    public void testPenteGrammai() {
+        new ForwardModelTester("game=PenteGrammai", "nGames=2", "nPlayers=2", "agent=json\\players\\mcts.json");
+    }
+
+
+    @Test
+    public void testPowerGrid() {
+        new ForwardModelTester("game=PowerGrid", "nGames=1", "nPlayers=4", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testGoFish() {
+        new ForwardModelTester("game=GoFish", "nGames=3", "nPlayers=4", "agent=json\\players\\mcts.json");
+        GoFishParameters params = new GoFishParameters();
+        params.setParameterValue("playUntilAllBooks", true);
+        new ForwardModelTester(params, "game=GoFish", "nGames=1", "nPlayers=4", "agent=json\\players\\mcts.json");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.GoFish, "data/gofish/GoFish_Valet.json"),
+                "game=GoFish", "nGames=1", "nPlayers=4", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testGolfSix() {
+        new ForwardModelTester("game=GolfSix", "nGames=2", "nPlayers=4", "agent=json\\players\\mcts.json");
+        GolfSixParameters params = new GolfSixParameters();
+        params.setParameterValue("nDeals", 2);
+        params.setParameterValue("finalTurns", true);
+        new ForwardModelTester(params, "game=GolfSix", "nGames=1", "nPlayers=3", "agent=json\\players\\mcts.json");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.GolfSix, "data/golfsix/GolfSix_Valet.json"),
+                "game=GolfSix", "nGames=1", "nPlayers=4", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testCrazyEights() {
+        new ForwardModelTester("game=CrazyEights", "nGames=2", "nPlayers=3", "agent=json\\players\\mcts.json");
+        CZEParameters params = new CZEParameters();
+        params.setParameterValue("dealerNominatesStarterSuit", true);
+        new ForwardModelTester(params, "game=CrazyEights", "nGames=3", "nPlayers=2", "agent=json\\players\\mcts.json");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.CrazyEights, "data/crazyeights/CrazyEights_Valet.json"),
+                "game=CrazyEights", "nGames=1", "nPlayers=3", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testWhist() {
+        new ForwardModelTester("game=Whist", "nGames=2", "nPlayers=4", "agent=json\\players\\mcts.json");
+        WhistParameters params = new WhistParameters();
+        params.setParameterValue("nDeals", 3);
+        params.setParameterValue("trumpMode", WhistParameters.TrumpMode.ROTATION);
+        params.setParameterValue("noTrumpsInRotation", true);
+        params.setParameterValue("rememberVoids", false);
+        new ForwardModelTester(params, "game=Whist", "nGames=2", "nPlayers=4", "agent=json\\players\\mcts.json");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.Whist, "data/whist/Whist_Valet.json"),
+                "game=Whist", "nGames=1", "nPlayers=4", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testEuchre() {
+        new ForwardModelTester("game=Euchre", "nGames=2", "nPlayers=4", "agent=json\\players\\mcts.json");
+        EuchreParameters params = new EuchreParameters();
+        params.setParameterValue("targetScore", 10);
+        params.setParameterValue("sittingOutDealerPicksUp", false);
+        params.setParameterValue("rememberVoids", false);
+        new ForwardModelTester(params, "game=Euchre", "nGames=2", "nPlayers=4", "agent=json\\players\\mcts.json");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.Euchre, "data/euchre/Euchre_Valet.json"),
+                "game=Euchre", "nGames=1", "nPlayers=4", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testCuckoo() {
+        new ForwardModelTester("game=Cuckoo", "nGames=2", "nPlayers=6", "agent=json\\players\\mcts.json");
+        CuckooParameters params = new CuckooParameters();
+        params.setParameterValue("nLives", 1);
+        new ForwardModelTester(params, "game=Cuckoo", "nGames=2", "nPlayers=4", "agent=json\\players\\mcts.json");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.Cuckoo, "data/cuckoo/Cuckoo_Valet.json"),
+                "game=Cuckoo", "nGames=1", "nPlayers=6", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testAgram() {
+        new ForwardModelTester("game=Agram", "nGames=2", "nPlayers=3", "agent=json\\players\\mcts.json");
+        AgramParameters params = new AgramParameters();
+        params.setParameterValue("nDeals", 3);
+        new ForwardModelTester(params, "game=Agram", "nGames=2", "nPlayers=2", "agent=json\\players\\mcts.json");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.Agram, "data/agram/Agram_Valet.json"),
+                "game=Agram", "nGames=1", "nPlayers=3", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testBlackjack() {
+        new ForwardModelTester("game=Blackjack", "nGames=2", "nPlayers=1", "agent=json\\players\\mcts.json");
+        BlackjackParameters params = new BlackjackParameters();
+        params.setParameterValue("nHands", 3);
+        params.setParameterValue("doubleDown", true);
+        params.setParameterValue("splitting", true);
+        new ForwardModelTester(params, "game=Blackjack", "nGames=2", "nPlayers=3", "agent=json\\players\\mcts.json");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.Blackjack, "data/blackjack/Blackjack_Valet.json"),
+                "game=Blackjack", "nGames=1", "nPlayers=1", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testCribbage() {
+        new ForwardModelTester("game=Cribbage", "nGames=2", "nPlayers=2", "agent=json\\players\\mcts.json");
+        CribbageParameters params = new CribbageParameters();
+        params.setParameterValue("nRounds", 4);
+        params.setParameterValue("targetScore", 31);
+        params.setParameterValue("runsIncludeStarter", true);
+        new ForwardModelTester(params, "game=Cribbage", "nGames=2", "nPlayers=2", "agent=json\\players\\mcts.json");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.Cribbage, "data/cribbage/Cribbage_Valet.json"),
+                "game=Cribbage", "nGames=1", "nPlayers=2", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testGoofspiel() {
+        new ForwardModelTester("game=Goofspiel", "nGames=2", "nPlayers=2", "agent=json\\players\\mcts.json");
+        GoofspielParameters params = new GoofspielParameters();
+        params.setParameterValue("tieRule", GoofspielParameters.TieRule.DISCARD);
+        params.setParameterValue("cardsPerSuit", 5);
+        new ForwardModelTester(params, "game=Goofspiel", "nGames=2", "nPlayers=3", "agent=json\\players\\mcts.json");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.Goofspiel, "data/goofspiel/Goofspiel_Valet.json"),
+                "game=Goofspiel", "nGames=1", "nPlayers=2", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testKlaverjassen() {
+        new ForwardModelTester("game=Klaverjassen", "nGames=2", "nPlayers=4", "agent=json\\players\\mcts.json");
+        KlaverjassenParameters params = new KlaverjassenParameters();
+        params.setParameterValue("nHands", 3);
+        params.setParameterValue("partnerTrumpRule", KlaverjassenParameters.PartnerTrumpRule.NO_UNDERTRUMP);
+        params.setParameterValue("tieIsFailure", true);
+        params.setParameterValue("rememberVoids", false);
+        new ForwardModelTester(params, "game=Klaverjassen", "nGames=2", "nPlayers=4", "agent=json\\players\\mcts.json");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.Klaverjassen, "data/klaverjassen/Klaverjassen_Valet.json"),
+                "game=Klaverjassen", "nGames=1", "nPlayers=4", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testLeducPoker() {
+        new ForwardModelTester("game=LeducPoker", "nGames=5", "nPlayers=2", "agent=json\\players\\mcts.json");
+        LeducPokerParameters params = new LeducPokerParameters();
+        params.setParameterValue("nHands", 5);
+        params.setParameterValue("highCardUsesBoard", true);
+        params.setParameterValue("maxRaisesPerRound", 1);
+        new ForwardModelTester(params, "game=LeducPoker", "nGames=2", "nPlayers=2", "agent=json\\players\\mcts.json");
+        new ForwardModelTester(AbstractParameters.createFromFile(GameType.LeducPoker, "data/leducpoker/LeducPoker_Valet.json"),
+                "game=LeducPoker", "nGames=1", "nPlayers=2", "agent=json\\players\\mcts.json");
+    }
+
+    @Test
+    public void testWarOfTheToads() {
+        new ForwardModelTester("game=WarOfTheToads", "nGames=3", "nPlayers=2", "agent=json\\players\\mcts.json");
+        // the legacy deck and flow
+        ToadParameters params = new ToadParameters();
+        params.setParameterValue("cardFile", "cards_005.json");
+        params.setParameterValue("openingReturn", false);
+        params.setParameterValue("discardOption", true);
+        params.setParameterValue("secondRoundStart", ToadParameters.SecondRoundStart.WINNER);
+        new ForwardModelTester(params, "game=WarOfTheToads", "nGames=3", "nPlayers=2", "agent=json\\players\\mcts.json");
+    }
+}

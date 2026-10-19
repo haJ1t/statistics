@@ -1,0 +1,8 @@
+{
+  "class": "players.basicMCTS.BasicMCTSParams",
+  "K": 1.41,
+  "rolloutLength": 10,
+  "maxTreeDepth": 100,
+  "budgetType": "BUDGET_FM_CALLS",
+  "budget": 10000
+}

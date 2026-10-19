@@ -1,0 +1,9 @@
+RESULT q4_own | n=4 games=500 | win=45.5% [41.2, 49.8] (chance 25.0%) | score=37.27 | diffBest=-0.54 +- 0.46 | ms/dec(all)=167 | 1895s
+    finalI_own.json [focus]                       win 45.5% over 500 seats
+    ref.json                                      win 12.1% over 752 seats
+    tagmcts.json                                  win 24.3% over 748 seats
+RESULT d1_own | n=3 games=500 | win=52.6% [48.2, 56.9] (chance 33.3%) | score=42.98 | diffBest=0.37 +- 0.44 | ms/dec(all)=173 | 1669s
+    finalI_own.json [focus]                       win 52.6% over 500 seats
+    ref.json                                      win 17.7% over 500 seats
+    tagmcts.json                                  win 29.7% over 500 seats
+BATCH DONE

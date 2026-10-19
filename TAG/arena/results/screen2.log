@@ -1,0 +1,29 @@
+RESULT s2_base | n=3 games=500 | win=27.3% [23.6, 31.4] (chance 33.3%) | score=40.96 | diffBest=-2.60 +- 0.47 | ms/dec(all)=114 | 281s
+    c_base.json [focus]                           win 27.3% over 500 seats
+    ref.json                                      win 23.1% over 500 seats
+    tagmcts.json                                  win 49.6% over 500 seats
+RESULT s2_R | n=3 games=500 | win=39.0% [34.8, 43.3] (chance 33.3%) | score=42.59 | diffBest=-1.19 +- 0.48 | ms/dec(all)=123 | 1044s
+    c_R.json [focus]                              win 39.0% over 500 seats
+    ref.json                                      win 24.8% over 500 seats
+    tagmcts.json                                  win 36.2% over 500 seats
+RESULT s2_M | n=3 games=500 | win=28.5% [24.7, 32.6] (chance 33.3%) | score=40.80 | diffBest=-2.94 +- 0.52 | ms/dec(all)=114 | 282s
+    c_M.json [focus]                              win 28.5% over 500 seats
+    ref.json                                      win 19.8% over 500 seats
+    tagmcts.json                                  win 51.7% over 500 seats
+RESULT s2_RM | n=3 games=500 | win=39.4% [35.2, 43.7] (chance 33.3%) | score=42.77 | diffBest=-1.01 +- 0.51 | ms/dec(all)=117 | 288s
+    c_RM.json [focus]                             win 39.4% over 500 seats
+    ref.json                                      win 24.9% over 500 seats
+    tagmcts.json                                  win 35.7% over 500 seats
+RESULT s2_rl100 | n=3 games=500 | win=34.0% [30.0, 38.3] (chance 33.3%) | score=42.12 | diffBest=-1.91 +- 0.48 | ms/dec(all)=117 | 288s
+    c_rl100.json [focus]                          win 34.0% over 500 seats
+    ref.json                                      win 26.4% over 500 seats
+    tagmcts.json                                  win 39.6% over 500 seats
+RESULT s2_K0.5 | n=3 games=500 | win=26.8% [23.1, 30.8] (chance 33.3%) | score=40.67 | diffBest=-2.91 +- 0.49 | ms/dec(all)=117 | 290s
+    c_K0.5.json [focus]                           win 26.8% over 500 seats
+    ref.json                                      win 22.9% over 500 seats
+    tagmcts.json                                  win 50.3% over 500 seats
+RESULT s2_R_K0.5 | n=3 games=500 | win=41.3% [37.1, 45.7] (chance 33.3%) | score=42.29 | diffBest=-1.16 +- 0.45 | ms/dec(all)=114 | 282s
+    c_R_K0.5.json [focus]                         win 41.3% over 500 seats
+    ref.json                                      win 24.6% over 500 seats
+    tagmcts.json                                  win 34.1% over 500 seats
+BATCH DONE

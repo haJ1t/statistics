@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# Claude Code local state
+.claude/
+
+# TAG's own git history (shallow clone of GAIGResearch/TabletopGames). Renamed from TAG/.git so that the
+# framework files are part of this repository; `mv TAG/.git-upstream TAG/.git` turns TAG back into its own clone.
+TAG/.git-upstream/
+
+# Build outputs
+TAG/target/
+*.class
+hs_err_pid*

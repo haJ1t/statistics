@@ -1,0 +1,13 @@
+RESULT rep_ref | n=3 games=500 | win=22.9% [19.4, 26.8] (chance 33.3%) | score=40.88 | diffBest=-3.42 +- 0.49 | ms/dec(all)=103 | 253s
+    ref.json                                      win 25.0% over 500 seats
+    ref.json [focus]                              win 22.9% over 500 seats
+    tagmcts.json                                  win 52.1% over 500 seats
+RESULT rep_K0.5_T8 | n=3 games=500 | win=37.5% [33.4, 41.8] (chance 33.3%) | score=42.34 | diffBest=-1.66 +- 0.46 | ms/dec(all)=102 | 252s
+    r_K0.5_T8.json [focus]                        win 37.5% over 500 seats
+    ref.json                                      win 26.8% over 500 seats
+    tagmcts.json                                  win 35.7% over 500 seats
+RESULT rep_K0.5_T8_M | n=3 games=500 | win=41.9% [37.7, 46.3] (chance 33.3%) | score=42.99 | diffBest=-0.48 +- 0.43 | ms/dec(all)=102 | 252s
+    r_K0.5_T8_M.json [focus]                      win 41.9% over 500 seats
+    ref.json                                      win 25.0% over 500 seats
+    tagmcts.json                                  win 33.1% over 500 seats
+BATCH DONE

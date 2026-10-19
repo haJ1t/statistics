@@ -1,0 +1,20 @@
+{
+ "class": "refv2.SushiMCTSParams",
+ "K": 1.41,
+ "rolloutLength": 10,
+ "maxTreeDepth": 100,
+ "heuristic": {
+  "class": "refv2.SushiGoHeuristic"
+ },
+ "useProgressiveBias": true,
+ "useInformedRollout": true,
+ "useDeterminisation": true,
+ "adaptiveDeterminisation": true,
+ "biasWeight": 1.0,
+ "priorScale": 5.0,
+ "rolloutEpsilon": 0.2,
+ "nDeterminisations": 4,
+ "budgetType": "BUDGET_TIME",
+ "budget": 900,
+ "breakMS": 0
+}

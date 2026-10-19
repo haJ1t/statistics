@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Health Potion",
+    "tokenType": "Potion",
+    "value": 25
+  },
+  {
+    "name": "Health Potion",
+    "tokenType": "Potion",
+    "value": 25
+  },
+  {
+    "name": "Health Potion",
+    "tokenType": "Potion",
+    "value": 25
+  },
+  {
+    "name": "Stamina Potion",
+    "tokenType": "Potion",
+    "value": 25
+  },
+  {
+    "name": "Stamina Potion",
+    "tokenType": "Potion",
+    "value": 25
+  },
+  {
+    "name": "Stamina Potion",
+    "tokenType": "Potion",
+    "value": 25
+  },
+  {
+    "name": "Power Potion",
+    "tokenType": "Potion",
+    "value": 50
+  },
+  {
+    "name": "Warding Talisman",
+    "tokenType": "Item",
+    "value": 50
+  },
+  {
+    "name": "Curse Doll",
+    "tokenType": "Item",
+    "value": 50
+  },
+  {
+    "name": "Fire Flask",
+    "tokenType": "Item",
+    "value": 50
+  },
+  {
+    "name": "Treasure Chest",
+    "tokenType": "Special",
+    "value": 0
+  },
+  {
+    "name": "Nothing",
+    "tokenType": "Special",
+    "value": 0
+  }
+]

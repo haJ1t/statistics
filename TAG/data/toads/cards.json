@@ -1,0 +1,58 @@
+{
+  "cards": [
+    {
+      "name": "Assassin",
+      "value": 1,
+      "special": "AssassinII",
+      "count": 1
+    },
+    {
+      "name": "Scout",
+      "value": 2,
+      "special": "Scout",
+      "count": 1
+    },
+    {
+      "name": "Saboteur",
+      "value": 3,
+      "special": "SaboteurIII",
+      "count": 1
+    },
+    {
+      "name": "Trickster",
+      "value": 4,
+      "special": "TricksterII",
+      "count": 1
+    },
+    {
+      "name": "Berserker",
+      "value": 5,
+      "special": "BerserkerII",
+      "count": 1
+    },
+    {
+      "name": "Bodyguard",
+      "value": 6,
+      "special": "Bodyguard",
+      "count": 1
+    },
+    {
+      "name": "General One",
+      "value": 7,
+      "special": "GeneralHostages",
+      "count": 1
+    },
+    {
+      "name": "General Two",
+      "value": 7,
+      "special": "GeneralFlags",
+      "count": 1
+    },
+    {
+      "name": "Siege Cannon",
+      "value": 0,
+      "special": "SiegeCannon",
+      "count": 1
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+ "class": "groupA.SushiMCTSParams",
+ "K": 0.5,
+ "rolloutLength": 10,
+ "maxTreeDepth": 100,
+ "heuristic": {
+  "class": "groupA.SushiGoHeuristic",
+  "args": [
+   15.0,
+   0.7,
+   0.5,
+   4.0,
+   0.2
+  ]
+ },
+ "useProgressiveBias": false,
+ "useInformedRollout": true,
+ "useDeterminisation": false,
+ "adaptiveDeterminisation": true,
+ "biasWeight": 1.0,
+ "priorScale": 5.0,
+ "rolloutEpsilon": 0.2,
+ "nDeterminisations": 4,
+ "budgetType": "BUDGET_TIME",
+ "budget": 900,
+ "breakMS": 0,
+ "useActionPruning": true,
+ "rolloutToRoundEnd": true,
+ "useMaxN": true,
+ "wallTimeLimitMS": 0,
+ "useDecoupledUCT": true,
+ "useInformationSets": true,
+ "treeThreshold": 0
+}

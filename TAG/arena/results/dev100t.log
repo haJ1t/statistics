@@ -1,0 +1,8 @@
+RESULT q4_FW2K11 | n=4 games=500 | win=47.7% [43.4, 52.1] (chance 25.0%) | score=37.28 | diffBest=-0.47 +- 0.46 | ms/dec(all)=154 | 3489s
+    finalI_X0K11W2F.json [focus]                  win 47.7% over 500 seats
+        pts/game: Maki=3.88 Tempura=6.09 Sashimi=5.22 Dumpling=5.05 SquidNigiri=5.37 SalmonNigiri=7.24 EggNigiri=1.51 Wasabi=0.00 Chopsticks=0.00 Pudding=3.22
+    ref.json                                      win 10.0% over 752 seats
+        pts/game: Maki=8.70 Tempura=5.11 Sashimi=7.22 Dumpling=3.30 SquidNigiri=3.62 SalmonNigiri=6.42 EggNigiri=1.29 Wasabi=0.00 Chopsticks=0.00 Pudding=0.34
+    tagmcts.json                                  win 24.9% over 748 seats
+        pts/game: Maki=5.72 Tempura=6.41 Sashimi=2.26 Dumpling=6.31 SquidNigiri=5.22 SalmonNigiri=7.51 EggNigiri=1.41 Wasabi=0.00 Chopsticks=0.00 Pudding=1.49
+BATCH DONE

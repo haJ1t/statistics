@@ -1,0 +1,104 @@
+package games.hearts;
+
+import core.AbstractGameState;
+import core.AbstractParameters;
+import core.Game;
+import core.components.FrenchCard;
+import evaluation.optimisation.TunableParameters;
+import games.tricktaking.ITrickTakingParameters;
+import games.GameType;
+
+import java.util.*;
+
+/**
+ * Parameters for Hearts (https://www.pagat.com/reverse/hearts.html): a game to 100 points, with cards passed before
+ * each hand. data/hearts/Hearts_Valet.json gives the Valet version of the game, a single hand with no passing.
+ */
+public class HeartsParameters extends TunableParameters<HeartsParameters> implements ITrickTakingParameters {
+    public String dataPath = "data/FrenchCards/";
+    public final int shootTheMoon = 26;
+    public final int heartCard = 1;
+    // Could be expanded if needed to a whole sequence of 'special cards, with special scores'
+    public final FrenchCard qosCard = new FrenchCard(FrenchCard.FrenchCardType.Queen, FrenchCard.Suite.Spades);
+    public final FrenchCard startingCard = new FrenchCard(FrenchCard.FrenchCardType.Number, FrenchCard.Suite.Clubs, 2);
+    public final int queenOfSpades = 13;
+    public final int cardsPassedPerRound = 3;
+    // The game ends at the end of the first hand (round) in which any player has at least this many points
+    public int matchScore = 100;
+    // If true then a player who fails to follow suit is remembered as being void in it, and
+    // redeterminisation will not deal them any cards of that suit
+    public boolean rememberVoids = true;
+    // If false then the simultaneous card-passing phase at the start of each round is skipped
+    // entirely, and every round goes straight to trick play
+    public boolean passCards = true;
+    // The game also ends after this many hands (rounds), even if nobody has reached matchScore.
+    // The default is high enough that in practice the score ends the game
+    public int maxRounds = 100;
+
+    // Number of cards per player - index to array is nPlayers
+    public final int[] numberOfCardsPerPlayer = new int[]{0, 0, 0,
+            17, 13, 10, 8, 7};
+
+    // Cards to remove for each number of players
+    Map<Integer, List<FrenchCard>> cardsToRemove = new HashMap<>();
+
+    public HeartsParameters() {
+        addTunableParameter("rememberVoids", true, Arrays.asList(false, true));
+        addTunableParameter("passCards", true, Arrays.asList(false, true));
+        addTunableParameter("maxRounds", 100, Arrays.asList(1, 2, 3, 5, 10, 100));
+        addTunableParameter("matchScore", 100, Arrays.asList(25, 50, 75, 100));
+        cardsToRemove.put(3, Collections.singletonList(new FrenchCard(FrenchCard.FrenchCardType.Number, FrenchCard.Suite.Diamonds, 2)));
+        cardsToRemove.put(4, Collections.emptyList());
+        cardsToRemove.put(5, Arrays.asList(new FrenchCard(FrenchCard.FrenchCardType.Number, FrenchCard.Suite.Diamonds, 2),
+                new FrenchCard(FrenchCard.FrenchCardType.Number, FrenchCard.Suite.Spades, 2)));
+        cardsToRemove.put(6, Arrays.asList(new FrenchCard(FrenchCard.FrenchCardType.Number, FrenchCard.Suite.Diamonds, 2),
+                new FrenchCard(FrenchCard.FrenchCardType.Number, FrenchCard.Suite.Diamonds, 3),
+                new FrenchCard(FrenchCard.FrenchCardType.Number, FrenchCard.Suite.Clubs, 3),
+                new FrenchCard(FrenchCard.FrenchCardType.Number, FrenchCard.Suite.Clubs, 4)));
+        cardsToRemove.put(7, Arrays.asList(new FrenchCard(FrenchCard.FrenchCardType.Number, FrenchCard.Suite.Diamonds, 2),
+                new FrenchCard(FrenchCard.FrenchCardType.Number, FrenchCard.Suite.Diamonds, 3),
+                new FrenchCard(FrenchCard.FrenchCardType.Number, FrenchCard.Suite.Clubs, 3)));
+    }
+
+    @Override
+    public void _reset() {
+        rememberVoids = (boolean) getParameterValue("rememberVoids");
+        passCards = (boolean) getParameterValue("passCards");
+        maxRounds = (int) getParameterValue("maxRounds");
+        matchScore = (int) getParameterValue("matchScore");
+    }
+
+    @Override
+    public boolean rememberVoids() {
+        return rememberVoids;
+    }
+
+    @Override
+    public HeartsParameters instantiate() {
+        return this;
+    }
+
+    public String getDataPath() {
+        return dataPath;
+    }
+
+    @Override
+    protected AbstractParameters _copy() {
+        HeartsParameters hgp = new HeartsParameters();
+        hgp.dataPath = dataPath;
+        return hgp;
+    }
+
+    @Override
+    public boolean _equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof HeartsParameters that)) return false;
+        return Objects.equals(dataPath, that.dataPath);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), dataPath);
+    }
+
+}
