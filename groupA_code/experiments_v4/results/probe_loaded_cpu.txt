@@ -1,0 +1,6 @@
+  game 1 done, 24 focus decisions so far
+  game 2 done, 49 focus decisions so far
+  game 3 done, 73 focus decisions so far
+  game 4 done, 97 focus decisions so far
+PROBE WALL arena/agents/b900/final.json: decisions=97 mean=998.0 p50=990.6 p95=1117.5 p99=1224.7 max=1224.7 ms, over 1000 ms: 42
+PROBE CPU  arena/agents/b900/final.json: decisions=97 mean=898.6 p50=899.1 p95=899.1 p99=899.3 max=899.3 ms, over 1000 ms: 0

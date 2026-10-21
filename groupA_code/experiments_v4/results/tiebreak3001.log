@@ -1,0 +1,21 @@
+RESULT tb2_ref | n=3 games=500 | win=24.4% [20.8, 28.4] (chance 33.3%) | score=40.57 | diffBest=-3.29 +- 0.51 | ms/dec(all)=104 | 256s
+    ref.json                                      win 21.9% over 500 seats
+    ref.json [focus]                              win 24.4% over 500 seats
+    tagmcts.json                                  win 53.7% over 500 seats
+RESULT tb2_final | n=3 games=500 | win=42.2% [37.9, 46.6] (chance 33.3%) | score=42.91 | diffBest=-0.72 +- 0.44 | ms/dec(all)=103 | 253s
+    r_K0.5_T8_M.json [focus]                      win 42.2% over 500 seats
+    ref.json                                      win 23.6% over 500 seats
+    tagmcts.json                                  win 34.2% over 500 seats
+RESULT tb2_T4 | n=3 games=500 | win=45.1% [40.8, 49.5] (chance 33.3%) | score=42.96 | diffBest=-0.61 +- 0.46 | ms/dec(all)=103 | 254s
+    abl_T4.json [focus]                           win 45.1% over 500 seats
+    ref.json                                      win 22.4% over 500 seats
+    tagmcts.json                                  win 32.5% over 500 seats
+RESULT tb2_T4_A | n=3 games=500 | win=48.1% [43.8, 52.5] (chance 33.3%) | score=43.45 | diffBest=-0.03 +- 0.45 | ms/dec(all)=103 | 253s
+    ref.json                                      win 21.1% over 500 seats
+    t_T4_A.json [focus]                           win 48.1% over 500 seats
+    tagmcts.json                                  win 30.8% over 500 seats
+RESULT tb2_T4_noR | n=3 games=500 | win=33.7% [29.7, 38.0] (chance 33.3%) | score=41.83 | diffBest=-1.70 +- 0.48 | ms/dec(all)=103 | 255s
+    ref.json                                      win 21.2% over 500 seats
+    t_T4_noR.json [focus]                         win 33.7% over 500 seats
+    tagmcts.json                                  win 45.1% over 500 seats
+BATCH DONE

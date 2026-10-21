@@ -1,0 +1,5 @@
+RESULT q4_P3 | n=4 games=500 | win=49.6% [45.2, 53.9] (chance 25.0%) | score=37.65 | diffBest=-0.22 +- 0.45 | ms/dec(all)=364 | 17711s
+    finalI_P3.json [focus]                        win 49.6% over 500 seats
+    ref.json                                      win 12.0% over 752 seats
+    tagmcts.json                                  win 21.6% over 748 seats
+BATCH DONE

@@ -1,0 +1,9 @@
+RESULT f5_ref | n=3 games=500 | win=18.3% [15.2, 21.9] (chance 33.3%) | score=40.30 | diffBest=-4.26 +- 0.47 | ms/dec(all)=590 | 2291s
+    ref.json                                      win 22.4% over 500 seats
+    ref.json [focus]                              win 18.3% over 500 seats
+    tagmcts.json                                  win 59.3% over 500 seats
+RESULT f5_finalM | n=3 games=500 | win=40.5% [36.3, 44.9] (chance 33.3%) | score=42.32 | diffBest=-0.82 +- 0.42 | ms/dec(all)=637 | 2471s
+    finalM.json [focus]                           win 40.5% over 500 seats
+    ref.json                                      win 18.7% over 500 seats
+    tagmcts.json                                  win 40.8% over 500 seats
+BATCH DONE

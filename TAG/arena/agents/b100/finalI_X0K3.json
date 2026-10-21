@@ -1,6 +1,6 @@
 {
  "class": "groupA.SushiMCTSParams",
- "K": 0.3,
+ "K": 0.5,
  "rolloutLength": 10,
  "maxTreeDepth": 100,
  "heuristic": {
@@ -35,5 +35,6 @@
  "useMaxN": true,
  "useDecoupledUCT": true,
  "useInformationSets": true,
- "treeThreshold": 0
+ "treeThreshold": 0,
+ "opponentTopK": 3
 }

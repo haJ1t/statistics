@@ -1,0 +1,1538 @@
+{
+ "v2final_vs_tag100": [
+  "3",
+  "300",
+  "1",
+  "arena/agents/b100/v2final.json",
+  "arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "v2H_vs_tag100": [
+  "3",
+  "300",
+  "1",
+  "arena/agents/b100/v2H.json",
+  "arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "v2HB_vs_tag100": [
+  "3",
+  "300",
+  "1",
+  "arena/agents/b100/v2HB.json",
+  "arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "basic_vs_tag100": [
+  "3",
+  "300",
+  "1",
+  "arena/agents/b100/basic.json",
+  "arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "v2final_vs_v2HB100": [
+  "3",
+  "300",
+  "1",
+  "arena/agents/b100/v2final.json",
+  "arena/agents/b100/v2HB.json",
+  "0277c11a"
+ ],
+ "s1_ref": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/ref.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s1_P": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/v3_P.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s1_O": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/v3_O.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s1_PO": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/v3_PO.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s1_PO_noA": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/v3_PO_noA.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s1_PO_K0.3": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/v3_PO_K0.3.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s1_PO_K0.6": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/v3_PO_K0.6.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s1_PO_K1.0": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/v3_PO_K1.0.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s2_PM": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/v3_PM.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s2_P_K0.5": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/v3_P_K0.5.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s2_PM_K0.5": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/v3_PM_K0.5.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s2_P_rl27": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/v3_P_rl27.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s2_P_noD": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/v3_P_noD.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s2_base": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/c_base.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s2_R": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/c_R.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s2_M": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/c_M.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s2_RM": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/c_RM.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s2_rl100": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/c_rl100.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s2_K0.5": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/c_K0.5.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s2_R_K0.5": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/c_R_K0.5.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s3_R_eps0.1": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/r_eps0.1.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s3_R_noD": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/r_noD.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s3_R_T8": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/r_T8.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s3_R_alpha1": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/r_alpha1.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s3_R_eps0.3": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/r_eps0.3.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s3_R_lw0.5": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/r_lw0.5.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s3_R_sigma8": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/r_sigma8.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s4_K0.5_T8": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/r_K0.5_T8.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s4_K0.5_T8_eps0.3": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/r_K0.5_T8_eps0.3.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s4_K0.5_T8_M": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/r_K0.5_T8_M.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s4_K0.3_T8": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/r_K0.3_T8.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "s4_K0.5_alpha0.25": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/r_K0.5_alpha0.25.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "rep_ref": [
+  "3",
+  "500",
+  "1001",
+  "arena/agents/b100/ref.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "rep_K0.5_T8": [
+  "3",
+  "500",
+  "1001",
+  "arena/agents/b100/r_K0.5_T8.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "rep_K0.5_T8_M": [
+  "3",
+  "500",
+  "1001",
+  "arena/agents/b100/r_K0.5_T8_M.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "f9_ref": [
+  "3",
+  "250",
+  "1",
+  "arena/agents/b900/ref.json",
+  "arena/agents/b900/ref.json,arena/agents/b900/tagmcts.json",
+  "0277c11a"
+ ],
+ "f9_finalM": [
+  "3",
+  "250",
+  "1",
+  "arena/agents/b900/finalM.json",
+  "arena/agents/b900/ref.json,arena/agents/b900/tagmcts.json",
+  "0277c11a"
+ ],
+ "abl_noR": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/abl_noR.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "abl_noP": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/abl_noP.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "abl_noB": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/abl_noB.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "abl_noD": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/abl_noD.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "abl_plusA": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/abl_plusA.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "abl_plusO": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/abl_plusO.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "abl_K1.41": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/abl_K1.41.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "abl_T4": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/abl_T4.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "abl_noH": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/abl_noH.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "f9_finalM_noR": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b900/finalM_noR.json",
+  "arena/agents/b900/ref.json,arena/agents/b900/tagmcts.json",
+  "0277c11a"
+ ],
+ "f5_ref": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b500/ref.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "0277c11a"
+ ],
+ "f5_finalM": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b500/finalM.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "0277c11a"
+ ],
+ "q4_ref": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/ref.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "q4_final": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalT4.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "d_T8": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/c_T8.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "d_KT8": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/d_KT8.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "d_MK": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/d_MK.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "d_MT8": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/d_MT8.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "q4_final_noR": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/abl_noR.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "f5_finalM_noR": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b500/finalM_noR.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "0277c11a"
+ ],
+ "tb1_ref": [
+  "3",
+  "500",
+  "2001",
+  "arena/agents/b100/ref.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "tb1_final": [
+  "3",
+  "500",
+  "2001",
+  "arena/agents/b100/r_K0.5_T8_M.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "tb1_T4": [
+  "3",
+  "500",
+  "2001",
+  "arena/agents/b100/abl_T4.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "tb1_T4_A": [
+  "3",
+  "500",
+  "2001",
+  "arena/agents/b100/t_T4_A.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "tb1_T4_noR": [
+  "3",
+  "500",
+  "2001",
+  "arena/agents/b100/t_T4_noR.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "tb2_ref": [
+  "3",
+  "500",
+  "3001",
+  "arena/agents/b100/ref.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "tb2_final": [
+  "3",
+  "500",
+  "3001",
+  "arena/agents/b100/r_K0.5_T8_M.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "tb2_T4": [
+  "3",
+  "500",
+  "3001",
+  "arena/agents/b100/abl_T4.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "tb2_T4_A": [
+  "3",
+  "500",
+  "3001",
+  "arena/agents/b100/t_T4_A.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "tb2_T4_noR": [
+  "3",
+  "500",
+  "3001",
+  "arena/agents/b100/t_T4_noR.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "0277c11a"
+ ],
+ "f5_finalT4": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b500/finalT4.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "0277c11a"
+ ],
+ "f9_finalT4": [
+  "3",
+  "250",
+  "1",
+  "arena/agents/b900/finalT4.json",
+  "arena/agents/b900/ref.json,arena/agents/b900/tagmcts.json",
+  "0277c11a"
+ ],
+ "rep_T4": [
+  "3",
+  "500",
+  "1001",
+  "arena/agents/b100/finalT4.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "label": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/finalT4.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_ref": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/ref.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_final": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalT4.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "f5_K1": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b500/finalT4_K1.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "f5_noB": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b500/finalT4_noB.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "f5_GE": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b500/finalT4_GE.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "d1_S": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/finalT4_S.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "f5_S": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b500/finalT4_S.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q4_S": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalT4_S.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q4_S2": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalT4_S.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "d1_S2": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/finalT4_S.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q4_I": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalT4_I.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "d1_I": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/finalT4_I.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "f5_I": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b500/finalT4_I.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "f9_I_a": [
+  "3",
+  "126",
+  "1",
+  "arena/agents/b900/finalT4_I.json",
+  "arena/agents/b900/ref.json,arena/agents/b900/tagmcts.json",
+  "761f2ac5"
+ ],
+ "f9_I": [
+  "3",
+  "250",
+  "1",
+  "arena/agents/b900/finalT4_I.json",
+  "arena/agents/b900/ref.json,arena/agents/b900/tagmcts.json",
+  "761f2ac5"
+ ],
+ "d1_I_K0.8": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/finalT4_I_K0.8.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "d1_I_K1.2": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/finalT4_I_K1.2.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_I": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalT4_I.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q4_Ith8": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalT4_I_th8.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q4_Io": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalT4_I.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "val_q5": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalI.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "val_f9": [
+  "3",
+  "250",
+  "1",
+  "arena/agents/b900/finalI.json",
+  "arena/agents/b900/ref.json,arena/agents/b900/tagmcts.json",
+  "761f2ac5"
+ ],
+ "val_q4": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalI.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "val_f5": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b500/finalI.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q4_I200": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalI_200.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_own": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalI_own.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q4_own": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalI_own.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "d1_own": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/finalI_own.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_GE": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalI_GE.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_noB": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalI_noB.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_mast10": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalI_mast10.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q4_P3": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalI_P3.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_P3": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalI_P3.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "d1_P3": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/finalI_P3.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q4_P7": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalI_P7.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q4_P7V3": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalI_P7V3.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q4_X0": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalI_X0.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q4_X0V3": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalI_X0V3.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_X0": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalI_X0.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q4_X0own": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalI_X0own.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q4_X0e1": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalI_X0e1.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_X0K10": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalI_X0K10.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_X0U": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalI_X0U.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_X0K14": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalI_X0K14.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "d1_X0": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/finalI_X0.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "f5_X0K10": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b500/finalI_X0K10.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "f9_X0K14": [
+  "3",
+  "250",
+  "1",
+  "arena/agents/b900/finalI_X0K14.json",
+  "arena/agents/b900/ref.json,arena/agents/b900/tagmcts.json",
+  "761f2ac5"
+ ],
+ "t25_X0K10": [
+  "4",
+  "160",
+  "1",
+  "arena/agents/b2500/finalI_X0K10.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "smokeW": [
+  "4",
+  "8",
+  "5",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/finalI_X0K10W.json",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/ref.json,/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/tag.json",
+  "761f2ac5"
+ ],
+ "smokeM": [
+  "3",
+  "6",
+  "5",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/finalI_X0K10m25.json",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/ref.json,/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/tag.json",
+  "761f2ac5"
+ ],
+ "q5_W": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalI_X0K10W.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_UK10": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalI_X0UK10.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "smokeW2": [
+  "4",
+  "8",
+  "5",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/W2.json",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/ref.json,/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/tag.json",
+  "761f2ac5"
+ ],
+ "smokeW2b": [
+  "3",
+  "6",
+  "5",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/W2.json",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/ref.json,/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/tag.json",
+  "761f2ac5"
+ ],
+ "q5_W2": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalI_X0K10W2.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_T4K10": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalT4_IK10.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "smokeW3": [
+  "4",
+  "8",
+  "5",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/W3.json",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/ref.json,/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/tag.json",
+  "761f2ac5"
+ ],
+ "smokeW3U": [
+  "3",
+  "6",
+  "5",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/W3U.json",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/ref.json,/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/tag.json",
+  "761f2ac5"
+ ],
+ "smokeF": [
+  "4",
+  "8",
+  "5",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/F.json",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/ref.json,/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/tag.json",
+  "761f2ac5"
+ ],
+ "smokeFW2": [
+  "3",
+  "9",
+  "5",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/FW2.json",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/ref.json,/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/tag.json",
+  "761f2ac5"
+ ],
+ "smokeF2p": [
+  "2",
+  "6",
+  "5",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/F.json",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/tag.json",
+  "761f2ac5"
+ ],
+ "q5_FK10": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalI_X0K10F.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FK20": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalI_X0K20F.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q4_FK10": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalI_X0K10F.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FW2": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalI_X0K10W2F.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "f5_FW2": [
+  "3",
+  "300",
+  "1",
+  "arena/agents/b500/finalI_X0K10W2F.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "d1_FW2": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b100/finalI_X0K10W2F.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q4_FW2": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalI_X0K10W2F.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_W2S": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalI_X0K10W2S.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FW2i": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalI_X0K10W2Fi13k.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "smokeFU": [
+  "4",
+  "6",
+  "5",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/FW2U.json",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/ref.json,/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/tag.json",
+  "761f2ac5"
+ ],
+ "smokeFU3": [
+  "3",
+  "6",
+  "5",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/FW2U.json",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/ref.json,/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/tag.json",
+  "761f2ac5"
+ ],
+ "q5_FW2K35": [
+  "4",
+  "250",
+  "1",
+  "arena/agents/b500/finalI_X0K35W2F.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "smokeFo": [
+  "4",
+  "6",
+  "5",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/Fo.json",
+  "/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/ref.json,/private/tmp/claude-501/-Users-halit-Desktop-statistics/761f2ac5-4fae-4278-a393-11b2a1801d49/scratchpad/smoke/tag.json",
+  "761f2ac5"
+ ],
+ "q5_W2r": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K10W2.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FW2o": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K10W2Fo23.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q4_FW2K11": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalI_X0K11W2F.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FL8": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K10W2FL8.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "f5_FL8": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b500/finalI_FL8.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "f9_FL8": [
+  "3",
+  "250",
+  "1",
+  "arena/agents/b900/finalI_FL8.json",
+  "arena/agents/b900/ref.json,arena/agents/b900/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q4_X0FL8": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalI_X0FL8.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FL8R3": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K10W2FL8R3.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FL8T1": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K10W2FL8T1.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "f5_W2FL8": [
+  "3",
+  "500",
+  "1",
+  "arena/agents/b500/finalI_X0K10W2FL8.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FL8t1000": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K10W2FL8_t1000.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q4_X0c": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalI_X0.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FL8Q": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K10W2FL8Q.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FL8t1000K14": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K14W2FL8_t1000.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FL8oK14": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K10oK14W2FL8.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "V_3p100": [
+  "3",
+  "500",
+  "7",
+  "arena/agents/final/SushiMCTS_100.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "V_3p500": [
+  "3",
+  "500",
+  "7",
+  "arena/agents/final/SushiMCTS_500.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "V_3p900": [
+  "3",
+  "250",
+  "7",
+  "arena/agents/final/SushiMCTS_900.json",
+  "arena/agents/b900/ref.json,arena/agents/b900/tagmcts.json",
+  "761f2ac5"
+ ],
+ "V_4p100": [
+  "4",
+  "500",
+  "7",
+  "arena/agents/final/SushiMCTS_100.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FL8K07": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K07oK10W2FL8.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FL8K07b": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K07W2FL8.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FW2th8": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K10W2Fth8.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "A_noSI": [
+  "3",
+  "500",
+  "7",
+  "arena/agents/b100/a4_noSI.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "A_noI": [
+  "3",
+  "500",
+  "7",
+  "arena/agents/b100/a4_noI.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "A_noR": [
+  "3",
+  "500",
+  "7",
+  "arena/agents/b100/a4_noR.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "A_noB": [
+  "3",
+  "500",
+  "7",
+  "arena/agents/b100/a4_noB.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "A_noH": [
+  "3",
+  "500",
+  "7",
+  "arena/agents/b100/a4_noH.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FL8s7": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K10W2FL8s7.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FUL8": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K10W2FUL8.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FL8s25": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K10W2FL8s25.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "V_4p500": [
+  "4",
+  "500",
+  "7",
+  "arena/agents/final/SushiMCTS_500_FL8.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FL8soft": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K10W2FL8soft.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "B_mcts_rhea": [
+  "3",
+  "500",
+  "7",
+  "arena/agents/final/SushiMCTS_100.json",
+  "arena/agents/b100/fw_BasicMCTS.json,arena/agents/b100/fw_RHEA.json",
+  "761f2ac5"
+ ],
+ "B_osla_mcts": [
+  "3",
+  "500",
+  "7",
+  "arena/agents/final/SushiMCTS_100.json",
+  "arena/agents/b100/fw_OSLA.json,arena/agents/b100/fw_BasicMCTS.json",
+  "761f2ac5"
+ ],
+ "q5_FL8oT15": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K10W2FL8oT15.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FL8e35": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K10W2FL8e35.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FL8d1": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K10W2FL8d1.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FL8ens5": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K10W2FL8ens5.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FL8K3": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K10W2FL8K3.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_FL8W25": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/b500/finalI_X0K10W2FL8W25.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q4_X0K3": [
+  "4",
+  "500",
+  "1",
+  "arena/agents/b100/finalI_X0K3.json",
+  "arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json",
+  "761f2ac5"
+ ],
+ "q5_X0b100": [
+  "4",
+  "250",
+  "2",
+  "arena/agents/final/SushiMCTS_100.json",
+  "arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json",
+  "761f2ac5"
+ ]
+}

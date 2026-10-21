@@ -1,0 +1,10 @@
+03:09:33 paused arena runs; probing on a quiet machine
+[3p SushiMCTS_1000ms.json] PROBE WALL arena/agents/comp/SushiMCTS_1000ms.json: decisions=96 mean=921.0 p50=925.0 p95=925.1 p99=927.5 max=927.5 ms, over 1000 ms: 0
+[3p SushiMCTS_1000ms.json] PROBE CPU  arena/agents/comp/SushiMCTS_1000ms.json: decisions=96 mean=832.9 p50=869.0 p95=899.1 p99=899.1 max=899.1 ms, over 1000 ms: 0
+[4p SushiMCTS_1000ms.json] PROBE WALL arena/agents/comp/SushiMCTS_1000ms.json: decisions=87 mean=934.9 p50=925.1 p95=1009.1 p99=1278.5 max=1278.5 ms, over 1000 ms: 5
+[4p SushiMCTS_1000ms.json] PROBE CPU  arena/agents/comp/SushiMCTS_1000ms.json: decisions=87 mean=815.9 p50=870.5 p95=899.2 p99=899.4 max=899.4 ms, over 1000 ms: 0
+[3p SushiMCTS_500ms.json] PROBE WALL arena/agents/comp/SushiMCTS_500ms.json: decisions=99 mean=449.1 p50=450.0 p95=470.2 p99=515.5 max=515.5 ms, over 500 ms: 2
+[3p SushiMCTS_500ms.json] PROBE CPU  arena/agents/comp/SushiMCTS_500ms.json: decisions=99 mean=370.2 p50=384.5 p95=429.1 p99=429.1 max=429.1 ms, over 500 ms: 0
+[4p SushiMCTS_500ms.json] PROBE WALL arena/agents/comp/SushiMCTS_500ms.json: decisions=86 mean=444.6 p50=450.0 p95=458.8 p99=641.8 max=641.8 ms, over 500 ms: 1
+[4p SushiMCTS_500ms.json] PROBE CPU  arena/agents/comp/SushiMCTS_500ms.json: decisions=86 mean=405.6 p50=421.5 p95=429.3 p99=429.4 max=429.4 ms, over 500 ms: 0
+03:17:00 resumed arena runs

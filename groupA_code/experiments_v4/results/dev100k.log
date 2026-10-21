@@ -1,0 +1,5 @@
+RESULT q4_X0 | n=4 games=500 | win=48.9% [44.5, 53.3] (chance 25.0%) | score=37.39 | diffBest=-0.31 +- 0.46 | ms/dec(all)=213 | 3215s
+    finalI_X0.json [focus]                        win 48.9% over 500 seats
+    ref.json                                      win 10.1% over 752 seats
+    tagmcts.json                                  win 24.0% over 748 seats
+BATCH DONE

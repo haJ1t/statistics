@@ -1,0 +1,9 @@
+RESULT f9_ref | n=3 games=250 | win=18.8% [14.4, 24.1] (chance 33.3%) | score=39.68 | diffBest=-3.93 +- 0.59 | ms/dec(all)=1571 | 5093s
+    ref.json                                      win 21.8% over 250 seats
+    ref.json [focus]                              win 18.8% over 250 seats
+    tagmcts.json                                  win 59.4% over 250 seats
+RESULT f9_finalT4 | n=3 games=250 | win=32.8% [27.3, 38.8] (chance 33.3%) | score=41.25 | diffBest=-1.86 +- 0.54 | ms/dec(all)=1437 | 4654s
+    finalT4.json [focus]                          win 32.8% over 250 seats
+    ref.json                                      win 21.2% over 250 seats
+    tagmcts.json                                  win 46.0% over 250 seats
+BATCH DONE

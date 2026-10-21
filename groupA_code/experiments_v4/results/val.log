@@ -1,0 +1,5 @@
+RESULT val_q5 | n=4 games=250 | win=38.4% [32.6, 44.6] (chance 25.0%) | score=37.46 | diffBest=-1.04 +- 0.61 | ms/dec(all)=616 | 1395s
+    finalI.json [focus]                           win 38.4% over 250 seats
+    ref.json                                      win 10.4% over 376 seats
+    tagmcts.json                                  win 30.7% over 374 seats
+BATCH DONE

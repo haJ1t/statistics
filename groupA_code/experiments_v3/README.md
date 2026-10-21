@@ -28,6 +28,12 @@ previous agent (package `refv2`) and benchmark configurations that use TAG's own
 * Time budgets are **CPU time** per decision (TAG's `ElapsedCpuTimer`), so results depend little on machine load.
 * The deals are reproducible, the searches are not: TAG's determinisation RNG (`AbstractGameState.redeterminisationRnd`)
   is not seeded, so a repeated run plays the same deals but not exactly the same games.
+* **Correction (found in the v4 study):** the deals were *not* the same. TAG fills the deck by iterating a `HashMap`
+  whose order follows identity hash codes, which differ in every JVM run, so the same seed gave different deals in
+  different runs. The comparisons of this study are therefore two-sample, not paired, comparisons. Their intervals
+  are still about right, because pairing reduces the variance very little in Sushi Go (the win/loss correlation of
+  two agents on the same deal is only 0.1–0.2). The v4 harness (`experiments_v4`) re-deals every game from a deck
+  in a fixed order, shuffled with the game seed.
 
 ## Reproducing
 

@@ -767,17 +767,27 @@ class SushiTreeNode {
         for (int k = 0; k < SushiSim.KINDS; k++) {
             if (sim.hand(p, k) == 0) continue;
             for (int c = 0; c <= chopMax; c++) {
-                int key = SushiSim.key(k) + c;
-                int j = slot(p, key);
-                double[] val = isVal[p];
-                val[3 * j + 2] += 1;   // available in this iteration
-                if (val[3 * j] == 0) untried++;
                 kinds[d] = k;
                 chop[d] = c;
-                slots[d] = j;
-                keys[d] = key;
+                keys[d] = SushiSim.key(k) + c;
                 d++;
             }
+        }
+        int kMax = p != player.getPlayerID() ? opponentCandidates(params) : Integer.MAX_VALUE;
+        if (d > kMax) {
+            // MODIFICATION K: the opponent only considers its kMax best cards by the card-value model
+            double[] mv = values.of(p);
+            double[] v = new double[d];
+            for (int x = 0; x < d; x++)
+                v[x] = mv[kinds[x]] + (chop[x] == 1 ? sim.bestOther(p, mv, kinds[x]) - CardValueModel.CHOPSTICKS_VALUE : 0.0);
+            d = keepBest(v, d, kMax, kinds, chop, keys);
+        }
+        for (int x = 0; x < d; x++) {
+            int j = slot(p, keys[x]);
+            double[] val = isVal[p];
+            val[3 * j + 2] += 1;   // available in this iteration
+            if (val[3 * j] == 0) untried++;
+            slots[x] = j;
         }
         double[] val = isVal[p];
         int pick = 0;
@@ -820,6 +830,41 @@ class SushiTreeNode {
         second[p] = chop[pick] == 1 ? simSecondCard(p, sim, values.of(p), kinds[pick]) : -1;
         slotOut[p] = slots[pick];
         return keys[pick];
+    }
+
+    /**
+     * MODIFICATION K: how many of its best cards an opponent considers at this node: opponentTopK, and with
+     * opponentWidening a > 0 at most ceil((n + 1)^a) for a node with n visits (progressive widening, Coulom 2007;
+     * Chaslot et al. 2008), so rarely visited nodes branch on few opponent cards and the tree grows deeper.
+     */
+    private int opponentCandidates(SushiMCTSParams params) {
+        int k = params.opponentTopK > 0 ? params.opponentTopK : Integer.MAX_VALUE;
+        if (params.opponentWidening > 0)
+            k = Math.min(k, (int) Math.ceil(Math.pow(nVisits + 1, params.opponentWidening)));
+        return k;
+    }
+
+    /**
+     * MODIFICATION K: keeps the k candidates with the highest values v (ties: the earlier candidate) in the first k
+     * places of the arrays a, b and c, in their original order; returns k.
+     */
+    private static int keepBest(double[] v, int d, int k, int[] a, int[] b, int[] c) {
+        boolean[] keep = new boolean[d];
+        for (int r = 0; r < k; r++) {
+            int best = -1;
+            for (int x = 0; x < d; x++)
+                if (!keep[x] && (best < 0 || v[x] > v[best])) best = x;
+            keep[best] = true;
+        }
+        int n = 0;
+        for (int x = 0; x < d; x++)
+            if (keep[x]) {
+                a[n] = a[x];
+                b[n] = b[x];
+                c[n] = c[x];
+                n++;
+            }
+        return n;
     }
 
     /**
@@ -877,14 +922,19 @@ class SushiTreeNode {
      * card of a Chopsticks move follows the rollout policy too when policySecond is true (as in playOut), otherwise it
      * is p's best other card (as the tree's greedyAction). With rolloutTemperature T > 0 the informed move is not the
      * best card but a card drawn with probability proportional to exp(value / T) (each copy in the hand counts).
+     * The other players use opponentRolloutEpsilon and opponentRolloutTemperature instead when these are >= 0.
      */
     private void simPolicyMove(int p, SushiSim sim, SimValues values, int[] first, int[] second, SushiMCTSParams params,
                                boolean policySecond) {
         boolean chopOk = sim.canChop(p);
         int h = sim.handSize;
         boolean useChop;
-        boolean informed = params.useInformedRollout && rnd.nextDouble() >= params.rolloutEpsilon;
-        if (informed && params.rolloutTemperature > 0) {
+        // the other players may follow their own epsilon and temperature (opponentRolloutEpsilon / -Temperature)
+        boolean other = p != player.getPlayerID();
+        double eps = other && params.opponentRolloutEpsilon >= 0 ? params.opponentRolloutEpsilon : params.rolloutEpsilon;
+        double temp = other && params.opponentRolloutTemperature >= 0 ? params.opponentRolloutTemperature : params.rolloutTemperature;
+        boolean informed = params.useInformedRollout && rnd.nextDouble() >= eps;
+        if (informed && temp > 0) {
             // softmax over the cards of the hand: card (and Chopsticks use) with value v has weight exp(v / T)
             double[] mv = values.of(p);
             double[] w = new double[2 * SushiSim.KINDS];
@@ -902,7 +952,7 @@ class SushiTreeNode {
                 int c = sim.hand(p, k);
                 for (int ch = 0; ch <= 1; ch++) {
                     int x = 2 * k + ch;
-                    w[x] = c > 0 && (ch == 0 || chopOk) ? c * Math.exp((w[x] - vmax) / params.rolloutTemperature) : 0.0;
+                    w[x] = c > 0 && (ch == 0 || chopOk) ? c * Math.exp((w[x] - vmax) / temp) : 0.0;
                     total += w[x];
                 }
             }
@@ -947,7 +997,7 @@ class SushiTreeNode {
             useChop = chopOk && idx % 2 == 1;
         }
         if (!useChop) second[p] = -1;
-        else if (!policySecond || (params.useInformedRollout && rnd.nextDouble() >= params.rolloutEpsilon))
+        else if (!policySecond || (params.useInformedRollout && rnd.nextDouble() >= eps))
             second[p] = simSecondCard(p, sim, values.of(p), first[p]);
         else
             second[p] = randomOther(p, sim, first[p]);
@@ -1091,6 +1141,14 @@ class SushiTreeNode {
         int m = 2 * sg.getPlayerHands().get(p).getSize();
         int[] keys = new int[m], cardIdx = new int[m], chop = new int[m], slots = new int[m];
         int d = CardValueModel.distinctCards(sg, p, keys, cardIdx, chop);
+        int kMax = p != player.getPlayerID() ? opponentCandidates(params) : Integer.MAX_VALUE;
+        if (d > kMax) {
+            // MODIFICATION K: the opponent only considers its kMax best cards by the card-value model
+            double[] mv = policyValues(sg, p);
+            double[] v = new double[d];
+            for (int x = 0; x < d; x++) v[x] = chopsticksValue(mv, cardIdx[x], chop[x] == 1);
+            d = keepBest(v, d, kMax, keys, cardIdx, chop);
+        }
         int untried = 0;
         double[] val;
         for (int x = 0; x < d; x++) {

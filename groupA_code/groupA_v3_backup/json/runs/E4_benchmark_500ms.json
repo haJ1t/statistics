@@ -1,0 +1,9 @@
+{
+  "game": "SushiGo",
+  "nPlayers": 4,
+  "playerDirectory": "src/main/java/groupA/json/benchmark_500ms",
+  "mode": "exhaustive",
+  "matchups": 504,
+  "destDir": "results/E4_benchmark_500ms",
+  "listener": "json/listeners/basiclistener.json"
+}

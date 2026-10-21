@@ -29,7 +29,8 @@ import static utilities.Utils.noise;
  * the whole budget goes into a single, deeper tree.
  * <p>
  * With Modification I (SushiTreeNode) the hidden cards are sampled again in every iteration of a single tree,
- * so D is not used (M = 1).
+ * so D is not used (M = 1). Modification E (ensembleTrees > 1) runs the same split-and-vote loop with M independent
+ * I trees instead.
  * <p>
  * Safety (not an AI change): the time budget is CPU time, as in BasicMCTS. If wallTimeLimitMS > 0 the search
  * also stops when that much real time has passed, so a busy machine cannot push a decision over the time limit.
@@ -152,10 +153,13 @@ public class SushiMCTSPlayer extends AbstractPlayer {
      */
     int numberOfDeterminisations(AbstractGameState gameState) {
         SushiMCTSParams params = getParameters();
-        if (!params.useDeterminisation || params.nDeterminisations <= 1 || !(gameState instanceof SGGameState sg))
-            return 1;
-        // MODIFICATION I samples the hidden cards again in every iteration of ONE tree (see SushiTreeNode)
+        // MODIFICATION I samples the hidden cards again in every iteration of ONE tree (see SushiTreeNode).
+        // MODIFICATION E: with ensembleTrees > 1 the budget is split between that many independent such trees and
+        // their root visits are summed (root parallelisation, Chaslot, Winands and van den Herik 2008, done one
+        // tree after another within the same budget)
         if (params.useInformationSets && params.useMaxN)
+            return Math.max(1, params.ensembleTrees);
+        if (!params.useDeterminisation || params.nDeterminisations <= 1 || !(gameState instanceof SGGameState sg))
             return 1;
         int n = sg.getNPlayers();
         int unknown = 0;
