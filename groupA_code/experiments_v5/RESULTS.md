@@ -58,7 +58,7 @@ Opponents: v2 and TAG's ISMCTS at the same budget (`arena/agents/b<budget>/ref.j
 3p, 100 ms         n= 500 win  52.6 [48.2, 56.9]  margin +0.73 ± 0.46
 3p, 500 ms         missing
 3p, 900 ms         missing
-4p, 100 ms         missing
+4p, 100 ms         n= 500 win  44.4 [40.1, 48.8]  margin -0.61 ± 0.43
 4p, 500 ms (F+L8)  missing
 ```
 
@@ -69,6 +69,10 @@ r2_val_3p100
     SushiMCTS_100.json [focus]                    win 52.6% over 500 seats
     ref.json                                      win 21.0% over 500 seats
     tagmcts.json                                  win 26.4% over 500 seats
+r2_val_4p100
+    SushiMCTS_100.json [focus]                    win 44.4% over 500 seats
+    ref.json                                      win 13.0% over 752 seats
+    tagmcts.json                                  win 24.1% over 748 seats
 ```
 
 ### Against TAG's decoupled information-set MCTS (SushiGoDUCT.json at 100 ms) and TAG's ISMCTS, 3 players, seed 100 000
