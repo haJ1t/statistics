@@ -45,6 +45,7 @@ The v4 agent was first re-run on this machine (3 players, 100 ms, seed 7, the sa
 | + N, λ 0.5 (denial) | 500 | 56.3 [51.9, 60.6] | +0.84 ± 0.47 | -1.8 ± 5.8 (z = -0.6) | -0.32 ± 0.59 (z = -1.1) |
 | + V2D (terminal value scale 2, σ decay 0.5) | 500 | 57.5 [53.1, 61.8] | +0.57 ± 0.46 | -0.6 ± 5.8 (z = -0.2) | -0.60 ± 0.56 (z = -2.1) |
 | + W1 (leader weight w 1.0) | 500 | 58.8 [54.4, 63.0] | +1.07 ± 0.47 | +0.7 ± 5.8 (z = +0.2) | -0.09 ± 0.58 (z = -0.3) |
+| + R3V2 (rollouts to the game end, terminal value scale 2) | 500 | 34.4 [30.4, 38.7] | -2.42 ± 0.54 | -23.7 ± 5.8 (z = -8.0) | -3.58 ± 0.65 (z = -10.9) |
 
 * **X3 – card-model constants tuned for 3 players.** With the v4 search-free tuner (`GreedyTune`, greedy card-value
   policies against each other, 20 000 deals per evaluation) we tuned the nine card-model constants for 3 players:
@@ -72,7 +73,20 @@ The v4 agent was first re-run on this machine (3 players, 100 ms, seed 7, the sa
   46.8 % for v4 on the same 500 deals (v4 validation run of the old machine): +2.0 ± 5.7 win points, margin
   −0.24 ± 0.57 – no clear gain, and this machine gave v4 itself +3.1 points at 3 players.
 
-*(runs still in progress: rollouts to the game end, K 0.35, the competition files)*
+* **R3V2 – rollouts to the end of the game, valued by the gap to the winner** (`rolloutRounds` 3, `terminalScale` 2),
+  so that every leaf value is about winning the game: **−23.7 ± 5.8 win points (z = −8.0)**. Simulating the later
+  rounds with the rollout policy makes the leaf values far noisier than the round-end estimate of H, and the
+  sharp terminal value (scale 2) adds more variance. This confirms the v3 result that rollouts must stop at the
+  end of the round (R).
+* K 0.35 was planned but not run: in the v3 study K 0.3 lost clearly to K 0.5 (34.5 % vs 42.2 %), and v4 found
+  K 0.8 worse than 0.5, so 0.5 is close to the best value.
+
+**Outcome of the sprint.** None of the ideas beat v4, so the competition files are unchanged and play exactly as
+v4; N stays in the code as a switch that is off. The sprint still tells us where the agent's limits are *not*:
+a much stronger rollout policy (X3), denial in the rollouts (N) and a value shape aimed at winning (V2D, W1) all
+leave the win rate where it was (differences within ± 2 win points), and longer rollouts are much worse.
+
+*(still running: the competition files at their real time limits on this machine)*
 
 ## What the agent is
 
