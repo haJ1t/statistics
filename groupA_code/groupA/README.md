@@ -44,6 +44,7 @@ The v4 agent was first re-run on this machine (3 players, 100 ms, seed 7, the sa
 | + X3 (3-player card model) | 500 | 56.8 [52.4, 61.1] | +0.59 ± 0.48 | -1.3 ± 5.8 (z = -0.4) | -0.57 ± 0.60 (z = -1.9) |
 | + N, λ 0.5 (denial) | 500 | 56.3 [51.9, 60.6] | +0.84 ± 0.47 | -1.8 ± 5.8 (z = -0.6) | -0.32 ± 0.59 (z = -1.1) |
 | + V2D (terminal value scale 2, σ decay 0.5) | 500 | 57.5 [53.1, 61.8] | +0.57 ± 0.46 | -0.6 ± 5.8 (z = -0.2) | -0.60 ± 0.56 (z = -2.1) |
+| + W1 (leader weight w 1.0) | 500 | 58.8 [54.4, 63.0] | +1.07 ± 0.47 | +0.7 ± 5.8 (z = +0.2) | -0.09 ± 0.58 (z = -0.3) |
 
 * **X3 – card-model constants tuned for 3 players.** With the v4 search-free tuner (`GreedyTune`, greedy card-value
   policies against each other, 20 000 deals per evaluation) we tuned the nine card-model constants for 3 players:
@@ -65,7 +66,13 @@ The v4 agent was first re-run on this machine (3 players, 100 ms, seed 7, the sa
   (`sigmaRoundDecay` 0.5). Same win rate (−0.6 ± 5.8), lower score margin (−0.60 ± 0.56, expected when the value
   stops rewarding the size of a win).
 
-*(runs still in progress: w 1.0, rollouts to the game end, K 0.35, X3 with 4 players)*
+* **W1 – only the lead over the best opponent counts** (w 1.0 instead of 0.7 in H): no difference (+0.7 ± 5.8 win
+  points, margin −0.09 ± 0.58).
+* **X3 with 4 players** (in the `fourPlayer` block of the 100 ms agent, instead of X0): 48.8 % [44.4, 53.2] against
+  46.8 % for v4 on the same 500 deals (v4 validation run of the old machine): +2.0 ± 5.7 win points, margin
+  −0.24 ± 0.57 – no clear gain, and this machine gave v4 itself +3.1 points at 3 players.
+
+*(runs still in progress: rollouts to the game end, K 0.35, the competition files)*
 
 ## What the agent is
 

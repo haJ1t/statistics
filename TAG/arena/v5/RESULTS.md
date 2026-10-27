@@ -12,6 +12,7 @@ same deals and seats; ± is 1.96 standard errors of the per-game differences.
 | + X3 (3-player card model) | 500 | 56.8 [52.4, 61.1] | +0.59 ± 0.48 | -1.3 ± 5.8 (z = -0.4) | -0.57 ± 0.60 (z = -1.9) |
 | + N, λ 0.5 (denial) | 500 | 56.3 [51.9, 60.6] | +0.84 ± 0.47 | -1.8 ± 5.8 (z = -0.6) | -0.32 ± 0.59 (z = -1.1) |
 | + V2D (terminal value scale 2, σ decay 0.5) | 500 | 57.5 [53.1, 61.8] | +0.57 ± 0.46 | -0.6 ± 5.8 (z = -0.2) | -0.60 ± 0.56 (z = -2.1) |
+| + W1 (leader weight w 1.0) | 500 | 58.8 [54.4, 63.0] | +1.07 ± 0.47 | +0.7 ± 5.8 (z = +0.2) | -0.09 ± 0.58 (z = -0.3) |
 
 ### 4 players, 100 ms, seed 7 (paired with the v4 validation run V_4p100 of the old machine, same deals)
 
