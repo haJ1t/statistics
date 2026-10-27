@@ -73,12 +73,16 @@ r2_val_4p100
     SushiMCTS_100.json [focus]                    win 44.4% over 500 seats
     ref.json                                      win 13.0% over 752 seats
     tagmcts.json                                  win 24.1% over 748 seats
+r2_duct_3p100
+    SushiMCTS_100.json [focus]                    win 55.0% over 500 seats
+    b100_tagduct.json                             win 21.0% over 500 seats
+    tagmcts.json                                  win 24.0% over 500 seats
 ```
 
 ### Against TAG's decoupled information-set MCTS (SushiGoDUCT.json at 100 ms) and TAG's ISMCTS, 3 players, seed 100 000
 
 ```
-v4 vs DUCT + ISMCTS missing
+v4 vs DUCT + ISMCTS n= 500 win  55.0 [50.6, 59.3]  margin +0.72 ± 0.40
 ```
 
 ### H replaced by TAG's LeaderHeuristic (K 7.5), 3 players, 100 ms, seed 7 (paired with `v5_base3p100`)

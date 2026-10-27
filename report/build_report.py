@@ -598,11 +598,11 @@ def text_final_agent():
     s += (f" On seed block 7, which overlaps the development deals, it had won {o['win']:.1f}% at 100 ms "
           f"({pp(d, ci)}), so we see no sign that the development overfitted its deals.")
     if DUCT:
-        dd = DUCT_SEATS.get("b100_tagduct.json")
-        if dd is not None:
-            s += f" TAG's DUCT agent wins {dd:.1f}% of its seats"
-            s += (", so decoupled information-set search without our card-value model and round-end rollouts is far "
-                  "weaker." if dd < 25 else ".")
+        dd, ii = DUCT_SEATS.get("b100_tagduct.json"), DUCT_SEATS.get("tagmcts.json")
+        if dd is not None and ii is not None:
+            s += (f" TAG's DUCT agent, which has decoupled selection and information sets but neither our card-value "
+                  f"model nor round-end rollouts, wins only {dd:.1f}% of its seats when it replaces v2 (ISMCTS "
+                  f"{ii:.1f}%, our agent {DUCT['win']:.1f}%).")
     m = max(BSEATS.get("fw_BasicMCTS.json", 0), BSEATS.get("fw_RHEA.json", 0), BSEATS.get("osla_fw_BasicMCTS.json", 0))
     s += (f" BasicMCTS, RHEA and OSLA win at most {m:.1f}% of their seats; OSLA wins "
           f"{'none' if BSEATS.get('osla_fw_OSLA.json', 1) == 0 else 'almost none'}, as cards are revealed only when "
