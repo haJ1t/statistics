@@ -12,3 +12,4 @@ TAG/.git-upstream/
 TAG/target/
 *.class
 hs_err_pid*
+__pycache__/
