@@ -52,8 +52,9 @@ the same budget, as in the v4 study.
 | `v5_comp_4p500` | 4 | 40 | 7 | `src/main/java/groupA/json/competition/SushiMCTS_500ms.json` | competition file (430 ms CPU, guard 450 ms), opponents at 500 ms, 3 threads |
 | `v5_field_3p100` | 3 | 300 | 7 | `arena/agents/final/SushiMCTS_100.json` | v4 against **two** TAG ISMCTS (a stronger field) |
 
-`v5_comp_3p1000b` (90 more 1 s games on the deals of games 90–179 of `V_3p900`, seed 97) was queued but skipped
-for lack of time.
+`v5_comp_3p1000b` (3 players, 45 games, seed 97 = the deals and seats of games 90–134 of `V_3p900`, the 1000 ms
+competition file, 3 threads) adds to `v5_comp_3p1000`; `merge_comp.py` joins both into `results/v5_comp_3p1000_all.csv`
+(135 games: 51.1 % [42.8, 59.4]; `V_3p900` on the same deals: 52.6 %).
 
 ## v4 is unchanged inside v5
 

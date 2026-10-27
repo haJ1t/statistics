@@ -40,7 +40,7 @@ echo
 echo "Paired with the first games of the v4 validation runs (same deals; those used the benchmark files without the guard)."
 echo
 [ -f $R/v5_comp_3p1000.csv ] && python3 table.py ../results/V_3p900.csv "v4 validation, 900 ms (V_3p900)=../results/V_3p900.csv" \
-  "SushiMCTS_1000ms.json, 3 players=$R/v5_comp_3p1000.csv" | grep -v "| V_3p900 |"
+  "SushiMCTS_1000ms.json, 3 players=$R/v5_comp_3p1000.csv" "SushiMCTS_1000ms.json, 3 players, both batches=$R/v5_comp_3p1000_all.csv" | grep -v "| V_3p900 |"
 echo
 [ -f $R/v5_comp_4p500.csv ] && python3 table.py ../results/V_4p500.csv "v4 validation, 500 ms (V_4p500)=../results/V_4p500.csv" \
   "SushiMCTS_500ms.json, 4 players=$R/v5_comp_4p500.csv" | grep -v "| V_4p500 |"

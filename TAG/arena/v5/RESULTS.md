@@ -41,6 +41,7 @@ Paired with the first games of the v4 validation runs (same deals; those used th
 |---|---|---|---|---|---|
 | v4 validation, 900 ms (V_3p900) | 250 | 56.0 [49.8, 62.0] | +1.06 ± 0.62 | base | base |
 | SushiMCTS_1000ms.json, 3 players | 90 | 55.6 [45.3, 65.4] | +0.67 ± 0.75 | +2.2 ± 13.3 (z = +0.3) | -0.08 ± 1.13 (z = -0.1) |
+| SushiMCTS_1000ms.json, 3 players, both batches | 135 | 51.1 [42.8, 59.4] | +0.43 ± 0.67 | -1.5 ± 10.6 (z = -0.3) | -0.07 ± 1.01 (z = -0.1) |
 
 | Agent | Games | Win % [95 % CI] | Score margin | Δ win vs base (paired) | Δ margin (paired) |
 |---|---|---|---|---|---|
