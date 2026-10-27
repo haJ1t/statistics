@@ -31,3 +31,38 @@ It uses the v4 harness (`arena.Arena`, frozen v2 in `refv2`, TAG's ISMCTS as an 
 | `probe.sh` | pauses the arena runs and measures wall-clock / CPU time of every decision of the competition files (`arena.WallProbe`) |
 | `../dev/groupA/GreedyTune.java` (v4) | search-free coordinate tuner of the card-model constants; `results/tune_X3.log` is the 3-player tuning |
 | `../dev/groupA/DenialDuel.java` (new) | search-free duel of greedy card-value policies with and without the denial term N |
+
+## Runs
+
+Every run is a line of `q.txt` (`label players games seed focus opponents [threads]`, a `#` marks a run that was
+started; `queue2.sh` writes `results/<label>.csv/.log/.err` and `results/queue.log`). All 100 ms runs use 4 game
+threads; the opponents are `arena/agents/b100/ref.json` (v2) and `arena/agents/b100/tagmcts.json` (TAG's ISMCTS) with
+the same budget, as in the v4 study.
+
+| Label | Players | Games | Seed | Agent file | What changes against v4 |
+|---|---|---|---|---|---|
+| `v5_base3p100` | 3 | 500 | 7 | `arena/agents/final/SushiMCTS_100.json` | nothing (v4 final agent, 100 ms) |
+| `v5_X3_3p100` | 3 | 500 | 7 | `agents/b100_X3.json` | heuristic args X3 = [15, 0.7, 0.5, 4, 0.8, 4, 0.25, 1.0, 1.5, 4, 3] |
+| `v5_N05_3p100` | 3 | 500 | 7 | `agents/b100_N05.json` | `rolloutDenial` 0.5 |
+| `v5_V2D_3p100` | 3 | 500 | 7 | `agents/b100_V2D.json` | `terminalScale` 2, `sigmaRoundDecay` 0.5 |
+| `v5_W1_3p100` | 3 | 500 | 7 | `agents/b100_W1.json` | heuristic args [15, 1.0, 0.5, 4] (w 1.0) |
+| `v5_R3V2_3p100` | 3 | 500 | 7 | `agents/b100_R3V2.json` | `rolloutRounds` 3, `terminalScale` 2 |
+| `v5_4X3_4p100` | 4 | 500 | 7 | `agents/b100_4X3.json` | X3 in the `fourPlayer` block (instead of X0) |
+| `v5_comp_3p1000` | 3 | 90 | 7 | `src/main/java/groupA/json/competition/SushiMCTS_1000ms.json` | competition file (900 ms CPU, guard 925 ms), opponents at 900 ms, 3 threads |
+| `v5_comp_4p500` | 4 | 40 | 7 | `src/main/java/groupA/json/competition/SushiMCTS_500ms.json` | competition file (430 ms CPU, guard 450 ms), opponents at 500 ms, 3 threads |
+| `v5_field_3p100` | 3 | 300 | 7 | `arena/agents/final/SushiMCTS_100.json` | v4 against **two** TAG ISMCTS (a stronger field) |
+
+The other files in `agents/` (K 0.35, X0, N 0.25 / 1.0, X3 + N, X3 + R3 / V2D / ε 0.1, N + V2D) were prepared but not
+run. `tune_X3.log` is the 3-player tuning: `GreedyTune tune 3 20000 0.2 2 <X0> "<default>;<X0>" 2`.
+
+## Reproducing
+
+Put the v4 experiment folder at `<TAG root>/arena` (as in v4) and this folder at `<TAG root>/arena/v5`; the dev
+tool goes to `<TAG root>/arena/dev/groupA/`. From the TAG root, after `mvn compile` and
+`mvn dependency:build-classpath -Dmdep.outputFile=cp.txt`:
+
+```
+arena/v5/build.sh
+nohup arena/v5/queue2.sh arena/v5/q.txt &       # runs the lines of q.txt that do not start with #
+cd arena/v5 && ./make_results.sh                # RESULTS.md
+```
