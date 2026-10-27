@@ -6,5 +6,6 @@
 #v5_R3V2_3p100 3 500 7 arena/v5/agents/b100_R3V2.json arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json
 #skipped(v3: K 0.3 clearly worse) v5_K035_3p100 3 500 7 arena/v5/agents/b100_K035.json arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json
 #v5_comp_3p1000 3 90 7 src/main/java/groupA/json/competition/SushiMCTS_1000ms.json arena/agents/b900/ref.json,arena/agents/b900/tagmcts.json 3
-v5_comp_4p500 4 40 7 src/main/java/groupA/json/competition/SushiMCTS_500ms.json arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json 3
+#v5_comp_4p500 4 40 7 src/main/java/groupA/json/competition/SushiMCTS_500ms.json arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json 3
 v5_field_3p100 3 300 7 arena/agents/final/SushiMCTS_100.json arena/agents/b100/tagmcts.json,arena/agents/b100/tagmcts.json
+v5_comp_3p1000b 3 90 97 src/main/java/groupA/json/competition/SushiMCTS_1000ms.json arena/agents/b900/ref.json,arena/agents/b900/tagmcts.json 3
