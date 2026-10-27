@@ -28,3 +28,5 @@
 20:49:25 start r2_val_3p900
 22:28:04 container restart: r2_val_3p900 lost at 200/250 games; remaining runs restarted in chunks (q3.txt)
 22:28:04 start r2_val_3p500_c0
+22:53:46 done r2_val_3p500_c0 rc=0
+22:53:46 start r2_val_3p500_c1

@@ -70,7 +70,7 @@ def edge(ax, x0, y0, x1, y1, label=None, color=BLUE, side=-1):
 
 
 def fig_turnnode():
-    fig = plt.figure(figsize=(COL, 1.8))
+    fig = plt.figure(figsize=(COL, 1.58))
     ax = fig.add_axes([0, 0, 1, 1])
     ax.set_xlim(0, 100); ax.set_ylim(0, 57.5); ax.axis("off")
     # left: v3, players of a turn in sequence
@@ -117,8 +117,8 @@ def fig_budget():
     styles = {"v2": (GREY, "s"), "v3": (ORANGE, "^"), "final (v4)": (BLUE, "o")}
     held = {"final (v4)": ["r2_val_3p100", "r2_val_3p500", ["r2_val_3p900_all", "r2_val_3p900"]],
             "v3": ["r2_v3_3p100", "r2_v3_3p500", None]}
-    fig, ax = plt.subplots(figsize=(COL, 1.9))
-    fig.subplots_adjust(left=0.115, right=0.985, bottom=0.2, top=0.82)
+    fig, ax = plt.subplots(figsize=(COL, 1.7))
+    fig.subplots_adjust(left=0.115, right=0.985, bottom=0.22, top=0.8)
     xs = [0, 1, 2]
     for k, (name, labels) in enumerate(dev.items()):
         c, m = styles[name]
@@ -179,9 +179,9 @@ def fig_effects():
     ys0 = [n1 + 2.5 + i for i in range(n0)][::-1]
     ys1 = list(range(n1))[::-1]
     ys = ys0 + ys1
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(COL, 2.45), sharey=True,
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(COL, 2.2), sharey=True,
                                  gridspec_kw={"width_ratios": [1.15, 1], "wspace": 0.08})
-    fig.subplots_adjust(left=0.425, right=0.975, bottom=0.15, top=0.985)
+    fig.subplots_adjust(left=0.425, right=0.975, bottom=0.17, top=0.985)
     for y, (lab, dw, cw, dm, cm, g) in zip(ys, rows):
         col = RED if g == 0 else BLUE
         a1.errorbar(dw, y, xerr=cw, fmt="o", color=col, ms=2.8, capsize=1.6, elinewidth=0.7)
