@@ -1,2 +1,3 @@
-# Keep the summary logs of the runs (TAG/.gitignore ignores *.log)
+# Keep the summary logs of the runs (TAG/.gitignore ignores *.log); runs in progress are not tracked
 !*.log
+running/
