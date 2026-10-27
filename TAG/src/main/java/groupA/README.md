@@ -9,8 +9,9 @@ off by default) and tested it together with five other ideas, none of which beat
 files still play exactly as version 4**. Version 3 (H + B + D + P + M + R, K 0.5) is also still inside unchanged: every new idea is a
 switch in `SushiMCTSParams` that is off by default, and the final JSON files switch on the ones that were kept.
 
-**Win rate of the final agent** against v2 (our previous agent) and TAG's tuned ISMCTS, on fresh deals that
-were not used during development (validation, seed 7):
+**Win rate of the final agent** against v2 (our previous agent) and TAG's tuned ISMCTS on seed block 7 (game
+seeds 7–506; these deals overlap the development deals of seeds 1 and 2). The held-out validation on seed block
+100 000, which shares no deal with any earlier run, is in `experiments_v5/RESULTS.md` and in the report:
 
 | Setting | Games | **v4 (final)** win % [95 % CI] | Score margin | for comparison: v3, development deals |
 |---|---|---|---|---|
@@ -198,8 +199,9 @@ against X0 alone with 4 players at 100 ms.
 * `json/competition/SushiMCTS_1000ms.json` – 1 s per decision: budget 900 ms CPU, wall-clock guard 925 ms.
 * `json/competition/SushiMCTS_500ms.json` – 500 ms per decision: budget 430 ms CPU, wall-clock guard 450 ms.
 
-Both work for 3 and 4 players. The guidelines mention both settings (3 players / 1 s and 4 players / 500 ms):
-submit the file of the setting the module team confirms, and **never the 1000 ms file in a 500 ms competition**.
+Both work for 3 and 4 players. **Our competition file is `SushiMCTS_1000ms.json`** (3 players, 1 s per decision,
+section 3 of the guidelines). Section 4 of the guidelines also mentions 4 players with 500 ms per decision: for
+that setting use `SushiMCTS_500ms.json`, and **never the 1000 ms file in a 500 ms competition**.
 
 **Timing safety.** The budget is CPU time, as for every TAG agent, and TAG's own timeout check (`Game.java`,
 `ElapsedCpuChessTimer`) also measures the thread's CPU time on Linux and macOS. With `wallTimeLimitMS` the search
@@ -277,13 +279,14 @@ holds for the v3 study, whose README says "same deals": its comparisons are two-
 intervals are valid as such. Since 19 October the harness re-deals every game from a deck in a fixed order,
 shuffled with the game seed (`Arena.canonicalDeal`), so runs with the same seed play the same deals and seats.
 Runs from before are marked †; a "paired" difference involving them is an ordinary two-sample difference.
-Pairing helps little in Sushi Go (the win/loss correlation of two agents on the same deal is 0.1–0.2): a
+Pairing helps little in Sushi Go (the win/loss correlation of two agents on the same deal is 0.0–0.2): a
 difference between two 500-game runs has a CI of about ±5.5 win points, between two 250-game runs about ±8.
 The score margin is about twice as precise and was used for screening.
 
 **Development and validation.** Every decision was made on the deals of seeds 1 and 2. The final configuration
-was then played on new deals (seed 7) that were not used for any decision, so the validation numbers are not
-inflated by picking the best of many noisy runs.
+was then played on seed block 7. Game g of a run uses deal seed s + g, so seed block 7 (game seeds 7–506) overlaps
+the development deals (seeds 1–501): these runs are a second measurement, not a clean hold-out. The held-out
+validation uses seed block 100 000 (`experiments_v5`, runs `r2_val_*`), which no earlier run touched.
 
 **Number of games.** 500 games per condition, except 3 players / 900 ms and the 4-player / 500 ms development
 runs, which have 250. A 3-player game at 900 ms needs about 3 × 27 decisions × 0.9 s ≈ 73 s of CPU time and a
@@ -292,7 +295,7 @@ runs, which have 250. A 3-player game at 900 ms needs about 3 × 27 decisions ×
 report the correspondingly wider intervals (about ±6 instead of ±4.4 points for a win rate). The final
 4-player / 500 ms agent was validated with 500 games.
 
-### Validation of the final agent (seed 7, new deals)
+### Final agent on seed block 7 (overlaps the development deals)
 
 | Setting | Games | Win % [95 % CI] | Score margin | TAG ISMCTS seats | v2 seats |
 |---|---|---|---|---|---|
@@ -334,7 +337,7 @@ for 4 players, see below) bring it to about 44 %.
 
 Every component pulls its weight: each removal lowers both the win rate and the score margin, and on the
 score margin every difference is significant (|z| ≥ 2.2). H matters most by far; S + I together are worth
-10.2 win points on the new deals (5.6 † on the development deals of seed 1).
+10.2 win points on seed block 7 (5.6 † on the development deals of seed 1).
 
 ### Four players
 
@@ -382,7 +385,7 @@ Nothing else improved the 4-player agent at 500 ms (seed 2, 250 games each, pair
 
 Giving *only our agent* 1000 ms (and K 1.37) made it worse (score margin −1.30 ± 0.77). Every variant in
 this table has a lower score margin than the base run (paired differences −0.33 to −2.67), so the base run
-(−0.71) was probably lucky; the validation run on new deals (−1.53 ± 0.46) is the better estimate of the final
+(−0.71) was probably lucky; the seed-7 run (−1.53 ± 0.46) is the better estimate of the final
 agent. Two results stand out: with tree depth 1 (bandits at the root only, rollouts from the second turn on) the
 agent lost 17.4 ± 8.2 win points (z = −4.2), so the second turn of the tree, where the opponents answer our
 card, matters a lot; and the 100 ms agent given 100 ms lost 9.0 ± 7.7 (z = −2.3). Limiting the opponents in

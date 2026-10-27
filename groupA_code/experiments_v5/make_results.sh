@@ -32,7 +32,7 @@ python3 table.py ../results/V_3p100.csv "v4, old machine (V_3p100)=../results/V_
 echo
 echo "### Stronger field: v4 against two TAG ISMCTS (3 players, 100 ms, seed 7)"
 echo
-python3 tab.py "v4 vs 2 x ISMCTS=$R/v5_field_3p100.csv"
+python3 tab.py "v4 vs 2 x ISMCTS=$R/v5_field_3p100.csv" "v4 vs 2 x ISMCTS, with r2_field_3p100b (500)=$R/v5_field_3p100_all.csv"
 if [ -f $R/v5_comp_3p1000.csv ] || [ -f $R/v5_comp_4p500.csv ]; then
 echo
 echo "### The competition files on this machine (wall-clock guard on, 3 game threads)"
@@ -53,9 +53,25 @@ echo
 echo "Opponents: v2 and TAG's ISMCTS at the same budget (\`arena/agents/b<budget>/ref.json\`, \`tagmcts.json\`)."
 echo
 echo '```'
-python3 tab.py "3p, 100 ms=$R/r2_val_3p100.csv" "3p, 500 ms=$R/r2_val_3p500.csv" "3p, 900 ms=$R/r2_val_3p900.csv" \
+python3 tab.py "3p, 100 ms=$R/r2_val_3p100.csv" "3p, 500 ms=$R/r2_val_3p500.csv" \
+  "3p, 900 ms, games 0-249=$R/r2_val_3p900.csv" "3p, 900 ms, all 500=$R/r2_val_3p900_all.csv" \
   "4p, 100 ms=$R/r2_val_4p100.csv" "4p, 500 ms (F+L8)=$R/r2_val_4p500.csv"
 echo '```'
+echo
+echo "\`r2_val_3p900_all\` = \`r2_val_3p900\` (seed 100 000, games 0–249) + \`r2_val_3p900b\` (seed 100 252), joined by"
+echo "\`merge_parts.py\` with offset 252: the second part has the deals, seats and opponent order of games 252–501 of one"
+echo "long run, so it pairs with the other held-out runs by game number."
+echo
+echo "### v3 (sequential tree, H + B + D + P + R + M) on the held-out deals, paired with the final agent"
+echo
+[ -f $R/r2_v3_3p100.csv ] && python3 table.py $R/r2_v3_3p100.csv "v3, 100 ms (base)=$R/r2_v3_3p100.csv" "final agent, 100 ms=$R/r2_val_3p100.csv" | grep -v "| r2_v3_3p100 |" | grep -v "| missing |"
+echo
+[ -f $R/r2_v3_3p500.csv ] && python3 table.py $R/r2_v3_3p500.csv "v3, 500 ms (base)=$R/r2_v3_3p500.csv" "final agent, 500 ms=$R/r2_val_3p500.csv" | grep -v "| r2_v3_3p500 |" | grep -v "| missing |"
+echo
+echo "### The final agent across budgets on the held-out deals (paired with 100 ms)"
+echo
+python3 table.py $R/r2_val_3p100.csv "100 ms (base)=$R/r2_val_3p100.csv" "500 ms=$R/r2_val_3p500.csv" "900 ms (all 500)=$R/r2_val_3p900_all.csv" | grep -v "| r2_val_3p100 |" | grep -v "| missing |"
+echo
 echo
 echo "Seats of every agent (from the logs):"
 echo

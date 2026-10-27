@@ -32,6 +32,7 @@ same deals and seats; ± is 1.96 standard errors of the per-game differences.
 ### Stronger field: v4 against two TAG ISMCTS (3 players, 100 ms, seed 7)
 
 v4 vs 2 x ISMCTS   n= 300 win  54.2 [48.5, 59.7]  margin +1.66 ± 0.69
+v4 vs 2 x ISMCTS, with r2_field_3p100b (500) missing
 
 ### The competition files on this machine (wall-clock guard on, 3 game threads)
 
@@ -57,10 +58,26 @@ Opponents: v2 and TAG's ISMCTS at the same budget (`arena/agents/b<budget>/ref.j
 ```
 3p, 100 ms         n= 500 win  52.6 [48.2, 56.9]  margin +0.73 ± 0.46
 3p, 500 ms         missing
-3p, 900 ms         missing
+3p, 900 ms, games 0-249 missing
+3p, 900 ms, all 500 missing
 4p, 100 ms         n= 500 win  44.4 [40.1, 48.8]  margin -0.61 ± 0.43
 4p, 500 ms (F+L8)  missing
 ```
+
+`r2_val_3p900_all` = `r2_val_3p900` (seed 100 000, games 0–249) + `r2_val_3p900b` (seed 100 252), joined by
+`merge_parts.py` with offset 252: the second part has the deals, seats and opponent order of games 252–501 of one
+long run, so it pairs with the other held-out runs by game number.
+
+### v3 (sequential tree, H + B + D + P + R + M) on the held-out deals, paired with the final agent
+
+
+
+### The final agent across budgets on the held-out deals (paired with 100 ms)
+
+| Agent | Games | Win % [95 % CI] | Score margin | Δ win vs base (paired) | Δ margin (paired) |
+|---|---|---|---|---|---|
+| 100 ms (base) | 500 | 52.6 [48.2, 56.9] | +0.73 ± 0.46 | base | base |
+
 
 Seats of every agent (from the logs):
 
