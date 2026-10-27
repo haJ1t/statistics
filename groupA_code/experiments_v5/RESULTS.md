@@ -28,3 +28,21 @@ same deals and seats; ± is 1.96 standard errors of the per-game differences.
 |---|---|---|---|---|---|
 | v4, old machine (V_3p100) | 500 | 55.0 [50.6, 59.3] | +1.00 ± 0.44 | base | base |
 | v4, this machine (v5_base3p100) | 500 | 58.1 [53.7, 62.3] | +1.16 ± 0.42 | +3.1 ± 5.8 (z = +1.1) | +0.17 ± 0.56 (z = +0.6) |
+
+### Stronger field: v4 against two TAG ISMCTS (3 players, 100 ms, seed 7)
+
+v4 vs 2 x ISMCTS   n= 300 win  54.2 [48.5, 59.7]  margin +1.66 ± 0.69
+
+### The competition files on this machine (wall-clock guard on, 3 game threads)
+
+Paired with the first games of the v4 validation runs (same deals; those used the benchmark files without the guard).
+
+| Agent | Games | Win % [95 % CI] | Score margin | Δ win vs base (paired) | Δ margin (paired) |
+|---|---|---|---|---|---|
+| v4 validation, 900 ms (V_3p900) | 250 | 56.0 [49.8, 62.0] | +1.06 ± 0.62 | base | base |
+| SushiMCTS_1000ms.json, 3 players | 90 | 55.6 [45.3, 65.4] | +0.67 ± 0.75 | +2.2 ± 13.3 (z = +0.3) | -0.08 ± 1.13 (z = -0.1) |
+
+| Agent | Games | Win % [95 % CI] | Score margin | Δ win vs base (paired) | Δ margin (paired) |
+|---|---|---|---|---|---|
+| v4 validation, 500 ms (V_4p500) | 500 | 41.4 [37.2, 45.8] | -1.53 ± 0.46 | base | base |
+| SushiMCTS_500ms.json, 4 players | 40 | 46.2 [31.8, 61.3] | +0.03 ± 1.67 | -2.5 ± 19.2 (z = -0.3) | +0.30 ± 1.86 (z = +0.3) |

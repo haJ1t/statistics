@@ -94,7 +94,7 @@ on, 3 game threads on the 4 cores, opponents with the same budget), on the deals
 | `SushiMCTS_1000ms.json` | 3 | 90 | 55.6 [45.3, 65.4] | 53.3 % (900 ms, old machine) |
 | `SushiMCTS_500ms.json` | 4 | 40 | 46.3 [31.8, 61.3] | 48.8 % (500 ms, old machine) |
 
-FIELD_RESULT
+Against a stronger field – the v4 agent against **two** TAG ISMCTS agents (3 players, 100 ms, seed 7, 300 games) – it won **54.2 %** [48.5, 59.7] (score margin +1.66 ± 0.69; each ISMCTS seat 22.9 %, chance 33.3 %), about as often as against one ISMCTS and v2, so its lead does not depend on the weaker v2 opponent.
 
 **Timing on a small machine.** Every decision of our agent in 3 games per file (`arena.WallProbe`, the other
 experiments paused), with the JVM's default settings (G1, default heap), as a plain TAG run gets them:

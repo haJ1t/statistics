@@ -29,6 +29,10 @@ echo "### Machine check: v4 on the old (18-core) and the new (4-core) machine, 3
 echo
 python3 table.py ../results/V_3p100.csv "v4, old machine (V_3p100)=../results/V_3p100.csv" \
   "v4, this machine (v5_base3p100)=$R/v5_base3p100.csv" | grep -v "| V_3p100 |"
+echo
+echo "### Stronger field: v4 against two TAG ISMCTS (3 players, 100 ms, seed 7)"
+echo
+python3 tab.py "v4 vs 2 x ISMCTS=$R/v5_field_3p100.csv"
 if [ -f $R/v5_comp_3p1000.csv ] || [ -f $R/v5_comp_4p500.csv ]; then
 echo
 echo "### The competition files on this machine (wall-clock guard on, 3 game threads)"
