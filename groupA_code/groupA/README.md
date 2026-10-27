@@ -5,8 +5,8 @@
 
 This is **version 5** of the agent. Version 5 is the sprint before the in-class tournament (see
 [Version 5](#version-5--sprint-for-the-in-class-tournament-27-october) below): it adds one more switch (N, denial,
-off by default) and tested four other ideas, none of which beat version 4, so **the competition files still play
-exactly as version 4**. Version 3 (H + B + D + P + M + R, K 0.5) is also still inside unchanged: every new idea is a
+off by default) and tested it together with five other ideas, none of which beat version 4, so **the competition
+files still play exactly as version 4**. Version 3 (H + B + D + P + M + R, K 0.5) is also still inside unchanged: every new idea is a
 switch in `SushiMCTSParams` that is off by default, and the final JSON files switch on the ones that were kept.
 
 **Win rate of the final agent** against v2 (our previous agent) and TAG's tuned ISMCTS, on fresh deals that
@@ -86,7 +86,33 @@ v4; N stays in the code as a switch that is off. The sprint still tells us where
 a much stronger rollout policy (X3), denial in the rollouts (N) and a value shape aimed at winning (V2D, W1) all
 leave the win rate where it was (differences within ± 2 win points), and longer rollouts are much worse.
 
-*(still running: the competition files at their real time limits on this machine)*
+**The competition files on this machine.** Both files were played unchanged at their real limits (wall-clock guard
+on, 3 game threads on the 4 cores, opponents with the same budget), on the deals of the v4 validation runs:
+
+| File | Players | Games | Win % [95 % CI] | v4 validation run, same deals |
+|---|---|---|---|---|
+| `SushiMCTS_1000ms.json` | 3 | 90 | 55.6 [45.3, 65.4] | 53.3 % (900 ms, old machine) |
+| `SushiMCTS_500ms.json` | 4 | 40 | 46.3 [31.8, 61.3] | 48.8 % (500 ms, old machine) |
+
+FIELD_RESULT
+
+**Timing on a small machine.** Every decision of our agent in 3 games per file (`arena.WallProbe`, the other
+experiments paused), with the JVM's default settings (G1, default heap), as a plain TAG run gets them:
+
+| File | Players | CPU time per decision: mean / max | Wall-clock: median / 95 % / max |
+|---|---|---|---|
+| 1000 ms | 3 | 845 / 900 ms | 925 / 926 / 1004 ms (1 of 73 decisions over 1 s) |
+| 500 ms | 4 | 418 / 453 ms | 441 / 451 / 472 ms (none over 500 ms) |
+
+With the probe settings of v4 (2 GB heap, ParallelGC with 2 threads) the wall-clock tail on this machine is much
+longer (3 players: 95 % 1085 ms, max 1455 ms, 5 of 73 decisions over 1 s; 4 players: max 766 ms, 2 of 66 over
+500 ms) while the CPU time stays within the budget: the long decisions are garbage-collection pauses of a small
+heap, which hit every agent in the JVM. TAG's own time check counts CPU time, which never exceeded the budget.
+Lowering the 1 s file to 850 ms (budget and guard) left the single decision just over 1 s (1002 ms), so that one is
+most likely a one-off JVM pause (class loading or compilation early in the run) rather than the search, and fast
+simulation (F) did not shorten the tail either; the competition files therefore keep v4's limits
+(`experiments_v5/results/probe_*.txt`). On a busy or small machine, give the JVM a larger heap (for example
+`-Xmx4g`) or keep TAG's default G1 settings.
 
 ## What the agent is
 
@@ -191,7 +217,7 @@ The CPU time never exceeds the budget. The few longer wall-clock times (5 of 87,
 are garbage-collection pauses of the JVM, which the other agents' trees fill as well; they do not count as the
 agent's CPU time. On a machine that runs many games at once the wall-clock times grow further (measured with 20
 other game threads on 18 cores: median 926 ms, maximum 1833 ms for the 1000 ms file), while the CPU time stays
-within the budget.
+within the budget. Version 5 repeated the measurement on a 4-core machine with the JVM's default settings (1000 ms file: median 925 ms, maximum 1004 ms; 500 ms file: maximum 472 ms; CPU time always within the budget), see [Version 5](#version-5--sprint-for-the-in-class-tournament-27-october).
 
 ## How to construct the agent in code
 

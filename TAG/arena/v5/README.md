@@ -52,6 +52,25 @@ the same budget, as in the v4 study.
 | `v5_comp_4p500` | 4 | 40 | 7 | `src/main/java/groupA/json/competition/SushiMCTS_500ms.json` | competition file (430 ms CPU, guard 450 ms), opponents at 500 ms, 3 threads |
 | `v5_field_3p100` | 3 | 300 | 7 | `arena/agents/final/SushiMCTS_100.json` | v4 against **two** TAG ISMCTS (a stronger field) |
 
+`v5_comp_3p1000b` (90 more 1 s games on the deals of games 90–179 of `V_3p900`, seed 97) was queued but skipped
+for lack of time.
+
+## Timing probes
+
+`results/probe_quiet.txt` (`probe.sh`, the v4 probe settings: 2 GB heap, ParallelGC with 2 threads),
+`results/probe_quiet_F.txt` (the same with fast simulation F for 3 players, `agents/comp1000_F.json`) and
+`results/probe_quiet_defaultjvm.txt` (the JVM's default settings: G1, default heap; also budget and guard 850 ms,
+`agents/comp1000_g850.json`). Every decision of our agent in 3 games per file, the arena runs paused (SIGSTOP).
+
+| Setting | Players | CPU per decision: mean / max (ms) | Wall-clock: median / 95 % / max (ms) | Over the limit |
+|---|---|---|---|---|
+| 1000 ms file, default JVM | 3 | 845 / 900 | 925 / 926 / 1004 | 1 of 73 |
+| 1000 ms file, budget and guard 850, default JVM | 3 | 769 / 846 | 850 / 852 / 1002 | 1 of 73 |
+| 500 ms file, default JVM | 4 | 418 / 453 | 441 / 451 / 472 | 0 of 67 |
+| 1000 ms file, 2 GB ParallelGC | 3 | 694 / 901 | 925 / 1085 / 1455 | 5 of 73 |
+| 1000 ms file + F, 2 GB ParallelGC | 3 | 723 / 901 | 925 / 1319 / 1653 | 8 of 76 |
+| 500 ms file, 2 GB ParallelGC | 4 | 398 / 430 | 440 / 451 / 766 | 2 of 66 |
+
 The other files in `agents/` (K 0.35, X0, N 0.25 / 1.0, X3 + N, X3 + R3 / V2D / ε 0.1, N + V2D) were prepared but not
 run. `tune_X3.log` is the 3-player tuning: `GreedyTune tune 3 20000 0.2 2 <X0> "<default>;<X0>" 2`.
 

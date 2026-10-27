@@ -1,0 +1,6 @@
+[3p 1000ms, default JVM (G1, default heap)] PROBE WALL src/main/java/groupA/json/competition/SushiMCTS_1000ms.json: decisions=73 mean=924.7 p50=925.1 p95=926.0 p99=1003.5 max=1003.5 ms, over 1000 ms: 1
+[3p 1000ms, default JVM (G1, default heap)] PROBE CPU  src/main/java/groupA/json/competition/SushiMCTS_1000ms.json: decisions=73 mean=844.8 p50=855.3 p95=899.4 p99=899.9 max=899.9 ms, over 1000 ms: 0
+[4p 500ms, default JVM (G1, default heap)] PROBE WALL src/main/java/groupA/json/competition/SushiMCTS_500ms.json: decisions=67 mean=441.4 p50=440.6 p95=450.7 p99=471.6 max=471.6 ms, over 500 ms: 0
+[4p 500ms, default JVM (G1, default heap)] PROBE CPU  src/main/java/groupA/json/competition/SushiMCTS_500ms.json: decisions=67 mean=418.0 p50=429.1 p95=429.9 p99=452.7 max=452.7 ms, over 500 ms: 0
+[3p budget 850 / guard 850, default JVM] PROBE WALL arena/v5/agents/comp1000_g850.json: decisions=73 mean=852.6 p50=850.1 p95=851.6 p99=1002.1 max=1002.1 ms, over 1000 ms: 1
+[3p budget 850 / guard 850, default JVM] PROBE CPU  arena/v5/agents/comp1000_g850.json: decisions=73 mean=769.4 p50=774.6 p95=841.3 p99=846.4 max=846.4 ms, over 1000 ms: 0
