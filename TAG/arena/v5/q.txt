@@ -1,6 +1,7 @@
 #v5_X3_3p100 3 500 7 arena/v5/agents/b100_X3.json arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json
 #v5_N05_3p100 3 500 7 arena/v5/agents/b100_N05.json arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json
 #v5_V2D_3p100 3 500 7 arena/v5/agents/b100_V2D.json arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json
+v5_4X3_4p100 4 500 7 arena/v5/agents/b100_4X3.json arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json
 v5_W1_3p100 3 500 7 arena/v5/agents/b100_W1.json arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json
 v5_R3V2_3p100 3 500 7 arena/v5/agents/b100_R3V2.json arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json
 v5_K035_3p100 3 500 7 arena/v5/agents/b100_K035.json arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json
