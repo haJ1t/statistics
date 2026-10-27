@@ -30,7 +30,7 @@ Before the in-class tournament we had one 4.5-hour session to improve the agent 
 (the v4 study used an 18-core laptop), within the module rules: everything stays in this package, nothing from
 `players.mcts` is used, the base agent is still `BasicMCTSPlayer`, and the competition files keep the 1 s / 500 ms
 limits with the wall-clock guard. Every v5 idea is again a switch that is off by default, so **v4 is still inside
-v5 unchanged**. Tools, agent files and per-game results are in `experiments_v5/`.
+v5 unchanged** (with the 4-player competition settings the v4 and v5 builds make exactly the same decisions on fixed states, `EquivF`). Tools, agent files and per-game results are in `experiments_v5/`.
 
 The v4 agent was first re-run on this machine (3 players, 100 ms, seed 7, the same deals as the v4 validation):
 58.1 % [53.7, 62.3], score margin +1.16 ± 0.42, in line with 55.0 % / +1.00 on the old machine (paired difference

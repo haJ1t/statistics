@@ -55,6 +55,16 @@ the same budget, as in the v4 study.
 `v5_comp_3p1000b` (90 more 1 s games on the deals of games 90–179 of `V_3p900`, seed 97) was queued but skipped
 for lack of time.
 
+## v4 is unchanged inside v5
+
+The only v5 code change is switch N (`rolloutDenial`, default 0): `CardValueModel.addDenial` and three lines in
+`SushiTreeNode.policyValues` (the card-model view is now built once and also passed to `addDenial` when λ > 0).
+The v4 dev tool `EquivF` (deterministic searches with the 4-player competition settings, F + L8, on fixed states)
+gives the same decision hash for the v4 build (commit 323ee7d) and the v5 build: `trace-hash=4814249538744286751`
+(240 searches). The 3-player path cannot be hashed the same way (TAG re-samples hidden cards in
+`AbstractGameState.copy(player)` with an unseeded random generator), but it differs from v4 only by the
+`if (denial > 0)` block.
+
 ## Timing probes
 
 `results/probe_quiet.txt` (`probe.sh`, the v4 probe settings: 2 GB heap, ParallelGC with 2 threads),
