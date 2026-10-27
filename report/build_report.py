@@ -613,15 +613,14 @@ def text_final_agent():
 def text_lead():
     if LEAD is None:
         return ""
-    s = (f"Replacing H by TAG's lead heuristic (own score minus the best opponent's, <i>K</i> = 7.5) changed the "
-         f"win rate by {dpp(LEAD)} and the margin by "
-         f"{LEAD['dm']:+.2f} ± {LEAD['dmci']:.2f}".replace("-", "−"))
-    if abs(LEAD["zw"]) < 2:
-        s += (": valuing the lead recovers most of H's effect.")
-    else:
-        s += (": a plain lead is not enough; unfinished sets, the Pudding standing and the bounded value of H carry "
-              "a significant part of its effect.")
-    return s
+    if LEAD["zw"] <= -2:
+        return (f"Replacing H by TAG's lead heuristic (own score minus the best opponent's, <i>K</i> = 7.5) cost "
+                f"{-LEAD['dw']:.1f} ± {LEAD['dwci']:.1f} pp (<i>z</i> = {abs(LEAD['zw']):.1f}), about half as much: "
+                "valuing the lead instead of the own score accounts for about half of H's effect, and the Pudding "
+                "standing, the term for the mean opponent and the bounded scale that H adds at the round-end leaves "
+                "for the rest.")
+    return (f"Replacing H by TAG's lead heuristic (own score minus the best opponent's, <i>K</i> = 7.5) changed the "
+            f"win rate by {dpp(LEAD)}: valuing the lead recovers most of H's effect.")
 
 
 def text_treestats():
@@ -658,8 +657,8 @@ def text_fig3_caption():
 def text_conclusion_1():
     s = ("We adapted TAG's BasicMCTS to Sushi Go! with a card-value model for evaluation and simulation, round-end "
          "rollouts, max-n backups, decoupled UCT and information-set search. For RQ1, the heuristic (28.3 pp when "
-         "removed) and the decoupled information-set tree (10.2 pp) contribute most, and round-end rollouts led "
-         "v3's factorial (+8.7 pp).")
+         "removed; a plain lead recovers half of it) and the decoupled information-set tree (10.2 pp) contribute "
+         "most, and round-end rollouts led v3's factorial (+8.7 pp).")
     if VAL["3p100"]:
         s += f" On held-out deals the final agent wins {v('3p100')}% of three-player games at 100 ms"
         if VAL["3p900"]:

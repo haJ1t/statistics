@@ -90,6 +90,7 @@ v4 vs DUCT + ISMCTS n= 500 win  55.0 [50.6, 59.3]  margin +0.72 ± 0.40
 | Agent | Games | Win % [95 % CI] | Score margin | Δ win vs base (paired) | Δ margin (paired) |
 |---|---|---|---|---|---|
 | v4 (final agent, base) | 500 | 58.1 [53.7, 62.3] | +1.16 ± 0.42 | base | base |
+| H → LeaderHeuristic, K 7.5 | 500 | 44.5 [40.2, 48.9] | -0.28 ± 0.46 | -13.6 ± 5.9 (z = -4.5) | -1.45 ± 0.60 (z = -4.7) |
 
 ### Diagnostics
 
