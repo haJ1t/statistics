@@ -1,13 +1,21 @@
 #!/usr/bin/env python3
-"""Figures of the report (data copied from groupA_code/experiments_v3, _v4 and _v5 RESULTS.md)."""
+"""Figures of the report. Paired effects and held-out results are computed from the per-game CSV files in
+groupA_code/experiments_v4/results and groupA_code/experiments_v5/results; the development win rates of Fig. 2
+are those of experiments_v4/RESULTS.md ("From v3 to v4"; runs before the canonical deal)."""
+import csv
 import math
+import os
+
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch
 
-plt.rcParams.update({"font.family": "Liberation Serif", "mathtext.fontset": "stix", "font.size": 7.5, "axes.linewidth": 0.6,
-                     "xtick.major.width": 0.6, "ytick.major.width": 0.6, "savefig.dpi": 600})
+HERE = os.path.dirname(os.path.abspath(__file__))
+R4 = os.path.join(HERE, "..", "groupA_code", "experiments_v4", "results")
+R5 = os.path.join(HERE, "..", "groupA_code", "experiments_v5", "results")
+plt.rcParams.update({"font.family": "Liberation Serif", "mathtext.fontset": "stix", "font.size": 7.5,
+                     "axes.linewidth": 0.6, "xtick.major.width": 0.6, "ytick.major.width": 0.6, "savefig.dpi": 600})
 COL = 3.39  # IEEE column width in inches (A4 template: 86 mm)
 
 
@@ -15,6 +23,27 @@ def wilson(p, n, z=1.96):
     c = (p + z * z / (2 * n)) / (1 + z * z / n)
     h = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / (1 + z * z / n)
     return 100 * (c - h), 100 * (c + h)
+
+
+def load(path):
+    with open(path) as f:
+        return {int(r["game"]): r for r in csv.DictReader(f)}
+
+
+def mean_se(xs):
+    n = len(xs)
+    m = sum(xs) / n
+    return m, math.sqrt(sum((x - m) ** 2 for x in xs) / (n - 1) / n)
+
+
+def paired(base, other):
+    """(d_win in pp, 1.96 SE, d_margin, 1.96 SE) of run other against run base on their common games"""
+    b, o = load(base), load(other)
+    g = sorted(set(b) & set(o))
+    mg = lambda r: float(r["focusScore"]) - float(r["bestOppScore"])
+    w, sw = mean_se([float(o[k]["focusWin"]) - float(b[k]["focusWin"]) for k in g])
+    d, sd = mean_se([mg(o[k]) - mg(b[k]) for k in g])
+    return 100 * w, 196 * sw, d, 1.96 * sd
 
 
 # ---------------------------------------------------------------- Fig. 1: one iteration of the final agent
@@ -29,7 +58,7 @@ def fig_iteration():
         (xs[0], top, "1  Sample (I)", "re-deal every card\nwe cannot see"),
         (xs[1], top, "2  Select (S, P, M)", "each player: UCB1 on\nits own cards; joint\npick leads to a child"),
         (xs[2], top, "3  Expand", "add one node for the\nfirst new joint pick"),
-        (xs[2], bot, "4  Roll out (B, R)", "\u03b5-greedy card values\nfor every player until\nthe round is scored"),
+        (xs[2], bot, "4  Roll out (B, R)", "ε-greedy card values\nfor every player until\nthe round is scored"),
         (xs[1], bot, "5  Evaluate (H)", "$H_i=\\tanh(\\Delta_i/\\sigma)$\nfor every player $i$"),
         (xs[0], bot, "6  Back up (M)", "each player's value\ngoes to the card it\nchose at each node"),
     ]
@@ -46,7 +75,7 @@ def fig_iteration():
              ((xs[0] + w / 2, bot + h + 0.9), (xs[0] + w / 2, top - 0.9))]
     for (x0, y0), (x1, y1) in pairs:
         ax.annotate("", xy=(x1, y1), xytext=(x0, y0), arrowprops=arrow)
-    fig.savefig("figures/fig1_iteration.png")
+    fig.savefig(os.path.join(HERE, "figures", "fig1_iteration.png"))
     plt.close(fig)
 
 
@@ -54,80 +83,98 @@ def fig_iteration():
 def fig_budget():
     budgets = [100, 500, 900]
     n = [500, 500, 250]
-    runs = {  # development runs, 3 players, seed 1 (experiments_v4/RESULTS.md, "From v3 to v4")
-        "v2": [24.8, 18.3, 18.8],
-        "v3": [50.1, 40.7, 32.8],
-        "v4": [55.7, 49.7, 47.6],
-    }
+    runs = {"v2": [24.8, 18.3, 18.8], "v3": [50.1, 40.7, 32.8], "v4": [55.7, 49.7, 47.6]}  # development, seed 1
     styles = {"v2": ("#9a9a9a", "s"), "v3": ("#d17a22", "^"), "v4": ("#1f5f9e", "o")}
-    fig, ax = plt.subplots(figsize=(COL, 1.9))
-    fig.subplots_adjust(left=0.12, right=0.985, bottom=0.215, top=0.97)
+    fig, ax = plt.subplots(figsize=(COL, 1.85))
+    fig.subplots_adjust(left=0.12, right=0.985, bottom=0.273, top=0.97)
     xs = [0, 1, 2]
     for k, (name, ys) in enumerate(runs.items()):
         c, m = styles[name]
         lo = [y - wilson(y / 100, nn)[0] for y, nn in zip(ys, n)]
         hi = [wilson(y / 100, nn)[1] - y for y, nn in zip(ys, n)]
         off = (k - 1) * 0.06
-        ax.errorbar([x + off for x in xs], ys, yerr=[lo, hi], color=c, marker=m, ms=3.6, lw=1.0, capsize=2, elinewidth=0.7,
-                    label=name)
+        ax.errorbar([x + off for x in xs], ys, yerr=[lo, hi], color=c, marker=m, ms=3.6, lw=1.0, capsize=2,
+                    elinewidth=0.7, label=name)
+    # held-out validation of the final agent (seed block 100 000)
+    hx, hy, hlo, hhi = [], [], [], []
+    for x, b in zip(xs, budgets):
+        f = os.path.join(R5, f"r2_val_3p{b}.csv")
+        if os.path.exists(f):
+            rows = load(f)
+            p = sum(float(r["focusWin"]) for r in rows.values()) / len(rows)
+            lo, hi = wilson(p, len(rows))
+            hx.append(x + 0.14); hy.append(100 * p); hlo.append(100 * p - lo); hhi.append(hi - 100 * p)
+    if hx:
+        ax.errorbar(hx, hy, yerr=[hlo, hhi], fmt="o", mfc="white", mec="#1f5f9e", color="#1f5f9e", ms=3.6,
+                    capsize=2, elinewidth=0.7, label="final, held-out")
     ax.axhline(100 / 3, color="black", lw=0.6, ls=":")
-    ax.text(2.28, 100 / 3 + 0.8, "chance", fontsize=6.5, ha="right", va="bottom")
+    ax.text(2.33, 100 / 3 + 0.8, "chance", fontsize=6.5, ha="right", va="bottom")
     ax.set_xticks(xs, [f"{b} ms\n(n = {nn})" for b, nn in zip(budgets, n)])
-    ax.set_xlim(-0.3, 2.3); ax.set_ylim(10, 68)
+    ax.set_xlabel("CPU time per decision (development runs: n games)", fontsize=6.8)
+    ax.set_xlim(-0.3, 2.35); ax.set_ylim(10, 70)
     ax.set_ylabel("win rate (%)")
     ax.grid(axis="y", lw=0.3, alpha=0.6)
-    ax.legend(loc="upper center", fontsize=6.6, frameon=False, ncol=3, handlelength=1.8, borderaxespad=0.1, columnspacing=1.6)
+    ax.legend(loc="upper center", fontsize=6.3, frameon=False, ncol=4, handlelength=1.6, borderaxespad=0.1,
+              columnspacing=1.1)
     for s in ("top", "right"):
         ax.spines[s].set_visible(False)
-    fig.savefig("figures/fig2_budget.png")
+    fig.savefig(os.path.join(HERE, "figures", "fig2_budget.png"))
     plt.close(fig)
 
 
-# ---------------------------------------------------------------- Fig. 3: paired effects (ablation and v5 additions)
+# ---------------------------------------------------------------- Fig. 3: paired effects (ablation and last study)
 def fig_effects():
-    # label, d_win, ci_win, d_margin, ci_margin, group
-    rows = [
-        ("− H (TAG score heuristic)", -28.3, 5.8, -5.45, 0.71, 0),
-        ("− S − I (= v3)", -10.2, 5.7, -1.75, 0.58, 0),
-        ("− R (10-move rollouts)", -6.2, 5.9, -0.74, 0.61, 0),
-        ("− B (random rollouts)", -4.3, 5.8, -0.98, 0.57, 0),
-        ("− I (S with determinisation D)", -3.8, 5.7, -0.63, 0.55, 0),
-        ("+ X3 (3-player card constants)", -1.3, 5.8, -0.57, 0.60, 1),
-        ("+ N (denial, λ = 0.5)", -1.8, 5.8, -0.32, 0.59, 1),
-        ("+ V2D (win-gap value, σ decay)", -0.6, 5.8, -0.60, 0.56, 1),
-        ("+ W1 (leader weight w = 1)", 0.7, 5.8, -0.09, 0.58, 1),
-        ("+ R3V2 (rollouts to game end)", -23.7, 5.8, -3.58, 0.65, 1),
+    base4, base5 = os.path.join(R4, "V_3p100.csv"), os.path.join(R5, "v5_base3p100.csv")
+    spec = [  # label, base, run, group
+        ("− heuristic H (own score / 50)", base4, os.path.join(R4, "A_noH.csv"), 0),
+        ("− decoupled tree S and info sets I", base4, os.path.join(R4, "A_noSI.csv"), 0),
+        ("− round-end rollouts R", base4, os.path.join(R4, "A_noR.csv"), 0),
+        ("− informed rollouts B", base4, os.path.join(R4, "A_noB.csv"), 0),
+        ("− info sets I (determinisation D)", base4, os.path.join(R4, "A_noI.csv"), 0),
+        ("H → TAG lead heuristic (K 7.5)", base5, os.path.join(R5, "r2_lead_3p100.csv"), 1),
+        ("+ 3-player card constants X3", base5, os.path.join(R5, "v5_X3_3p100.csv"), 1),
+        ("+ denial in the rollouts (λ 0.5)", base5, os.path.join(R5, "v5_N05_3p100.csv"), 1),
+        ("+ win-gap value, σ decay", base5, os.path.join(R5, "v5_V2D_3p100.csv"), 1),
+        ("+ leader weight w = 1", base5, os.path.join(R5, "v5_W1_3p100.csv"), 1),
+        ("+ rollouts to game end, win-gap value", base5, os.path.join(R5, "v5_R3V2_3p100.csv"), 1),
     ]
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(COL, 2.55), sharey=True, gridspec_kw={"width_ratios": [1.15, 1], "wspace": 0.08})
-    fig.subplots_adjust(left=0.41, right=0.985, bottom=0.135, top=0.985)
-    ys = [11, 10, 9, 8, 7, 4, 3, 2, 1, 0]
+    rows = [(lab, *paired(b, r), g) for lab, b, r, g in spec if os.path.exists(r)]
+    n0 = sum(1 for r in rows if r[5] == 0)
+    n1 = len(rows) - n0
+    ys0 = [n1 + 2.5 + i for i in range(n0)][::-1]
+    ys1 = list(range(n1))[::-1]
+    ys = ys0 + ys1
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(COL, 2.55), sharey=True,
+                                 gridspec_kw={"width_ratios": [1.15, 1], "wspace": 0.08})
+    fig.subplots_adjust(left=0.43, right=0.985, bottom=0.135, top=0.985)
     for y, (lab, dw, cw, dm, cm, g) in zip(ys, rows):
         col = "#b23a3a" if g == 0 else "#1f5f9e"
         a1.errorbar(dw, y, xerr=cw, fmt="o", color=col, ms=2.8, capsize=1.6, elinewidth=0.7)
         a2.errorbar(dm, y, xerr=cm, fmt="o", color=col, ms=2.8, capsize=1.6, elinewidth=0.7)
+    sep = n1 + 0.75
+    top_label, bot_label = max(ys0) + 1.05, n1 - 0.05 + 0.75
     for a in (a1, a2):
         a.axvline(0, color="black", lw=0.6)
         a.grid(axis="x", lw=0.3, alpha=0.6)
-        a.axhline(5.75, color="#777777", lw=0.5, ls="--")
-        a.set_ylim(-0.7, 12.6)
+        a.axhline(sep, color="#777777", lw=0.5, ls="--")
+        a.set_ylim(-0.7, top_label + 0.6)
         for s in ("top", "right"):
             a.spines[s].set_visible(False)
-    group_y = [12.05, 5.05]
-    a1.set_yticks(ys + group_y, [r[0] for r in rows] + ["ablation of the final agent (v4)", "added to the final agent (v5)"],
-                  fontsize=6.4)
+    a1.set_yticks(ys + [top_label, bot_label],
+                  [r[0] for r in rows] + ["removed from the final agent", "last study (new base run)"], fontsize=6.3)
     for lab, col in zip(a1.get_yticklabels()[-2:], ("#b23a3a", "#1f5f9e")):
         lab.set_color(col); lab.set_fontstyle("italic"); lab.set_fontweight("bold")
-    for tick in a1.yaxis.get_major_ticks()[-2:]:
-        tick.tick1line.set_visible(False)
-    for tick in a2.yaxis.get_major_ticks()[-2:]:
-        tick.tick1line.set_visible(False)
-    a1.set_xlabel("Δ win rate (points)")
+    for a in (a1, a2):
+        for tick in a.yaxis.get_major_ticks()[-2:]:
+            tick.tick1line.set_visible(False)
+    a1.set_xlabel("Δ win rate (pp)")
     a2.set_xlabel("Δ score margin (points)")
     a1.set_xlim(-36, 8); a2.set_xlim(-6.6, 1.2)
-    fig.savefig("figures/fig3_effects.png")
+    fig.savefig(os.path.join(HERE, "figures", "fig3_effects.png"))
     plt.close(fig)
 
 
 if __name__ == "__main__":
+    os.makedirs(os.path.join(HERE, "figures"), exist_ok=True)
     fig_iteration(); fig_budget(); fig_effects()
     print("figures written")

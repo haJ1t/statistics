@@ -1,0 +1,2 @@
+arena/agents/final/SushiMCTS_500_FL8.json                    decisions=71  mean tree iterations=36806
+arena/v5/agents/b500_4noF.json                               decisions=71  mean tree iterations=10170

@@ -17,3 +17,6 @@
 17:50:11 done v5_field_3p100 rc=0
 17:54:31 start v5_comp_3p1000b
 18:14:20 done v5_comp_3p1000b rc=0
+19:33:25 start r2_val_3p100
+19:55:35 done r2_val_3p100 rc=0
+19:55:35 start r2_val_4p100

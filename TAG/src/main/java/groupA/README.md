@@ -345,12 +345,15 @@ The best settings for 3 and 4 players differ, so the agent switches parameters b
 * **W2** (value shape for 4 players): +3.4 ± 8.6 at 4 players / 500 ms (seed 1, 42.2 → 45.6 %), but with
   3 players at 500 ms adding X0 + W2 to v4 + F + L8 costs 7.7 ± 5.4 points (z = −2.8; 49.5 → 41.8 %).
 * **F + L8** (fast simulator, 8 rollouts per leaf): +1.0 ± 7.9 at 4 players / 500 ms (seed 2, W2 42.8 → 43.8 %),
-  −6.6 ± 6.0 (z = −2.2) at 4 players / 100 ms, −0.2 ± 6.3 † at 3 players / 500 ms. F makes 7–11 times more iterations per
-  second, yet more iterations help little: at 4 players / 500 ms the tree has about 12 000 iterations, 700
-  joint actions at the root, 45 % of the depth-1 nodes are visited only once and the mean depth is 1.6. The
-  search is essentially a decoupled bandit at the root plus rollouts, and its quality is limited by the
-  rollout policy and the evaluation, not by the number of iterations. L8 spends the extra speed on better leaf
-  estimates instead.
+  −6.6 ± 6.0 (z = −2.2) at 4 players / 100 ms, −0.2 ± 6.3 † at 3 players / 500 ms. With F + L8 the 500 ms agent
+  runs about 36 800 iterations of 8 rollouts per decision, against 10 200 single-rollout iterations without
+  them, yet more search helps little: on 73 positions from random 4-player games the 500 ms tree has 704 joint
+  actions at the root, 53 % of the depth-1 nodes are visited only once and the mean depth is 1.5, and doubling
+  the time or the rollouts per leaf changes the chosen card in only 2.7 % and 5.5 % of the positions, no more
+  often than re-running the same search (5.5 %; `experiments_v5/results/bench4.txt`, `treestats4.txt`,
+  `agree4.txt`, made with `arena/v5/run_treestats.sh`). The search is essentially a decoupled bandit at the root
+  plus rollouts, and its quality is limited by the rollout policy and the evaluation, not by the number of
+  iterations. L8 spends the extra speed on better leaf estimates instead.
 
 Nothing else improved the 4-player agent at 500 ms (seed 2, 250 games each, paired with W2 + F + L8):
 
