@@ -4,3 +4,8 @@ Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cace
   [v5_base3p100] 150/500 games, 351s
   [v5_base3p100] 200/500 games, 549s
   [v5_base3p100] 250/500 games, 661s
+  [v5_base3p100] 300/500 games, 758s
+  [v5_base3p100] 350/500 games, 861s
+  [v5_base3p100] 400/500 games, 957s
+  [v5_base3p100] 450/500 games, 1059s
+  [v5_base3p100] 500/500 games, 1156s

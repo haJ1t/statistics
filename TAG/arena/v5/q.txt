@@ -1,2 +1,3 @@
-v5_X3_3p100 3 500 7 arena/v5/agents/b100_X3.json arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json
+#v5_X3_3p100 3 500 7 arena/v5/agents/b100_X3.json arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json
+v5_N05_3p100 3 500 7 arena/v5/agents/b100_N05.json arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json
 v5_X3N05_3p100 3 500 7 arena/v5/agents/b100_X3N05.json arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json
