@@ -54,13 +54,14 @@ echo "Opponents: v2 and TAG's ISMCTS at the same budget (\`arena/agents/b<budget
 echo
 echo '```'
 python3 tab.py "3p, 100 ms=$R/r2_val_3p100.csv" "3p, 500 ms=$R/r2_val_3p500.csv" \
-  "3p, 900 ms, games 0-249=$R/r2_val_3p900.csv" "3p, 900 ms, all 500=$R/r2_val_3p900_all.csv" \
+  "3p, 900 ms=$R/r2_val_3p900.csv" \
   "4p, 100 ms=$R/r2_val_4p100.csv" "4p, 500 ms (F+L8)=$R/r2_val_4p500.csv"
 echo '```'
 echo
-echo "\`r2_val_3p900_all\` = \`r2_val_3p900\` (seed 100 000, games 0–249) + \`r2_val_3p900b\` (seed 100 252), joined by"
-echo "\`merge_parts.py\` with offset 252: the second part has the deals, seats and opponent order of games 252–501 of one"
-echo "long run, so it pairs with the other held-out runs by game number."
+echo "The 500 ms, 900 ms and v3 500 ms runs were played in four chunks each (\`*_c0\` … \`*_c3\`, seeds 100 000 + offset,"
+echo "offsets 0, 126, 252, 378 with 3 players and 0, 128, 256, 384 with 4) after a container restart had lost a running"
+echo "experiment; \`merge_chunks.py\` joins them into one 500-game run with the deals, seats and opponent order of seed"
+echo "block 100 000 (see its docstring), so they pair with the other held-out runs by game number."
 echo
 echo "### v3 (sequential tree, H + B + D + P + R + M) on the held-out deals, paired with the final agent"
 echo
@@ -70,7 +71,7 @@ echo
 echo
 echo "### The final agent across budgets on the held-out deals (paired with 100 ms)"
 echo
-python3 table.py $R/r2_val_3p100.csv "100 ms (base)=$R/r2_val_3p100.csv" "500 ms=$R/r2_val_3p500.csv" "900 ms (all 500)=$R/r2_val_3p900_all.csv" | grep -v "| r2_val_3p100 |" | grep -v "| missing |"
+python3 table.py $R/r2_val_3p100.csv "100 ms (base)=$R/r2_val_3p100.csv" "500 ms=$R/r2_val_3p500.csv" "900 ms=$R/r2_val_3p900.csv" | grep -v "| r2_val_3p100 |" | grep -v "| missing |"
 echo
 echo
 echo "Seats of every agent (from the logs):"

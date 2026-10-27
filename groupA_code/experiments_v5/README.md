@@ -87,8 +87,9 @@ run. `tune_X3.log` is the 3-player tuning: `GreedyTune tune 3 20000 0.2 2 <X0> "
 
 ## Report revision runs (27 October, after the tournament sprint)
 
-Run after the first independent review of the report, with `queue2.sh q2.txt` (same harness, 4 game threads) and
-`run_treestats.sh`; all tables are in `RESULTS.md`.
+Run after the first and second independent reviews of the report, with `queue2.sh q2.txt` and `queue2.sh q3.txt`
+(same harness, 4 game threads) and `run_treestats.sh`; all tables are in `RESULTS.md` (`finalize_r2.sh` joins the
+chunks and rewrites it).
 
 | Label | Players | Games | Seed | Agent file | Opponents | Purpose |
 |---|---|---|---|---|---|---|
@@ -96,9 +97,18 @@ Run after the first independent review of the report, with `queue2.sh q2.txt` (s
 | `r2_val_4p100` | 4 | 500 | 100 000 | `arena/agents/final/SushiMCTS_100.json` | v2, TAG ISMCTS (100 ms) | held-out validation |
 | `r2_duct_3p100` | 3 | 500 | 100 000 | `arena/agents/final/SushiMCTS_100.json` | `agents/b100_tagduct.json` (TAG's `SushiGoDUCT.json`, budget 100), TAG ISMCTS | comparison with TAG's decoupled information-set MCTS |
 | `r2_lead_3p100` | 3 | 500 | 7 | `agents/b100_leadK75.json` | v2, TAG ISMCTS (100 ms) | H replaced by TAG's `LeaderHeuristic`, K 7.5 (paired with `v5_base3p100`) |
-| `r2_val_3p900` | 3 | 250 | 100 000 | `arena/agents/final/SushiMCTS_900.json` | v2, TAG ISMCTS (900 ms) | held-out validation |
-| `r2_val_4p500` | 4 | 250 | 100 000 | `arena/agents/final/SushiMCTS_500_FL8.json` | v2, TAG ISMCTS (500 ms) | held-out validation |
-| `r2_val_3p500` | 3 | 250 | 100 000 | `arena/agents/final/SushiMCTS_500.json` | v2, TAG ISMCTS (500 ms) | held-out validation |
+| `r2_val_3p500` | 3 | 4 × ≈125 | 100 000 | `arena/agents/final/SushiMCTS_500.json` | v2, TAG ISMCTS (500 ms) | held-out validation (chunks `_c0`–`_c3`) |
+| `r2_field_3p100b` | 3 | 200 | 307 | `arena/agents/final/SushiMCTS_100.json` | TAG ISMCTS × 2 | continues `v5_field_3p100` (games 300–499 of seed block 7) |
+| `r2_val_4p500` | 4 | 4 × ≈125 | 100 000 | `arena/agents/final/SushiMCTS_500_FL8.json` | v2, TAG ISMCTS (500 ms) | held-out validation (chunks) |
+| `r2_v3_3p100` | 3 | 500 | 100 000 | `arena/agents/b100/finalT4.json` (v3) | v2, TAG ISMCTS (100 ms) | v3 on the held-out deals (budget test of S + I) |
+| `r2_val_3p900` | 3 | 4 × ≈125 | 100 000 | `arena/agents/final/SushiMCTS_900.json` | v2, TAG ISMCTS (900 ms) | held-out validation (chunks) |
+| `r2_v3_3p500` | 3 | 4 × ≈125 | 100 000 | `arena/agents/b500/finalT4.json` (v3) | v2, TAG ISMCTS (500 ms) | v3 on the held-out deals (chunks) |
+
+A first, unchunked attempt at `r2_val_3p900` (250 games) was lost at game 200 when the container was restarted
+(`results/r2_val_3p900_lost_at_200.err`; the arena writes its CSV only at the end). The long runs were therefore
+split into chunks: chunk k starts at seed 100 000 + offset with offset a multiple of 2n (6 with 3 players, 8 with
+4), so it plays the deals, focus seats and opponent order of games offset, offset + 1, … of one long run, and
+`merge_chunks.py` joins the chunks into one run of 500 games numbered 0–499.
 
 Seed block 100 000 (game seeds 100 000 – 100 499) shares no deal with the development (seeds 1, 2, 1001–3001) or
 seed-7 runs, unlike seed block 7 (game seeds 7 – 506), which overlaps the development deals.
@@ -118,6 +128,8 @@ tool goes to `<TAG root>/arena/dev/groupA/`. From the TAG root, after `mvn compi
 arena/v5/build.sh
 nohup arena/v5/queue2.sh arena/v5/q.txt &       # runs the lines of q.txt that do not start with #
 nohup arena/v5/queue2.sh arena/v5/q2.txt &      # the report-revision runs
+nohup arena/v5/queue2.sh arena/v5/q3.txt &      # the report-revision runs after the restart (chunks)
+arena/v5/finalize_r2.sh                         # joins the chunks, RESULTS.md, copy to groupA_code
 arena/v5/run_treestats.sh                       # 4-player diagnostics
 cd arena/v5 && ./make_results.sh                # RESULTS.md
 ```
