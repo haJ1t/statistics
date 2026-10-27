@@ -416,6 +416,8 @@ arena/run.sh players=3 games=500 threads=8 seed=7 focus=<agent.json> opps=<opp1.
 
 `experiments_v4/README.md` explains the harness, the batch script, the agent files of every run and the tools
 that produced the tables.
+The v5 sprint (bash versions of the scripts, a run queue, the greedy duel tools) is described in
+`experiments_v5/README.md`; `experiments_v5/RESULTS.md` has its tables.
 
 ## TAG version
 
