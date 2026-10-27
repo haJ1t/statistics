@@ -47,3 +47,65 @@ Paired with the first games of the v4 validation runs (same deals; those used th
 |---|---|---|---|---|---|
 | v4 validation, 500 ms (V_4p500) | 500 | 41.4 [37.2, 45.8] | -1.53 ± 0.46 | base | base |
 | SushiMCTS_500ms.json, 4 players | 40 | 46.2 [31.8, 61.3] | +0.03 ± 1.67 | -2.5 ± 19.2 (z = -0.3) | +0.30 ± 1.86 (z = +0.3) |
+
+## Report revision (r2 runs, `q2.txt`)
+
+### Held-out validation: seed block 100 000 (game seeds 100 000 – 100 499), disjoint from all earlier deals
+
+Opponents: v2 and TAG's ISMCTS at the same budget (`arena/agents/b<budget>/ref.json`, `tagmcts.json`).
+
+```
+3p, 100 ms         n= 500 win  52.6 [48.2, 56.9]  margin +0.73 ± 0.46
+3p, 500 ms         missing
+3p, 900 ms         missing
+4p, 100 ms         missing
+4p, 500 ms (F+L8)  missing
+```
+
+Seats of every agent (from the logs):
+
+```
+r2_val_3p100
+    SushiMCTS_100.json [focus]                    win 52.6% over 500 seats
+    ref.json                                      win 21.0% over 500 seats
+    tagmcts.json                                  win 26.4% over 500 seats
+```
+
+### Against TAG's decoupled information-set MCTS (SushiGoDUCT.json at 100 ms) and TAG's ISMCTS, 3 players, seed 100 000
+
+```
+v4 vs DUCT + ISMCTS missing
+```
+
+### H replaced by TAG's LeaderHeuristic (K 7.5), 3 players, 100 ms, seed 7 (paired with `v5_base3p100`)
+
+| Agent | Games | Win % [95 % CI] | Score margin | Δ win vs base (paired) | Δ margin (paired) |
+|---|---|---|---|---|---|
+| v4 (final agent, base) | 500 | 58.1 [53.7, 62.3] | +1.16 ± 0.42 | base | base |
+
+### Diagnostics
+
+Iterations per decision of v3 and v4 (`arena.Probe`, 2 games per budget):
+
+```
+# iterations per decision (arena.Probe, 3 players, 2 games, opponents v2 + TAG ISMCTS at the same budget)
+100 ms v3: PROBE arena/agents/b100/finalT4.json: decisions=48  iterations/decision=1569  determinisations/decision=1.63 
+100 ms v4: PROBE arena/agents/final/SushiMCTS_100.json: decisions=51  iterations/decision=2387  determinisations/decision=1.00 
+500 ms v3: PROBE arena/agents/b500/finalT4.json: decisions=48  iterations/decision=11170  determinisations/decision=1.63 
+500 ms v4: PROBE arena/agents/final/SushiMCTS_500.json: decisions=50  iterations/decision=11865  determinisations/decision=1.00 
+900 ms v3: PROBE arena/agents/b900/finalT4.json: decisions=49  iterations/decision=19696  determinisations/decision=1.61 
+900 ms v4: PROBE arena/agents/final/SushiMCTS_900.json: decisions=49  iterations/decision=21246  determinisations/decision=1.00 
+```
+
+Four-player search of the final 500 ms agent on 73 positions from random games (`run_treestats.sh`: Bench4,
+TreeStats4, Agree4 of `experiments_v4/dev`):
+
+```
+arena/agents/final/SushiMCTS_500_FL8.json                    decisions=71  mean tree iterations=36806
+arena/v5/agents/b500_4noF.json                               decisions=71  mean tree iterations=10170
+SushiMCTS_500_FL8.json                       budget t500: states 73, iterations 34746 (14.4 us each), root children 704, depth-1 visits 1:53% 2-5:31% 6-20:11% 21-100:4% >100:1%, untried passes 4%, mean depth 1.53
+SushiMCTS_500_FL8.json: decisions 73, same card with another seed 90.4%
+  vs SushiMCTS_500_FL8.json                       94.5% same
+  vs b500_4L16.json                               94.5% same
+  vs b1000_4FL8.json                              97.3% same
+```

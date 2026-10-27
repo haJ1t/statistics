@@ -85,6 +85,29 @@ gives the same decision hash for the v4 build (commit 323ee7d) and the v5 build:
 The other files in `agents/` (K 0.35, X0, N 0.25 / 1.0, X3 + N, X3 + R3 / V2D / ε 0.1, N + V2D) were prepared but not
 run. `tune_X3.log` is the 3-player tuning: `GreedyTune tune 3 20000 0.2 2 <X0> "<default>;<X0>" 2`.
 
+## Report revision runs (27 October, after the tournament sprint)
+
+Run after the first independent review of the report, with `queue2.sh q2.txt` (same harness, 4 game threads) and
+`run_treestats.sh`; all tables are in `RESULTS.md`.
+
+| Label | Players | Games | Seed | Agent file | Opponents | Purpose |
+|---|---|---|---|---|---|---|
+| `r2_val_3p100` | 3 | 500 | 100 000 | `arena/agents/final/SushiMCTS_100.json` | v2, TAG ISMCTS (100 ms) | held-out validation |
+| `r2_val_4p100` | 4 | 500 | 100 000 | `arena/agents/final/SushiMCTS_100.json` | v2, TAG ISMCTS (100 ms) | held-out validation |
+| `r2_duct_3p100` | 3 | 500 | 100 000 | `arena/agents/final/SushiMCTS_100.json` | `agents/b100_tagduct.json` (TAG's `SushiGoDUCT.json`, budget 100), TAG ISMCTS | comparison with TAG's decoupled information-set MCTS |
+| `r2_lead_3p100` | 3 | 500 | 7 | `agents/b100_leadK75.json` | v2, TAG ISMCTS (100 ms) | H replaced by TAG's `LeaderHeuristic`, K 7.5 (paired with `v5_base3p100`) |
+| `r2_val_3p900` | 3 | 250 | 100 000 | `arena/agents/final/SushiMCTS_900.json` | v2, TAG ISMCTS (900 ms) | held-out validation |
+| `r2_val_4p500` | 4 | 250 | 100 000 | `arena/agents/final/SushiMCTS_500_FL8.json` | v2, TAG ISMCTS (500 ms) | held-out validation |
+| `r2_val_3p500` | 3 | 250 | 100 000 | `arena/agents/final/SushiMCTS_500.json` | v2, TAG ISMCTS (500 ms) | held-out validation |
+
+Seed block 100 000 (game seeds 100 000 – 100 499) shares no deal with the development (seeds 1, 2, 1001–3001) or
+seed-7 runs, unlike seed block 7 (game seeds 7 – 506), which overlaps the development deals.
+
+Diagnostics: `results/probe_iterations.txt` (iterations per decision of v3 and v4 at 100, 500 and 900 ms,
+`arena.Probe`, 2 games each) and `results/bench4.txt`, `treestats4.txt`, `agree4.txt` (`run_treestats.sh`: iterations
+with and without F + L8, tree shape and decision agreement of the final 500 ms 4-player agent on 73 positions from
+random games; `agents/b500_4noF.json`, `b500_4L16.json`, `b1000_4FL8.json` are its comparison configurations).
+
 ## Reproducing
 
 Put the v4 experiment folder at `<TAG root>/arena` (as in v4) and this folder at `<TAG root>/arena/v5`; the dev
@@ -94,5 +117,7 @@ tool goes to `<TAG root>/arena/dev/groupA/`. From the TAG root, after `mvn compi
 ```
 arena/v5/build.sh
 nohup arena/v5/queue2.sh arena/v5/q.txt &       # runs the lines of q.txt that do not start with #
+nohup arena/v5/queue2.sh arena/v5/q2.txt &      # the report-revision runs
+arena/v5/run_treestats.sh                       # 4-player diagnostics
 cd arena/v5 && ./make_results.sh                # RESULTS.md
 ```

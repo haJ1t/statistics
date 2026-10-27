@@ -161,14 +161,14 @@ def fig_effects():
         for s in ("top", "right"):
             a.spines[s].set_visible(False)
     a1.set_yticks(ys + [top_label, bot_label],
-                  [r[0] for r in rows] + ["removed from the final agent", "last study (new base run)"], fontsize=6.3)
+                  [r[0] for r in rows] + ["removed from the final agent", "vs. a re-run of the final agent"], fontsize=6.3)
     for lab, col in zip(a1.get_yticklabels()[-2:], ("#b23a3a", "#1f5f9e")):
         lab.set_color(col); lab.set_fontstyle("italic"); lab.set_fontweight("bold")
     for a in (a1, a2):
         for tick in a.yaxis.get_major_ticks()[-2:]:
             tick.tick1line.set_visible(False)
     a1.set_xlabel("Δ win rate (pp)")
-    a2.set_xlabel("Δ score margin (points)")
+    a2.set_xlabel("Δ margin (points)")
     a1.set_xlim(-36, 8); a2.set_xlim(-6.6, 1.2)
     fig.savefig(os.path.join(HERE, "figures", "fig3_effects.png"))
     plt.close(fig)

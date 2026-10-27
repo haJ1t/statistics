@@ -313,8 +313,8 @@ p("TAG {tag} splits a game into a state, a forward model and parameters; an agen
   "each round, while the value of a card depends on what the others will take from the hands we pass on.")
 h2("Monte Carlo Tree Search")
 p("MCTS {browne} builds a search tree by repeating selection, expansion, simulation (rollout) and "
-  "backpropagation. Upper Confidence bounds applied to Trees (UCT) {kocsis} selects the child that maximises "
-  "<i>Q</i> + <i>K</i>√(ln <i>N</i> / <i>n</i>), where <i>Q</i> is the child's mean reward, <i>n</i> its visits "
+  "backpropagation. Upper Confidence bounds applied to Trees (UCT) {kocsis} selects the child that maximises the "
+  "upper confidence bound (UCB1) <i>Q</i> + <i>K</i>√(ln <i>N</i> / <i>n</i>), where <i>Q</i> is the child's mean reward, <i>n</i> its visits "
   "and <i>N</i> those of its parent. Domain knowledge can enter through heuristic rollout policies {browne} or "
   "priors such as progressive bias {chaslot}. A stronger rollout policy does not guarantee better estimates, "
   "however: Silver and Tesauro {silver} showed that rollouts should be balanced, i.e., give unbiased value "
@@ -422,9 +422,10 @@ B.append(("table", "Experimental setup", [0.72, 2.66],
           [["Framework", "TAG as distributed with the module, Sushi Go! with its default rules; OpenJDK 21"],
            ["Opponents",
             "v2 (frozen copy of our previous agent): H, progressive bias, B, D, <i>K</i> 1.41. TAG ISMCTS: TAG's "
-            "SushiGo_3+P_HiBudget configuration (information sets, one tree per player {goodman}, UCB-Tuned, "
-            "<i>K</i> 1, random rollouts to the game end, score heuristic). TAG DUCT: TAG's SushiGoDUCT configuration "
-            "(decoupled UCT, <i>K</i> 1, information sets, lead heuristic, 30-move rollouts). BasicMCTS (<i>K</i> 1.41, "
+            "SushiGo_3+P_HiBudget configuration, set for 400 ms and run at our budget (information sets, one tree per "
+            "player {goodman}, UCB-Tuned, <i>K</i> 1, random rollouts to the game end, score heuristic). TAG DUCT: "
+            "TAG's SushiGoDUCT configuration (decoupled UCT, <i>K</i> 1, information sets, lead heuristic, 30-move "
+            "rollouts). BasicMCTS (<i>K</i> 1.41, "
             "10-move random rollouts), Rolling Horizon Evolutionary Algorithm (RHEA; horizon 10, population 10), "
             "One-Step Look-Ahead (OSLA, score heuristic)"],
            ["Budget", "CPU time per decision, equal for all agents: 100 ms (most development), 500 and 900 ms"],
@@ -438,10 +439,13 @@ B.append(("table", "Experimental setup", [0.72, 2.66],
            ["Games", "500 per condition; 250 at 900 ms, in 4-player 500 ms development and in the 500/900 ms "
                      "validation (48–73 s of CPU time per game); 300 in one run"],
            ["Hardware", "18-core laptop (6–16 games in parallel); last study and validation on a 4-core machine "
-                        "(4 in parallel)"]],
+                        "(4 in parallel)"],
+           ["Records", "agent files, per-game results and scripts of every run are kept with our code "
+                       "(experiments_v3 to experiments_v5)"]],
           None))
 p("Each game is an independent trial whose outcome for our agent is 1 for a win, 1/<i>k</i> for a <i>k</i>-way "
-  "shared first place and 0 otherwise. Win rates are reported with Wilson 95% intervals {wilson}; the score margin "
+  "shared first place and 0 otherwise. Win rates are reported with Wilson 95% confidence intervals (CI) {wilson}; "
+  "the score margin "
   "(our score minus the best opponent's) as mean ± 1.96 standard errors (SE); differences between runs as the mean "
   "of the per-game differences on the same deals ± 1.96 SE (for independent samples, the difference of the means "
   "with the two-sample SE) and <i>z</i> = difference/SE, in percentage points (pp) for win rates. With 500 games a "
@@ -506,10 +510,11 @@ h2("Four Players and the Limits of Search (RQ3)")
 p("With four players the 3-player configuration won 46.4% at 100 ms and 38.4% at 500 ms (development; chance 25%). "
   "None of the 4-player changes is individually significant: X0 added +3.2 ± 6.2 pp at 100 ms; at 500 ms X0 with "
   "W2 and <i>K</i> = 1 added +7.2 ± 8.6 pp and F + L a further +1.0 ± 7.9 pp, whereas F + L cost 6.6 ± 6.0 pp at "
-  "100 ms (<i>z</i> = 2.2). Together they support H3: X0 and W2 cost the 3-player agent 7.7 ± 5.4 pp "
-  "(<i>z</i> = 2.8) at 500 ms, so their effect differs by 14.9 ± 10.2 pp (<i>z</i> = 2.9) between the table sizes. "
+  "100 ms (<i>z</i> = 2.2). Together they support H3: adding X0, W2 and <i>K</i> = 1 to the 3-player agent at "
+  "500 ms cost 7.7 ± 5.4 pp (<i>z</i> = 2.8), so their effect differs by 14.9 ± 10.2 pp (<i>z</i> = 2.9) between the table sizes. "
   "At 500 ms a 4-player tree cut to depth 1 lost 17.4 ± 8.2 pp (<i>z</i> = 4.2) and our agent limited to 100 ms "
-  "9.0 ± 7.7 pp (<i>z</i> = 2.3), yet 1 000 ms did not help (−4.8 ± 8.1 pp). TREESTATS_SENTENCE")
+  "9.0 ± 7.7 pp (<i>z</i> = 2.3), yet 1 000 ms (with <i>K</i> = 1.37) did not help (−4.8 ± 8.1 pp). "
+  "TREESTATS_SENTENCE")
 h2("What Did Not Help")
 p("LAST_STUDY_PARAGRAPH")
 
@@ -632,7 +637,8 @@ def text_treestats():
 
 def text_last_study():
     x3, n05, v2d, w1, r3 = (LAST[k] for k in ("X3", "N05", "V2D", "W1", "R3V2"))
-    s = ("The last study (Fig. 3, bottom) changed the model and the value. Card constants tuned for three players "
+    s = ("The last study (three players, Fig. 3 bottom) changed the model and the value. Card constants tuned for "
+         "three players "
          "(X3) make a far stronger greedy policy – it wins 45.0% of greedy games against two X0 players – yet did "
          f"not strengthen the search ({dpp(x3, False)}), consistent with simulation balancing {{silver}}. Denial "
          "(“hate drafting”: simulated players also value taking the next player's best card) gained about 1 pp in "
@@ -644,8 +650,9 @@ def text_last_study():
 
 def text_fig3_caption():
     return ("Paired effects with three players at 100 ms (seed 7, 500 games each), ± 95% CI. Top: one component "
-            f"removed from the final agent (base: final agent, {OLD['3p100']['win']:.1f}%). Bottom: changes tested in "
-            f"our last study, against a re-run of the final agent on the 4-core machine ({BASE5['win']:.1f}%).")
+            f"removed from the final agent (base: final agent, {OLD['3p100']['win']:.1f}%). Bottom: the lead-heuristic "
+            f"ablation and the changes of our last study, against a re-run of the final agent on the 4-core machine "
+            f"({BASE5['win']:.1f}%).")
 
 
 def text_conclusion_1():
@@ -660,8 +667,8 @@ def text_conclusion_1():
         s += " against TAG's ISMCTS and our previous agent."
     s += (" For RQ2, the decoupled tree loses less strength than the sequential one at longer budgets (−8.1 against "
           "−17.3 pp from 100 to 900 ms), though not significantly. For RQ3, the best settings differ between three "
-          "and four players (<i>z</i> = 2.9), and with four players the wide joint-move tree, not the time, limits "
-          "the search.")
+          "and four players (<i>z</i> = 2.9), and with four players extra time rarely changes the decision of the "
+          "wide, shallow joint-move tree.")
     return s
 
 
@@ -877,10 +884,23 @@ def build():
     # title
     for r in P[0].runs[1:]:
         r._r.getparent().remove(r._r)
-    P[0].runs[0].text = TITLE
+    P[0].runs[0].text = TITLE.split("Card-Value")[0]
     P[0].runs[0].font.name = "Times New Roman"
     P[0].runs[0]._element.rPr.rFonts.set(qn("w:cs"), "Times New Roman")
     P[0].runs[0]._element.rPr.rFonts.set(qn("w:eastAsia"), "Times New Roman")
+    if "Card-Value" in TITLE:
+        tail = copy.deepcopy(P[0].runs[0]._r)
+        for t in tail.findall(qn("w:t")):
+            tail.remove(t)
+        t1 = OxmlElement("w:t")
+        t1.text = "Card"
+        tail.append(t1)
+        tail.append(OxmlElement("w:noBreakHyphen"))
+        t2 = OxmlElement("w:t")
+        t2.set(qn("xml:space"), "preserve")
+        t2.text = "Value" + TITLE.split("Card-Value")[1]
+        tail.append(t2)
+        P[0].runs[0]._r.addnext(tail)
     # subtitle note and empty author line of section 0
     for i in (1, 2):
         P[i]._p.getparent().remove(P[i]._p)
@@ -888,21 +908,14 @@ def build():
     a_par = P[5]
     for i in (4, 6):
         P[i]._p.getparent().remove(P[i]._p)
-    proto = copy.deepcopy(a_par._p)
+    # one paragraph with column breaks between the authors, so that all three blocks start at the same height
     for r in list(a_par._p.findall(qn("w:r"))):
         a_par._p.remove(r)
-    pars = [a_par]
-    for _ in AUTHORS[1:]:
-        e = copy.deepcopy(proto)
-        for r in list(e.findall(qn("w:r"))):
-            e.remove(r)
-        pars[-1]._p.addnext(e)
-        pars.append(docx.text.paragraph.Paragraph(e, a_par._parent))
-    for k, (par, lines) in enumerate(zip(pars, AUTHORS)):
+    for k, lines in enumerate(AUTHORS):
         if k > 0:
-            par.add_run().add_break(docx.enum.text.WD_BREAK.COLUMN)
+            a_par.add_run().add_break(docx.enum.text.WD_BREAK.COLUMN)
         for j, line in enumerate(lines):
-            r = par.add_run(line)
+            r = a_par.add_run(line)
             r.font.size = Pt(9)
             r.italic = j >= 2
             if j < len(lines) - 1:
@@ -994,7 +1007,9 @@ def build():
     doc.core_properties.title = TITLE
     doc.core_properties.author = "ECS7032P Group A"
     doc.save(OUT + ".docx")
-    subprocess.run(["soffice", "--headless", "--convert-to", "pdf", "--outdir", HERE, OUT + ".docx"],
+    pdf_filter = ('pdf:writer_pdf_Export:{"UseLosslessCompression":{"type":"boolean","value":"true"},'
+                  '"ReduceImageResolution":{"type":"boolean","value":"false"}}')
+    subprocess.run(["soffice", "--headless", "--convert-to", pdf_filter, "--outdir", HERE, OUT + ".docx"],
                    check=True, capture_output=True)
     print("written", OUT + ".docx", OUT + ".pdf")
     words = lambda t: len(re.sub(r"<[^>]+>|\{\w+\}", "", t).split())

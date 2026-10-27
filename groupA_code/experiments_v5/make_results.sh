@@ -45,5 +45,50 @@ echo
 [ -f $R/v5_comp_4p500.csv ] && python3 table.py ../results/V_4p500.csv "v4 validation, 500 ms (V_4p500)=../results/V_4p500.csv" \
   "SushiMCTS_500ms.json, 4 players=$R/v5_comp_4p500.csv" | grep -v "| V_4p500 |"
 fi
+echo
+echo "## Report revision (r2 runs, \`q2.txt\`)"
+echo
+echo "### Held-out validation: seed block 100 000 (game seeds 100 000 – 100 499), disjoint from all earlier deals"
+echo
+echo "Opponents: v2 and TAG's ISMCTS at the same budget (\`arena/agents/b<budget>/ref.json\`, \`tagmcts.json\`)."
+echo
+echo '```'
+python3 tab.py "3p, 100 ms=$R/r2_val_3p100.csv" "3p, 500 ms=$R/r2_val_3p500.csv" "3p, 900 ms=$R/r2_val_3p900.csv" \
+  "4p, 100 ms=$R/r2_val_4p100.csv" "4p, 500 ms (F+L8)=$R/r2_val_4p500.csv"
+echo '```'
+echo
+echo "Seats of every agent (from the logs):"
+echo
+echo '```'
+for l in r2_val_3p100 r2_val_3p500 r2_val_3p900 r2_val_4p100 r2_val_4p500 r2_duct_3p100; do
+  [ -f $R/$l.log ] && { echo "$l"; grep -E "win [0-9.]+% over" $R/$l.log; }
+done
+echo '```'
+echo
+echo "### Against TAG's decoupled information-set MCTS (SushiGoDUCT.json at 100 ms) and TAG's ISMCTS, 3 players, seed 100 000"
+echo
+echo '```'
+python3 tab.py "v4 vs DUCT + ISMCTS=$R/r2_duct_3p100.csv"
+echo '```'
+echo
+echo "### H replaced by TAG's LeaderHeuristic (K 7.5), 3 players, 100 ms, seed 7 (paired with \`v5_base3p100\`)"
+echo
+python3 table.py $R/v5_base3p100.csv "v4 (final agent, base)=$R/v5_base3p100.csv" \
+  "H → LeaderHeuristic, K 7.5=$R/r2_lead_3p100.csv" | grep -v "| missing |" | grep -v "| v5_base3p100 |"
+echo
+echo "### Diagnostics"
+echo
+echo "Iterations per decision of v3 and v4 (\`arena.Probe\`, 2 games per budget):"
+echo
+echo '```'
+cat $R/probe_iterations.txt 2>/dev/null
+echo '```'
+echo
+echo "Four-player search of the final 500 ms agent on 73 positions from random games (\`run_treestats.sh\`: Bench4,"
+echo "TreeStats4, Agree4 of \`experiments_v4/dev\`):"
+echo
+echo '```'
+cat $R/bench4.txt $R/treestats4.txt $R/agree4.txt 2>/dev/null
+echo '```'
 } > RESULTS.md
 echo "RESULTS.md written"
