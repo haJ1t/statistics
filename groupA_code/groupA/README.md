@@ -3,9 +3,11 @@
 > **Rename first:** replace every `groupA` (package line of the 7 `.java` files, the folder name,
 > and the `class` / `heuristic` entries of the JSON files) with your real group letter, e.g. `groupK`.
 
-This is **version 4** of the agent. Version 3 (H + B + D + P + M + R, K 0.5) is still inside it unchanged:
-every new idea is a switch in `SushiMCTSParams` that is off by default, and the final JSON files switch on the
-ones that were kept.
+This is **version 5** of the agent. Version 5 is the sprint before the in-class tournament (see
+[Version 5](#version-5--sprint-for-the-in-class-tournament-27-october) below): it adds one more switch (N, denial,
+off by default) and tested four other ideas, none of which beat version 4, so **the competition files still play
+exactly as version 4**. Version 3 (H + B + D + P + M + R, K 0.5) is also still inside unchanged: every new idea is a
+switch in `SushiMCTSParams` that is off by default, and the final JSON files switch on the ones that were kept.
 
 **Win rate of the final agent** against v2 (our previous agent) and TAG's tuned ISMCTS, on fresh deals that
 were not used during development (validation, seed 7):
@@ -21,6 +23,49 @@ were not used during development (validation, seed 7):
 Chance is 33.3 % with 3 players and 25 % with 4. *Score margin* = our score minus the best opponent's score
 (points per game, ± 95 % CI). Our agent sits in every seat equally often; the other seats alternate between
 v2 and TAG's ISMCTS.
+
+## Version 5 – sprint for the in-class tournament (27 October)
+
+Before the in-class tournament we had one 4.5-hour session to improve the agent further, on a 4-core machine
+(the v4 study used an 18-core laptop), within the module rules: everything stays in this package, nothing from
+`players.mcts` is used, the base agent is still `BasicMCTSPlayer`, and the competition files keep the 1 s / 500 ms
+limits with the wall-clock guard. Every v5 idea is again a switch that is off by default, so **v4 is still inside
+v5 unchanged**. Tools, agent files and per-game results are in `experiments_v5/`.
+
+The v4 agent was first re-run on this machine (3 players, 100 ms, seed 7, the same deals as the v4 validation):
+58.1 % [53.7, 62.3], score margin +1.16 ± 0.42, in line with 55.0 % / +1.00 on the old machine (paired difference
++3.1 ± 5.8 win points). Every candidate below played the same 500 deals and seats (paired comparison).
+
+**Ideas tested** (3 players, 100 ms, seed 7, 500 games each, opponents v2 and TAG's ISMCTS as in v4):
+
+| Agent | Games | Win % [95 % CI] | Score margin | Δ win vs base (paired) | Δ margin (paired) |
+|---|---|---|---|---|---|
+| v4 (final agent, base) | 500 | 58.1 [53.7, 62.3] | +1.16 ± 0.42 | base | base |
+| + X3 (3-player card model) | 500 | 56.8 [52.4, 61.1] | +0.59 ± 0.48 | -1.3 ± 5.8 (z = -0.4) | -0.57 ± 0.60 (z = -1.9) |
+| + N, λ 0.5 (denial) | 500 | 56.3 [51.9, 60.6] | +0.84 ± 0.47 | -1.8 ± 5.8 (z = -0.6) | -0.32 ± 0.59 (z = -1.1) |
+| + V2D (terminal value scale 2, σ decay 0.5) | 500 | 57.5 [53.1, 61.8] | +0.57 ± 0.46 | -0.6 ± 5.8 (z = -0.2) | -0.60 ± 0.56 (z = -2.1) |
+
+* **X3 – card-model constants tuned for 3 players.** With the v4 search-free tuner (`GreedyTune`, greedy card-value
+  policies against each other, 20 000 deals per evaluation) we tuned the nine card-model constants for 3 players:
+  X3 = α 0.5, T 4, β 0.8, T_m 4, κ 0.25, δ 1.0, π 1.5, ν 4, γ 3. As a *greedy policy* X3 is far stronger than the
+  v4 3-player model (which wins only 7 % of greedy games against the default and X0 models) and than X0 (45.0 %
+  against two X0 players, chance 33.3 %; `experiments_v5/results/greedy_duels.txt`). Inside the search it did
+  **not** help (−1.3 ± 5.8 win points, score margin −0.57 ± 0.60, z = −1.9). Together with v4's X0 result at
+  3 players this shows that the strength of the rollout policy is not what limits the agent: a rollout policy
+  only has to give unbiased leaf values and a plausible model of the opponents, not to play well itself
+  (simulation balancing, Silver and Tesauro 2009).
+* **N – denial ("hate drafting"), new switch `rolloutDenial`.** The cards a player leaves in its hand go to the
+  next player (TAG passes hand i to player i − 1). With N every simulated player adds λ times the loss of the next
+  player to the value of that player's favourite card of the hand: λ · max(0, v_q(c) − max_{c' ≠ c} v_q(c')),
+  with v_q the next player's marginal card value (`CardValueModel.addDenial`, used by the rollout policy). In greedy
+  duels it adds about one win point at 3 players (λ 0.25–1); in the search it did not help (λ 0.5: −1.8 ± 5.8 win
+  points, margin −0.32 ± 0.59).
+* **V2D – value shape aimed at winning** (the 4-player W2 ideas, for 3 players): finished games valued by the gap to
+  the winner, tanh((S_i − max_j S_j) / 2) (`terminalScale` 2), and σ multiplied by (R / 2)^0.5 with R rounds left
+  (`sigmaRoundDecay` 0.5). Same win rate (−0.6 ± 5.8), lower score margin (−0.60 ± 0.56, expected when the value
+  stops rewarding the size of a win).
+
+*(runs still in progress: w 1.0, rollouts to the game end, K 0.35, X3 with 4 players)*
 
 ## What the agent is
 
@@ -77,6 +122,7 @@ When the time is up the agent plays its card with the most visits at the root.
 | Q | per-opponent card-type biases learned from its picks during the game | `OpponentModel` | no |
 | E | ensemble: the budget is split between several independent trees whose root visits are summed (root parallelisation, Chaslot, Winands and van den Herik 2008, one tree after another) | `SushiMCTSPlayer` | no |
 | K | opponents in the tree only consider their k best cards by the card model, fixed k or progressive widening k = ⌈(n + 1)^a⌉ (Coulom 2007; Chaslot et al. 2008) | `opponentCandidates` | no |
+| N | **v5**: denial ("hate drafting") in the rollout policy: the cards a player leaves go to the next player, so every simulated player adds λ · max(0, v_q(c) − max_{c' ≠ c} v_q(c')) to the next player's favourite card c of the hand (v_q = that player's marginal card value) | `CardValueModel.addDenial`, `policyValues` | no (v5) |
 
 Other switches that were tested and are off: `treeThreshold`, `ownCardTree`, `stopAtRoundEnd`,
 `rolloutRounds` > 1, `rolloutTemperature`, `opponentK`, `opponentRivalWeight`, `maxChildShare`.
@@ -144,7 +190,7 @@ p.budgetType = PlayerConstants.BUDGET_TIME;  p.budget = 900;  p.wallTimeLimitMS 
 AbstractPlayer agent = new SushiMCTSPlayer(p);
 ```
 
-## Parameters added in v4
+## Parameters added in v4 and v5
 
 | JSON key | Default | Final (3 p / 4 p) | Meaning |
 |---|---|---|---|
@@ -160,6 +206,7 @@ AbstractPlayer agent = new SushiMCTSPlayer(p);
 | `ensembleTrees` (E) | 1 | 1 | tested, off: number of independent trees (I) the budget is split between |
 | `opponentTopK`, `opponentWidening` (K) | 0 | 0 | tested, off: an opponent's k best cards, or ⌈(n + 1)^a⌉ of them at a node with n visits |
 | `opponentRolloutEpsilon`, `opponentRolloutTemperature` | −1 | −1 | tested, off: ε and softmax temperature of the other players' rollout moves with F (< 0 = as ours) |
+| `rolloutDenial` (v5) | 0 | 0 / 0 | tested, off: λ of N (rollouts on TAG's game state, not with F) |
 | `treeThreshold`, `ownCardTree`, `stopAtRoundEnd`, `rolloutRounds`, `rolloutTemperature`, `opponentK`, `opponentRivalWeight`, `maxChildShare` | 0 / false / 1 / −1 | defaults | tested, off |
 | `heuristic.args` | – | default / X0 | up to 11 constants: σ, w, α, T, β, T_m, κ, δ, π, avgNigiri, γ |
 
