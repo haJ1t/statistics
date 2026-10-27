@@ -430,6 +430,43 @@ public final class CardValueModel {
         return mv;
     }
 
+    /**
+     * MODIFICATION N (v5, denial or "hate drafting"): the cards p leaves in its hand go to the next player q (TAG passes
+     * hand i to player i - 1). If p takes q's favourite card of this hand, q has to settle for its second-best card
+     * there, so every card value mv[c] of p's hand gets lambda * max(0, v_q(c) - max_{c' != c} v_q(c')), where v_q is
+     * q's marginal value of the card when it picks from this hand next turn (one card fewer). Only q's single best card
+     * gets a bonus; with two copies of it the bonus is 0, as taking one leaves the other.
+     */
+    public static void addDenial(View view, int p, double[] mv, double lambda) {
+        List<SGCard> hand = view.s.getPlayerHands().get(p).getComponents();
+        int h = hand.size(), n = view.s.getNPlayers();
+        if (h < 2 || n < 2) return;
+        int q = (p - 1 + n) % n;
+        Tableau tq = view.tableau(q);
+        double[] vq = new double[h];
+        double[] byKind = new double[64];
+        boolean[] known = new boolean[64];
+        double top1 = Double.NEGATIVE_INFINITY, top2 = Double.NEGATIVE_INFINITY;
+        int best = -1, i = 0;
+        for (SGCard card : hand) {
+            int kind = card.type.ordinal() * 4 + card.count;
+            if (!known[kind]) {
+                byKind[kind] = marginalValue(tq, view.maki, view.pudding, q, h - 1, view.puddingWeight, view.supply(),
+                        card.type, card.count, view.par, view.cfg);
+                known[kind] = true;
+            }
+            double x = byKind[kind];
+            vq[i] = x;
+            if (x > top1) {
+                top2 = top1;
+                top1 = x;
+                best = i;
+            } else if (x > top2) top2 = x;
+            i++;
+        }
+        mv[best] += lambda * Math.max(0.0, vq[best] - top2);
+    }
+
     /** Value of a ChooseCard action for the player who takes it (chopsticks add the best other card). */
     public static double actionValue(SGGameState s, AbstractAction a) {
         return actionValue(new View(s), a);

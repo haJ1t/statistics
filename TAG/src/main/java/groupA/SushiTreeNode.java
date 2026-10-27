@@ -1562,12 +1562,16 @@ class SushiTreeNode {
      * Q) the learned bias of p's card types when p is an opponent.
      */
     private double[] policyValues(SGGameState sg, int p) {
-        double[] mv = CardValueModel.handValues(cardView(sg), p);
+        CardValueModel.View view = cardView(sg);
+        double[] mv = CardValueModel.handValues(view, p);
         OpponentModel om = player.getParameters().useOpponentBias ? player.opponentModel : null;
         if (om != null && p != player.getPlayerID()) {
             List<SGCard> hand = sg.getPlayerHands().get(p).getComponents();
             for (int i = 0; i < mv.length; i++) mv[i] += om.bias(p, hand.get(i).type);
         }
+        // MODIFICATION N: every simulated player also values denying the next player its best card of this hand
+        double denial = player.getParameters().rolloutDenial;
+        if (denial > 0) CardValueModel.addDenial(view, p, mv, denial);
         return mv;
     }
 
