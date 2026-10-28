@@ -743,7 +743,8 @@ def text_ablation():
               "(paired); as round-end leaves hold no unfinished sets, H differs from it only by the Pudding standing, "
               "the mean-opponent term and its bounded scale (not separated), while the card values act through B.")
     s += (f" S and I together are worth 10.2 ± 5.7 pp (<i>z</i> = 3.5). S alone, decoupled selection with v3's "
-          f"determinisation, beats v3 by {fpp(SALONE)} (development: {fpp(DEVD['s100'], z=False)}), and I adds a further, non-significant 3.8 ± 5.7 pp, in line "
+          f"determinisation, beats v3 by {fpp(SALONE, z=False)} (<i>z</i> = {abs(SALONE['zw']):.1f}; development: "
+          f"{fpp(DEVD['s100'], z=False)}), and I adds a further, non-significant 3.8 ± 5.7 pp, in line "
           "with Long et al.'s analysis {long} for a game that reveals its hidden information within <i>n</i> − 1 "
           "turns. P and M stay (S and I build on them); in a 2<sup>4</sup> factorial on v3 (R, M, <i>K</i> = 0.5 vs "
           "1.41, <i>T</i> = 8 vs 4; 16 × 500 games) R added 8.7 pp and M 4.1 pp (main effects, each ±2.1), and only "
@@ -823,7 +824,8 @@ def text_four():
          f"{fpp(f['depth1'], z=False, sign=False)} – but more time for our agent alone did not help (1 000 ms, "
          f"<i>K</i> = 1.37: {fpp(f['t1000'], z=False)}), and the 500 ms agent (W2, F + L, <i>K</i> = 1; all agents at "
          f"500 ms) changed our win rate against the 100 ms agent by {fpp(SEED7_4P, z=False)} on seed block 7"
-         + (f" and {fpp(BUD4, z=False)} on the held-out deals (pooled {fpp(POOL4)})" if BUD4 else "") + ".")
+         + (f" and {fpp(BUD4, z=False)} on the held-out deals (pooled {fpp(POOL4, z=False)}, <i>z</i> = "
+            f"{abs(POOL4['zw']):.1f})" if BUD4 else "") + ".")
     if DIAG:
         s += (f" On {DIAG['states']} random positions the 500 ms tree has {DIAG['kids']} joint-move children at the "
               f"root, {DIAG['once']}% visited once; doubling the time or "

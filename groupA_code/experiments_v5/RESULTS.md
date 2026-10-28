@@ -60,7 +60,7 @@ Opponents: v2 and TAG's ISMCTS at the same budget (`arena/agents/b<budget>/ref.j
 3p, 500 ms         n= 500 win  47.2 [42.9, 51.6]  margin -0.10 ± 0.40
 3p, 900 ms         missing
 4p, 100 ms         n= 500 win  44.4 [40.1, 48.8]  margin -0.61 ± 0.43
-4p, 500 ms (F+L8)  missing
+4p, 500 ms (F+L8)  n= 500 win  36.5 [32.4, 40.8]  margin -1.83 ± 0.45
 ```
 
 The 500 ms, 900 ms and v3 500 ms runs were played in four chunks each (`*_c0` … `*_c3`, seeds 100 000 + offset,
