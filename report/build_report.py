@@ -392,10 +392,10 @@ def dpp(d, z=True):
 # ----------------------------------------------------------------------------------------------- content
 TITLE = "Decoupled Information-Set MCTS with a Card-Value Model for Sushi Go!"
 
-AUTHORS = [  # three columns, as in the template; fill in the group's names and student numbers
-    ["Halit Ozger", "Student no. [to be completed]", "Queen Mary University of London", "London, UK"],
-    ["[Group member 2]", "Student no. [to be completed]", "Queen Mary University of London", "London, UK"],
-    ["[Group member 3]", "Student no. [to be completed]", "Queen Mary University of London", "London, UK"],
+AUTHORS = [  # three columns, as in the template
+    ["Halit Ozger", "Student no. 230625112", "Queen Mary University of London", "London, UK"],
+    ["Weronika Podgorska", "Student no. 230394735", "Queen Mary University of London", "London, UK"],
+    ["Hakan Coskun", "Student no. 241076864", "Queen Mary University of London", "London, UK"],
 ]
 
 FIRST_PAGE_NOTE = ("All sections, tables and figures of this paper were drafted with Claude {claude}; the prompts are "
@@ -1345,7 +1345,7 @@ def build():
                 add_runs(new_par(doc, anchor, "references"), REFS[k])
 
     doc.core_properties.title = TITLE
-    doc.core_properties.author = "ECS7032P Group A"
+    doc.core_properties.author = "Halit Ozger, Weronika Podgorska, Hakan Coskun (ECS7032P Group A)"
     doc.save(OUT + ".docx")
     pdf_filter = ('pdf:writer_pdf_Export:{"UseLosslessCompression":{"type":"boolean","value":"true"},'
                   '"ReduceImageResolution":{"type":"boolean","value":"false"}}')
