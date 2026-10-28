@@ -4,7 +4,7 @@
 #r2_val_3p500_c3 3 122 100378 arena/agents/final/SushiMCTS_500.json arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json
 #r2_field_3p100b 3 200 307 arena/agents/final/SushiMCTS_100.json arena/agents/b100/tagmcts.json,arena/agents/b100/tagmcts.json
 #r2_val_4p500_c0 4 128 100000 arena/agents/final/SushiMCTS_500_FL8.json arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json
-r2_val_4p500_c1 4 128 100128 arena/agents/final/SushiMCTS_500_FL8.json arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json
+#r2_val_4p500_c1 4 128 100128 arena/agents/final/SushiMCTS_500_FL8.json arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json
 r2_val_4p500_c2 4 128 100256 arena/agents/final/SushiMCTS_500_FL8.json arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json
 r2_val_4p500_c3 4 116 100384 arena/agents/final/SushiMCTS_500_FL8.json arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json
 r2_v3_3p100 3 500 100000 arena/agents/b100/finalT4.json arena/agents/b100/ref.json,arena/agents/b100/tagmcts.json
