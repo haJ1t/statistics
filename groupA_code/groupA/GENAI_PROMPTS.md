@@ -43,7 +43,10 @@ Claude Code tool (see the report's statement on the use of generative AI). This 
    English translation: "Now, following all the rules, give me here, as a zip or folder named upload_ready, all the
    files the way we will hand them to the lecturer, with whatever the brief says is missing or extra fixed, and put it
    on this computer's desktop; the code part too should be clean, with no unnecessary notes left, exactly as we must
-   give it to the lecturer." This prompt produced the package's README and its final contents.
+   give it to the lecturer." This prompt produced the package's README and its final contents. A last message gave
+   the group letter and the authors' full names: "biz group w Hakan Coskun Halit Ozger Weronika Diana Podgorska
+   isimlerde tam olarak bu bunlarida duzetl ve zip disyasini buraya ver" ("We are group W: Hakan Coskun, Halit Ozger,
+   Weronika Diana Podgorska; the names are exactly these, correct them too and give me the zip file here").
 
 4. **Earlier development sessions** asked Claude to implement and test the modifications listed in Table I of the
    report and in this package's README, and to run the experiments of Section IV; their prompts are not reproduced.
@@ -75,4 +78,5 @@ Following prompt 3, a further Claude instance checked the two submission files (
 the brief; its prompt and report are `genai/package_check_prompt.txt` and `genai/package_check.md`, and the
 corrections it found and we verified were applied to the README, to comments in the code and to this file.
 
-Paths in the files of `genai/` refer to the authors' development repository, which is not part of the submission.
+Paths in the files of `genai/` refer to the authors' development repository, in which the package was still called
+`groupA`; that repository is not part of the submission.

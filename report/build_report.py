@@ -24,7 +24,7 @@ from docx.shared import Inches, Pt
 HERE = os.path.dirname(os.path.abspath(__file__))
 TEMPLATE = os.path.join(HERE, "..", "Report tips and templates", "Paper_Template.docx")
 WORK = os.path.join(HERE, "build")
-OUT = os.path.join(HERE, "ECS7032P_Assignment1_Report_GroupA")
+OUT = os.path.join(HERE, "ECS7032P_Assignment1_Report_GroupW")
 
 # ----------------------------------------------------------------------------------------------- data
 import csv as _csv
@@ -393,9 +393,9 @@ def dpp(d, z=True):
 TITLE = "Decoupled Information-Set MCTS with a Card-Value Model for Sushi Go!"
 
 AUTHORS = [  # three columns, as in the template
-    ["Halit Ozger", "Student no. 230625112", "Queen Mary University of London", "London, UK"],
-    ["Weronika Podgorska", "Student no. 230394735", "Queen Mary University of London", "London, UK"],
     ["Hakan Coskun", "Student no. 241076864", "Queen Mary University of London", "London, UK"],
+    ["Halit Ozger", "Student no. 230625112", "Queen Mary University of London", "London, UK"],
+    ["Weronika Diana Podgorska", "Student no. 230394735", "Queen Mary University of London", "London, UK"],
 ]
 
 FIRST_PAGE_NOTE = ("All sections, tables and figures of this paper were drafted with Claude {claude}; the prompts are "
@@ -1347,7 +1347,7 @@ def build():
                 add_runs(new_par(doc, anchor, "references"), REFS[k])
 
     doc.core_properties.title = TITLE
-    doc.core_properties.author = "Halit Ozger, Weronika Podgorska, Hakan Coskun (ECS7032P Group A)"
+    doc.core_properties.author = "Hakan Coskun, Halit Ozger, Weronika Diana Podgorska (ECS7032P Group W)"
     doc.save(OUT + ".docx")
     pdf_filter = ('pdf:writer_pdf_Export:{"UseLosslessCompression":{"type":"boolean","value":"true"},'
                   '"ReduceImageResolution":{"type":"boolean","value":"false"}}')

@@ -1,7 +1,7 @@
-# groupA – SushiMCTS, an MCTS agent for Sushi Go!
+# groupW – SushiMCTS, an MCTS agent for Sushi Go!
 
-ECS7032P Assignment 1, group A: Halit Ozger (230625112), Weronika Podgorska (230394735) and Hakan Coskun
-(241076864).
+ECS7032P Assignment 1, group W: Hakan Coskun (241076864), Halit Ozger (230625112) and Weronika Diana Podgorska
+(230394735).
 
 `SushiMCTSPlayer` plays Sushi Go! in TAG with decoupled information-set MCTS and a model of the game's scoring. It is
 a modified copy of TAG's `players.basicMCTS.BasicMCTSPlayer` (BasicMCTS in the brief's list of permitted base
@@ -28,7 +28,7 @@ experiments.
 ## Requirements
 
 A TAG version that has `SGGameState.isHandKnown` and `SGGameState.getCurrentSimultaneousPlayers`, such as the copy
-provided for the module, and Java 21, as for TAG itself. Copy this folder to `src/main/java/groupA` in TAG and compile
+provided for the module, and Java 21, as for TAG itself. Copy this folder to `src/main/java/groupW` in TAG and compile
 TAG as usual (`mvn compile` or the IDE). Nothing else is needed.
 
 ## Running the agent
@@ -43,7 +43,7 @@ per decision instead (the guidelines also mention four players with 500 ms), use
 From code (`core.AbstractPlayer`, `players.PlayerFactory`; paths relative to the TAG root):
 
 ```java
-AbstractPlayer agent = PlayerFactory.createPlayer("src/main/java/groupA/json/competition/SushiMCTS_1000ms.json");
+AbstractPlayer agent = PlayerFactory.createPlayer("src/main/java/groupW/json/competition/SushiMCTS_1000ms.json");
 ```
 
 From the command line, for example a three-player tournament between all agent files in one folder (copy the
@@ -59,7 +59,7 @@ agent:
 
 ```java
 import core.AbstractPlayer;
-import groupA.*;
+import groupW.*;
 import players.PlayerConstants;
 
 SushiMCTSParams p = new SushiMCTSParams();
@@ -129,7 +129,7 @@ separate copy of our earlier code and is not needed to run the agent.
 | `budgetType`, `budget` | `BUDGET_FM_CALLS`, 4000 | `BUDGET_TIME`, 900 (1 s file) or 430 (500 ms file) | as for 3 players | CPU time per decision in ms |
 | `wallTimeLimitMS` | 0 (off) | 925 or 450 | as for 3 players | the search also stops after this much real time |
 | `K` | √2 | 0.5 | 1.0 | UCB1 exploration constant |
-| `heuristic` | TAG's game heuristic | `groupA.SushiGoHeuristic` with its default constants | the same class with `args` [15, 1, 0.5, 6, 0.5, 3, 0.25, 1.5, 1.25, 3, 3] | H; `args` = (σ, w, α, T, β, T_m, κ, δ, π, ν, γ), default (15, 0.7, 0.5, 4, 1, 0, 0, 0, 1, 2, 0), see Table I of the report |
+| `heuristic` | TAG's game heuristic | `groupW.SushiGoHeuristic` with its default constants | the same class with `args` [15, 1, 0.5, 6, 0.5, 3, 0.25, 1.5, 1.25, 3, 3] | H; `args` = (σ, w, α, T, β, T_m, κ, δ, π, ν, γ), default (15, 0.7, 0.5, 4, 1, 0, 0, 0, 1, 2, 0), see Table I of the report |
 | `useInformedRollout`, `rolloutEpsilon` | false, 0.2 | true, 0.2 | true, 0.2 | B |
 | `rolloutToRoundEnd` | false | true | true | R (`rolloutLength` is then not used) |
 | `useActionPruning` | false | true | true | P |
