@@ -17,3 +17,4 @@ merge $R/r2_val_4p500.csv $R/r2_val_4p500_c0.csv:0 $R/r2_val_4p500_c1.csv:128 $R
   python3 merge_parts.py $R/v5_field_3p100_all.csv $R/v5_field_3p100.csv $R/r2_field_3p100b.csv 300
 ./make_results.sh
 bash sync_to_groupA_code.sh
+bash sync_results_to_package.sh   # per-game results into the code package (groupA/results)

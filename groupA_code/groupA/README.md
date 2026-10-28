@@ -16,7 +16,7 @@ the held-out validation on seed block 100 000, which shares no deal with any ear
 | Setting | **v4 (final), held-out deals** win % [95 % CI] | v4 on seed block 7 (games) | Score margin, seed block 7 | for comparison: v3, development deals |
 |---|---|---|---|---|
 | 3 players, 100 ms | **52.6** [48.2, 56.9] | 55.0 [50.6, 59.3] (500) | +1.00 ± 0.44 | 50.1 (44.8 on seed block 7, 46.5 on the held-out deals) |
-| 3 players, 500 ms | **47.2** [42.9, 51.6] | 49.4 [45.0, 53.8] (500) | +0.40 ± 0.39 | 40.7 |
+| 3 players, 500 ms | **47.2** [42.9, 51.6] | 49.4 [45.0, 53.8] (500) | +0.40 ± 0.39 | 40.7 (41.9 on the held-out deals) |
 | 3 players, 900 ms | **44.8** [40.5, 49.2] | 56.0 [49.8, 62.0] (250) | +1.06 ± 0.62 | 32.8 |
 | 4 players, 100 ms | **44.4** [40.1, 48.8] | 46.8 [42.5, 51.2] (500) | −0.28 ± 0.46 | 38.6 |
 | 4 players, 500 ms | **36.5** [32.4, 40.8] | 41.4 [37.2, 45.8] (500) | −1.53 ± 0.46 | 35.4 |

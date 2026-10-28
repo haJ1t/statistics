@@ -870,11 +870,11 @@ def text_budget():
     held = GAIN["3p100"] and GAIN["3p500"] and RISE
     if held:
         z = RISE["zw"]
-        verdict = ("which supports E2" if z >= 1.96 else
-                   "which contradicts E2: the held-out test does not support the sequential-tree explanation"
-                   if z <= -1.96 else "which is inconclusive")
+        verdict = ("support for E2" if z >= 1.96 else
+                   "evidence against E2 and the sequential-tree explanation"
+                   if z <= -1.96 else "no sign of the development rise" if RISE["dw"] <= 1 else "inconclusive")
         s += (f" On the held-out deals adding S and I to v3 changed its win rate by {fpp(GAIN['3p100'], z=False)} at "
-              f"100 ms and {fpp(GAIN['3p500'], z=False)} at 500 ms: a difference of {fpp(RISE)}, {verdict}")
+              f"100 ms and {fpp(GAIN['3p500'], z=False)} at 500 ms, a difference of {fpp(RISE)}: {verdict}")
         if abs(z) < 1.96:   # 80% power at alpha = 0.05: (1.96 + 0.84) SE
             s += f" (80% power only for {1.43 * RISE['dwci']:.0f} pp)"
         s += "."
