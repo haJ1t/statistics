@@ -58,7 +58,7 @@ Opponents: v2 and TAG's ISMCTS at the same budget (`arena/agents/b<budget>/ref.j
 ```
 3p, 100 ms         n= 500 win  52.6 [48.2, 56.9]  margin +0.73 ± 0.46
 3p, 500 ms         n= 500 win  47.2 [42.9, 51.6]  margin -0.10 ± 0.40
-3p, 900 ms         missing
+3p, 900 ms         n= 500 win  44.8 [40.5, 49.2]  margin -0.35 ± 0.39
 4p, 100 ms         n= 500 win  44.4 [40.1, 48.8]  margin -0.61 ± 0.43
 4p, 500 ms (F+L8)  n= 500 win  36.5 [32.4, 40.8]  margin -1.83 ± 0.45
 ```
@@ -82,6 +82,7 @@ block 100 000 (see its docstring), so they pair with the other held-out runs by 
 |---|---|---|---|---|---|
 | 100 ms (base) | 500 | 52.6 [48.2, 56.9] | +0.73 ± 0.46 | base | base |
 | 500 ms | 500 | 47.2 [42.9, 51.6] | -0.10 ± 0.40 | -5.4 ± 5.9 (z = -1.8) | -0.83 ± 0.58 (z = -2.8) |
+| 900 ms | 500 | 44.8 [40.5, 49.2] | -0.35 ± 0.39 | -7.8 ± 5.8 (z = -2.6) | -1.08 ± 0.56 (z = -3.8) |
 
 
 Seats of every agent (from the logs):
