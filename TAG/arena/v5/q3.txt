@@ -11,7 +11,7 @@
 #r2_val_3p900_c0 3 126 100000 arena/agents/final/SushiMCTS_900.json arena/agents/b900/ref.json,arena/agents/b900/tagmcts.json
 #r2_val_3p900_c1 3 126 100126 arena/agents/final/SushiMCTS_900.json arena/agents/b900/ref.json,arena/agents/b900/tagmcts.json
 #r2_val_3p900_c2 3 126 100252 arena/agents/final/SushiMCTS_900.json arena/agents/b900/ref.json,arena/agents/b900/tagmcts.json
-r2_val_3p900_c3 3 122 100378 arena/agents/final/SushiMCTS_900.json arena/agents/b900/ref.json,arena/agents/b900/tagmcts.json
+#r2_val_3p900_c3 3 122 100378 arena/agents/final/SushiMCTS_900.json arena/agents/b900/ref.json,arena/agents/b900/tagmcts.json
 r2_v3_3p500_c0 3 126 100000 arena/agents/b500/finalT4.json arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json
 r2_v3_3p500_c1 3 126 100126 arena/agents/b500/finalT4.json arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json
 r2_v3_3p500_c2 3 126 100252 arena/agents/b500/finalT4.json arena/agents/b500/ref.json,arena/agents/b500/tagmcts.json
