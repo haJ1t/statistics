@@ -130,7 +130,7 @@ base agent). It does **not** use, copy or import anything from the advanced `pla
 | `SushiGoHeuristic.java` | new | state evaluation H |
 | `CardValueModel.java` | new | Sushi Go knowledge: estimated scores and marginal card values (used by H and B) |
 | `SushiSim.java` | new | F: TAG's Sushi Go rules re-implemented on `int` arrays (checked move by move against the forward model) |
-| `OpponentModel.java` | new | Q: card preferences of each opponent learned during a game (tested, off) |
+| `OpponentModel.java` | new | Q: card preferences of each opponent learned during a game (implemented, off; its only full-run test stopped after 50 of 250 games) |
 
 ## One decision of the final agent
 

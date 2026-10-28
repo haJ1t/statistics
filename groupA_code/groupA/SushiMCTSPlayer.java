@@ -17,7 +17,8 @@ import static utilities.Utils.noise;
 /**
  * SushiMCTSPlayer - copied from players.basicMCTS.BasicMCTSPlayer (permitted base agent).
  * <p>
- * Only _getAction() is changed, to add Modification D: Information-Aware Determinisation.
+ * _getAction() is changed to add Modification D: Information-Aware Determinisation (v2, v3; the final agent
+ * uses I instead, see below).
  * BasicMCTS searches ONE sampled ("determinised") version of the hidden cards and treats it as
  * the truth. D instead builds M independent trees, each on a fresh sample of the hidden hands
  * (gameState.copy(playerId) re-shuffles everything this player cannot see), splits the budget

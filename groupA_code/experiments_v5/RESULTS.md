@@ -70,6 +70,10 @@ block 100 000 (see its docstring), so they pair with the other held-out runs by 
 
 ### v3 (sequential tree, H + B + D + P + R + M) on the held-out deals, paired with the final agent
 
+| Agent | Games | Win % [95 % CI] | Score margin | Δ win vs base (paired) | Δ margin (paired) |
+|---|---|---|---|---|---|
+| v3, 100 ms (base) | 500 | 46.5 [42.2, 50.9] | -0.24 ± 0.43 | base | base |
+| final agent, 100 ms | 500 | 52.6 [48.2, 56.9] | +0.73 ± 0.46 | +6.1 ± 5.9 (z = +2.0) | +0.97 ± 0.60 (z = +3.2) |
 
 
 ### The final agent across budgets on the held-out deals (paired with 100 ms)

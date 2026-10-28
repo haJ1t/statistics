@@ -149,12 +149,12 @@ def fig_budget():
             q = next((win(os.path.join(R5, f + ".csv")) for f in cand if os.path.exists(os.path.join(R5, f + ".csv"))),
                      None)
             if q:
-                hx.append(x + 0.13); hy.append(q[0]); lo.append(q[0] - q[1]); hi.append(q[2] - q[0])
+                hx.append(x + (0.17 if name.startswith("final") else 0.09)); hy.append(q[0]); lo.append(q[0] - q[1]); hi.append(q[2] - q[0])
         if hx:
             ax.errorbar(hx, hy, yerr=[lo, hi], fmt=m, mfc="white", mec=c, color=c, ms=3.4, capsize=1.8,
                         elinewidth=0.7, label=f"{name.split(' ')[0]}, held-out")
     ax.axhline(100 / 3, color="black", lw=0.6, ls=":")
-    ax.text(2.33, 100 / 3 + 0.8, "chance 33.3%", fontsize=7, ha="right", va="bottom")
+    ax.text(-0.28, 100 / 3 + 0.8, "chance 33.3%", fontsize=7, ha="left", va="bottom")
     ax.set_xticks(xs, [f"{b} ms" for b in budgets])
     ax.set_xlabel("CPU time per decision", fontsize=7.5, labelpad=1.5)
     ax.set_xlim(-0.3, 2.35); ax.set_ylim(10, 70)
