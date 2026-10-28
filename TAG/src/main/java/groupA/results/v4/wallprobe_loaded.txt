@@ -1,0 +1,7 @@
+  game 1 done, 27 focus decisions so far
+  game 2 done, 52 focus decisions so far
+  game 3 done, 78 focus decisions so far
+  game 4 done, 102 focus decisions so far
+  game 5 done, 126 focus decisions so far
+  game 6 done, 152 focus decisions so far
+WALLPROBE arena/agents/b900/cand_R_K0.5.json: decisions=152 mean=1005.2 p50=993.5 p95=1133.0 p99=1247.5 max=1335.0 ms, over 1000 ms: 71

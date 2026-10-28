@@ -1,0 +1,4 @@
+[3p comp1000_F.json] PROBE WALL arena/v5/agents/comp1000_F.json: decisions=76 mean=965.2 p50=925.1 p95=1319.4 p99=1652.6 max=1652.6 ms, over 1000 ms: 8
+[3p comp1000_F.json] PROBE CPU  arena/v5/agents/comp1000_F.json: decisions=76 mean=723.4 p50=745.1 p95=899.1 p99=901.0 max=901.0 ms, over 1000 ms: 0
+[3p SushiMCTS_1000ms.json] PROBE WALL src/main/java/groupA/json/competition/SushiMCTS_1000ms.json: decisions=74 mean=943.4 p50=925.1 p95=1083.6 p99=1355.0 max=1355.0 ms, over 1000 ms: 5
+[3p SushiMCTS_1000ms.json] PROBE CPU  src/main/java/groupA/json/competition/SushiMCTS_1000ms.json: decisions=74 mean=693.7 p50=720.0 p95=899.2 p99=899.2 max=899.2 ms, over 1000 ms: 0

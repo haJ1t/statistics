@@ -1,0 +1,50 @@
+14:39:58 start v5_X3_3p100
+14:56:46 start v5_N05_3p100
+15:13:23 done v5_N05_3p100 rc=0
+15:13:23 start v5_V2D_3p100
+15:30:01 done v5_V2D_3p100 rc=0
+15:30:01 start v5_4X3_4p100
+15:49:39 done v5_4X3_4p100 rc=0
+15:49:39 start v5_W1_3p100
+16:06:09 done v5_W1_3p100 rc=0
+16:06:09 start v5_R3V2_3p100
+16:22:42 done v5_R3V2_3p100 rc=0
+16:22:42 start v5_comp_3p1000
+17:01:34 done v5_comp_3p1000 rc=0
+17:01:34 start v5_comp_4p500
+17:12:37 done v5_comp_4p500 rc=0
+17:12:37 start v5_field_3p100
+17:50:11 done v5_field_3p100 rc=0
+17:54:31 start v5_comp_3p1000b
+18:14:20 done v5_comp_3p1000b rc=0
+19:33:25 start r2_val_3p100
+19:55:35 done r2_val_3p100 rc=0
+19:55:35 start r2_val_4p100
+20:15:29 done r2_val_4p100 rc=0
+20:15:29 start r2_duct_3p100
+20:32:50 done r2_duct_3p100 rc=0
+20:32:50 start r2_lead_3p100
+20:49:25 done r2_lead_3p100 rc=0
+20:49:25 start r2_val_3p900
+22:28:04 container restart: r2_val_3p900 lost at 200/250 games; remaining runs restarted in chunks (q3.txt)
+22:28:04 start r2_val_3p500_c0
+22:53:46 done r2_val_3p500_c0 rc=0
+22:53:46 start r2_val_3p500_c1
+23:19:23 done r2_val_3p500_c1 rc=0
+23:19:23 start r2_val_3p500_c2
+23:44:53 done r2_val_3p500_c2 rc=0
+23:44:53 start r2_val_3p500_c3
+00:09:35 done r2_val_3p500_c3 rc=0
+00:09:35 start r2_field_3p100b
+00:16:29 done r2_field_3p100b rc=0
+00:16:29 start r2_val_4p500_c0
+00:49:48 done r2_val_4p500_c0 rc=0
+00:49:48 start r2_val_4p500_c1
+01:23:24 done r2_val_4p500_c1 rc=0
+01:23:24 start r2_val_4p500_c2
+01:56:52 done r2_val_4p500_c2 rc=0
+01:56:52 start r2_val_4p500_c3
+02:27:22 done r2_val_4p500_c3 rc=0
+02:27:22 start r2_v3_3p100
+02:44:26 done r2_v3_3p100 rc=0
+02:44:26 start r2_val_3p900_c0

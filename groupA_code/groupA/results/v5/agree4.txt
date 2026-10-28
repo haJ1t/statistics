@@ -1,0 +1,4 @@
+SushiMCTS_500_FL8.json: decisions 73, same card with another seed 90.4%
+  vs SushiMCTS_500_FL8.json                       94.5% same
+  vs b500_4L16.json                               94.5% same
+  vs b1000_4FL8.json                              97.3% same

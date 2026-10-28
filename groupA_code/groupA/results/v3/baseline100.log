@@ -1,0 +1,16 @@
+RESULT v2final_vs_tag100 | n=3 games=300 | win=27.3% [22.6, 32.6] (chance 33.3%) | score=42.01 | diffBest=-1.97 +- 0.64 | ms/dec(all)=186 | 282s
+    tagmcts.json                                  win 36.3% over 600 seats
+    v2final.json [focus]                          win 27.3% over 300 seats
+RESULT v2H_vs_tag100 | n=3 games=300 | win=20.7% [16.5, 25.6] (chance 33.3%) | score=40.56 | diffBest=-3.68 +- 0.62 | ms/dec(all)=182 | 276s
+    tagmcts.json                                  win 39.7% over 600 seats
+    v2H.json [focus]                              win 20.7% over 300 seats
+RESULT v2HB_vs_tag100 | n=3 games=300 | win=23.3% [18.9, 28.4] (chance 33.3%) | score=41.11 | diffBest=-3.04 +- 0.69 | ms/dec(all)=165 | 251s
+    tagmcts.json                                  win 38.3% over 600 seats
+    v2HB.json [focus]                             win 23.3% over 300 seats
+RESULT basic_vs_tag100 | n=3 games=300 | win=7.3% [4.9, 10.9] (chance 33.3%) | score=37.81 | diffBest=-8.43 +- 0.73 | ms/dec(all)=166 | 252s
+    basic.json [focus]                            win 7.3% over 300 seats
+    tagmcts.json                                  win 46.3% over 600 seats
+RESULT v2final_vs_v2HB100 | n=3 games=300 | win=33.8% [28.7, 39.4] (chance 33.3%) | score=40.48 | diffBest=-2.43 +- 0.69 | ms/dec(all)=105 | 150s
+    v2HB.json                                     win 33.1% over 600 seats
+    v2final.json [focus]                          win 33.8% over 300 seats
+BATCH DONE

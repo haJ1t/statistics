@@ -1,0 +1,9 @@
+RESULT q4_Ith8 | n=4 games=500 | win=45.4% [41.1, 49.8] (chance 25.0%) | score=37.64 | diffBest=-0.55 +- 0.43 | ms/dec(all)=151 | 1715s
+    finalT4_I_th8.json [focus]                    win 45.4% over 500 seats
+    ref.json                                      win 12.6% over 752 seats
+    tagmcts.json                                  win 23.9% over 748 seats
+RESULT q4_Io | n=4 games=500 | win=43.5% [39.2, 47.9] (chance 25.0%) | score=37.74 | diffBest=-0.60 +- 0.43 | ms/dec(all)=139 | 1568s
+    finalT4_I.json [focus]                        win 43.5% over 500 seats
+    ref.json                                      win 13.9% over 752 seats
+    tagmcts.json                                  win 23.8% over 748 seats
+BATCH DONE

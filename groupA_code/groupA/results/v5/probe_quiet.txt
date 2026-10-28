@@ -1,0 +1,6 @@
+17:12:59 paused arena runs; probing on a quiet machine
+[3p SushiMCTS_1000ms.json] PROBE WALL src/main/java/groupA/json/competition/SushiMCTS_1000ms.json: decisions=73 mean=945.2 p50=925.1 p95=1085.3 p99=1455.1 max=1455.1 ms, over 1000 ms: 5
+[3p SushiMCTS_1000ms.json] PROBE CPU  src/main/java/groupA/json/competition/SushiMCTS_1000ms.json: decisions=73 mean=694.1 p50=743.5 p95=899.1 p99=901.2 max=901.2 ms, over 1000 ms: 0
+[4p SushiMCTS_500ms.json] PROBE WALL src/main/java/groupA/json/competition/SushiMCTS_500ms.json: decisions=66 mean=447.6 p50=439.8 p95=450.8 p99=765.6 max=765.6 ms, over 500 ms: 2
+[4p SushiMCTS_500ms.json] PROBE CPU  src/main/java/groupA/json/competition/SushiMCTS_500ms.json: decisions=66 mean=398.2 p50=429.2 p95=430.0 p99=430.3 max=430.3 ms, over 500 ms: 0
+17:20:51 resumed arena runs

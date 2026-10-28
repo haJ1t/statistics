@@ -1,0 +1,1 @@
+SushiMCTS_500_FL8.json                       budget t500: states 73, iterations 34746 (14.4 us each), root children 704, depth-1 visits 1:53% 2-5:31% 6-20:11% 21-100:4% >100:1%, untried passes 4%, mean depth 1.53

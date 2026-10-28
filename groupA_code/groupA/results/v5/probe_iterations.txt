@@ -1,0 +1,7 @@
+# iterations per decision (arena.Probe, 3 players, 2 games, opponents v2 + TAG ISMCTS at the same budget)
+100 ms v3: PROBE arena/agents/b100/finalT4.json: decisions=48  iterations/decision=1569  determinisations/decision=1.63 
+100 ms v4: PROBE arena/agents/final/SushiMCTS_100.json: decisions=51  iterations/decision=2387  determinisations/decision=1.00 
+500 ms v3: PROBE arena/agents/b500/finalT4.json: decisions=48  iterations/decision=11170  determinisations/decision=1.63 
+500 ms v4: PROBE arena/agents/final/SushiMCTS_500.json: decisions=50  iterations/decision=11865  determinisations/decision=1.00 
+900 ms v3: PROBE arena/agents/b900/finalT4.json: decisions=49  iterations/decision=19696  determinisations/decision=1.61 
+900 ms v4: PROBE arena/agents/final/SushiMCTS_900.json: decisions=49  iterations/decision=21246  determinisations/decision=1.00 

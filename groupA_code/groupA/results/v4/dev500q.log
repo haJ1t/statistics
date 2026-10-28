@@ -1,0 +1,8 @@
+RESULT q5_X0b100 | n=4 games=250 | win=34.8% [29.2, 40.9] (chance 25.0%) | score=36.61 | diffBest=-1.77 +- 0.57 | ms/dec(all)=1365 | 3893s
+    SushiMCTS_100.json [focus]                    win 34.8% over 250 seats
+        pts/game: Maki=4.14 Tempura=6.38 Sashimi=4.20 Dumpling=5.52 SquidNigiri=5.04 SalmonNigiri=7.34 EggNigiri=1.41 Wasabi=0.00 Chopsticks=0.00 Pudding=2.98
+    ref.json                                      win 14.1% over 376 seats
+        pts/game: Maki=8.58 Tempura=5.05 Sashimi=7.85 Dumpling=3.56 SquidNigiri=3.20 SalmonNigiri=6.20 EggNigiri=1.24 Wasabi=0.00 Chopsticks=0.00 Pudding=0.27
+    tagmcts.json                                  win 29.4% over 374 seats
+        pts/game: Maki=5.61 Tempura=6.15 Sashimi=2.41 Dumpling=5.52 SquidNigiri=5.56 SalmonNigiri=8.19 EggNigiri=1.50 Wasabi=0.00 Chopsticks=0.00 Pudding=1.73
+BATCH DONE

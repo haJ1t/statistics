@@ -1,0 +1,31 @@
+# Search-free duels of epsilon-greedy card-value policies (eps 0.2), deals 9000 + g, candidate in seat g % n,
+# the pool fills the other seats. Config = alpha,T,beta,T_m,kappa,delta,pi,nu,gamma (CardValueModel.Config),
+# "@lambda" = with the denial term N. Win % +- 1.96 SE. (GreedyTune eval / DenialDuel, 27 October)
+#   D  = default (v4 3-player card model)      0.5,4,1,0,0,0,1,2,0
+#   X0 = v4 4-player card model                 0.5,6,0.5,3,0.25,1.5,1.25,3,3
+#   X3 = v5 3-player card model (tune_X3.log)   0.5,4,0.8,4,0.25,1.0,1.5,4,3
+
+## pool {D, X0}, 4000 games (GreedyTune eval 3,4 4000 0.2)
+D   | n=3 win  7.25% +- 0.79 margin -6.33 | n=4 win  4.43% +- 0.62 margin -5.80
+X0  | n=3 win 45.72% +- 1.51 margin +3.79 | n=4 win 37.86% +- 1.46 margin +4.40
+
+## one constant of D changed, pool {D, X0}, n=3, 6000 games
+T_m=3,kappa=0.25 13.69% | beta=0.5 14.34% | delta=1.5 6.85% | nu=3 7.38% | gamma=3 18.53% | pi=1.25 8.65%
+
+## pool {X0}, 8000 games (chance: 33.3 % / 25 %)
+X0  | n=3 win 32.62% +- 1.00 margin -0.19 | n=4 win 24.78% +- 0.92 margin -0.07
+X3  | n=3 win 45.00% +- 1.06 margin +2.45 | n=4 win 36.32% +- 1.03 margin +1.83
+
+## denial N, pool {D, X0}, 6000 games (DenialDuel 3,4 6000 0.2)
+D        | n=3 win 7.35% +- 0.64 margin -6.50 | n=4 win 4.59% +- 0.52 margin -5.57
+D@0.25   | n=3 win 8.14% +- 0.67 margin -5.91 | n=4 win 5.13% +- 0.54 margin -5.21
+D@0.5    | n=3 win 8.34% +- 0.68 margin -5.89 | n=4 win 4.94% +- 0.53 margin -5.14
+D@1.0    | n=3 win 8.87% +- 0.70 margin -5.67 | n=4 win 5.23% +- 0.55 margin -4.99
+X0       | n=3 win 43.27% +- 1.22 margin +3.57 | n=4 win 36.64% +- 1.19 margin +4.26
+X0@0.5   | n=3 win 43.94% +- 1.23 margin +3.94 | n=4 win 35.85% +- 1.18 margin +4.22
+
+## denial N on X3, pool {X3, X0}, 8000 games
+X3       | n=3 win 36.01% +- 1.03 margin +0.52 | n=4 win 27.15% +- 0.95 margin +0.29
+X3@0.25  | n=3 win 37.16% +- 1.03 margin +0.74 | n=4 win 27.14% +- 0.95 margin +0.37
+X3@0.5   | n=3 win 37.19% +- 1.04 margin +0.78 | n=4 win 26.15% +- 0.94 margin +0.24
+X3@1.0   | n=3 win 36.75% +- 1.03 margin +0.70 | n=4 win 24.58% +- 0.92 margin -0.04

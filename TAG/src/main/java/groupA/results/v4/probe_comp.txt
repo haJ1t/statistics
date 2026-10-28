@@ -1,0 +1,12 @@
+== players=3 SushiMCTS_1000ms.json
+PROBE WALL arena/agents/comp/SushiMCTS_1000ms.json: decisions=97 mean=966.9 p50=926.2 p95=1158.1 p99=1832.6 max=1832.6 ms, over 1000 ms: 10
+PROBE CPU  arena/agents/comp/SushiMCTS_1000ms.json: decisions=97 mean=473.2 p50=442.2 p95=872.7 p99=899.2 max=899.2 ms, over 1000 ms: 0
+== players=4 SushiMCTS_1000ms.json
+PROBE WALL arena/agents/comp/SushiMCTS_1000ms.json: decisions=85 mean=969.4 p50=926.2 p95=1203.6 p99=1507.3 max=1507.3 ms, over 1000 ms: 9
+PROBE CPU  arena/agents/comp/SushiMCTS_1000ms.json: decisions=85 mean=446.1 p50=455.7 p95=582.5 p99=689.2 max=689.2 ms, over 1000 ms: 0
+== players=3 SushiMCTS_500ms.json
+PROBE WALL arena/agents/comp/SushiMCTS_500ms.json: decisions=98 mean=496.2 p50=451.0 p95=748.2 p99=1028.6 max=1028.6 ms, over 500 ms: 20
+PROBE CPU  arena/agents/comp/SushiMCTS_500ms.json: decisions=98 mean=184.3 p50=193.1 p95=300.5 p99=363.1 max=363.1 ms, over 500 ms: 0
+== players=4 SushiMCTS_500ms.json
+PROBE WALL arena/agents/comp/SushiMCTS_500ms.json: decisions=86 mean=485.7 p50=451.0 p95=786.2 p99=948.3 max=948.3 ms, over 500 ms: 11
+PROBE CPU  arena/agents/comp/SushiMCTS_500ms.json: decisions=86 mean=228.6 p50=236.0 p95=317.1 p99=367.9 max=367.9 ms, over 500 ms: 0

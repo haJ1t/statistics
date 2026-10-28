@@ -15,15 +15,16 @@ seeds 7–506; these deals overlap the development deals of seeds 1 and 2). The 
 
 | Setting | Games | **v4 (final)** win % [95 % CI] | Score margin | for comparison: v3, development deals |
 |---|---|---|---|---|
-| 3 players, 100 ms | 500 | **55.0** [50.6, 59.3] | +1.00 ± 0.44 | 50.1 (44.8 on the validation deals) |
+| 3 players, 100 ms | 500 | **55.0** [50.6, 59.3] | +1.00 ± 0.44 | 50.1 (44.8 on seed block 7, 46.5 on the held-out deals) |
 | 3 players, 500 ms | 500 | **49.4** [45.0, 53.8] | +0.40 ± 0.39 | 40.7 |
 | 3 players, 900 ms | 250 | **56.0** [49.8, 62.0] | +1.06 ± 0.62 | 32.8 |
 | 4 players, 100 ms | 500 | **46.8** [42.5, 51.2] | −0.28 ± 0.46 | 38.6 |
 | 4 players, 500 ms | 500 | **41.4** [37.2, 45.8] | −1.53 ± 0.46 | 35.4 |
 
 Chance is 33.3 % with 3 players and 25 % with 4. *Score margin* = our score minus the best opponent's score
-(points per game, ± 95 % CI). Our agent sits in every seat equally often; the other seats alternate between
-v2 and TAG's ISMCTS.
+(points per game, ± 95 % CI). Our agent sits in every seat equally often; v2 and TAG's ISMCTS fill the other
+seats and swap them every 3 games (4 players: 2 + 1 copies, swapped every 4 games). The per-game results and
+logs of every run in the report are in `results/`.
 
 ## Version 5 – sprint for the in-class tournament (27 October)
 
@@ -270,10 +271,10 @@ The v3 parameters (`K`, `rolloutLength`, `maxTreeDepth`, `useProgressiveBias`, `
 ## Results
 
 All numbers: Sushi Go in TAG, played with the benchmark harness in `experiments_v4` (next to this
-folder, not part of the submission). Budgets are CPU time per decision, the same for every agent at the table.
+folder in our repository); the per-game results and logs of every run are also in `results/` in this package. Budgets are CPU time per decision, the same for every agent at the table.
 Our agent plays against **v2** (our previous agent, H + A + B + D) and **TAG's tuned ISMCTS** (`players.mcts`
 configuration, used only as an opponent; nothing of it is in this folder). In game *g* it sits in seat *g* mod *n*;
-the other seats alternate between the two opponents. A shared first place counts 1/k; chance is 33.3 % with
+the two opponents swap seats every *n* games (4 players: 2 + 1 copies, swapped every 4 games). A shared first place counts 1/k; chance is 33.3 % with
 3 players and 25 % with 4. Brackets: Wilson 95 % CI; ±: 95 % CI (1.96 standard errors) of a mean or of a paired
 difference; z = difference / standard error. *Score margin*: our score minus the best opponent's score.
 
@@ -295,8 +296,8 @@ settings, however, were chosen on fixed seed-1 and seed-2 deals that seed block 
 uses seed block 100 000 (`experiments_v5`, runs `r2_val_*`), which no earlier run touched.
 
 **Number of games.** 500 games per condition, except the 3-player / 900 ms runs in development and on seed
-block 7 and the 4-player / 500 ms development runs, which have 250. A 3-player game at 900 ms needs about 3 × 27 decisions × 0.9 s ≈ 73 s of CPU time and a
-4-player game at 500 ms 4 × 24 × 0.5 s ≈ 48 s; on our 18-core laptop a 250-game run took 45–75 minutes with
+block 7 and the 4-player / 500 ms development runs, which have 250. A 3-player game at 900 ms has about 77 searched decisions (all players) × 0.9 s ≈ 70 s of CPU time and a
+4-player game at 500 ms about 90 × 0.5 s ≈ 45 s (decision counts from our runs); on our 18-core laptop a 250-game run took 45–75 minutes with
 8 games in parallel, and the study has about 165 runs. We therefore used 250 games at these budgets and
 report the correspondingly wider intervals (about ±6 instead of ±4.4 points for a win rate). The final
 4-player / 500 ms agent was validated with 500 games.
@@ -413,9 +414,9 @@ opponents' play.
 | BasicMCTS + RHEA | 500 | **84.2 [80.7, 87.1]** | +6.68 ± 0.60 | BasicMCTS 9.0 %, RHEA 6.8 % |
 | OSLA + BasicMCTS | 500 | **87.2 [84.0, 89.8]** | +9.74 ± 0.75 | BasicMCTS 12.8 %, OSLA 0.0 % |
 
-Full tables of every run (development, ablation, 4 players), the per-game data and the tools are in
-`experiments_v4/` (next to this folder, not part of the submission); `experiments_v4/RESULTS.md` has every
-table.
+Full tables of every run (development, ablation, 4 players) and the tools are in `experiments_v3/` to
+`experiments_v5/` (next to this folder in our repository); `experiments_v4/RESULTS.md` has every table. The
+per-game results and logs of every run are also in `results/` in this package (see `results/README.md`).
 
 ## Running the experiments
 
