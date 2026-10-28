@@ -30,7 +30,7 @@ Claude Code tool (see the report's statement on the use of generative AI). This 
 
 ## Prompts written by Claude for its reviewer instances
 
-Following prompt 1, each draft of the report was marked by a separate Claude instance. Its prompt, written by the
+Following prompt 1, successive drafts of the report were marked by a separate Claude instance. Its prompt, written by the
 generating instance, followed this outline (abridged here; the verbatim prompt for each draft is in
 `genai/reviewer_prompt_draftN.txt`):
 
@@ -45,5 +45,6 @@ generating instance, followed this outline (abridged here; the verbatim prompt f
 > presentation. (6) Give a prioritised list of changes with replacement text and their effect on length. (7) End
 > with a plain answer: would this get 85% or more, and what stands between it and 90%+?
 
-The reviewers' written reports, one per draft, were the instructions for the revisions; they are in
-`genai/review_draftN.md`.
+The reviewers' written reports were the instructions for the revisions; they are in `genai/review_draftN.md`
+(N = the draft that was marked). The final draft's rewritten sections were checked once more
+(`genai/reviewer_prompt_draft15_check.txt`, `genai/review_draft15_check.md`).
