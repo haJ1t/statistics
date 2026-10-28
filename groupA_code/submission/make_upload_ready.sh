@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Builds upload_ready/ with the two group files for QMplus: groupA.zip (only the package directory groupA, without
 # the framework) and the report PDF; upload_ready.zip holds the same folder as one download.
-# The package gets the agent's Java files, the competition files, the submission README and the generative-AI
-# prompts. The development files of TAG/src/main/java/groupA (experiment JSONs, per-game results, development
-# README) stay in the repository.
+# The package gets the agent's Java files, its JSON files (competition, 500 ms, 100 ms), the submission README and
+# the generative-AI prompts. The development files of TAG/src/main/java/groupA (experiment JSONs, per-game results,
+# development README) stay in the repository.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 SRC="$ROOT/TAG/src/main/java/groupA"
@@ -18,6 +18,7 @@ cp "$SRC/GENAI_PROMPTS.md" "$PKG/"
 cp "$SRC"/genai/* "$PKG/genai/"
 cp "$SRC/json/competition/SushiMCTS_1000ms.json" "$PKG/json/competition/"
 cp "$SRC/json/competition/SushiMCTS_500ms.json" "$PKG/json/"
+cp "$SRC/json/agents_v4/SushiMCTS_100ms.json" "$PKG/json/SushiMCTS_100ms.json"
 
 rm -rf "$OUT" "$ROOT/upload_ready.zip"
 mkdir -p "$OUT"

@@ -1,0 +1,18 @@
+You are an independent, strict checker of a group's submission for the QMUL module ECS7032P (AI in games), Assignment 1 (a Sushi Go! agent in the TAG framework). The group will upload exactly two group files to QMplus, both in /home/user/statistics/upload_ready/:
+  - groupA.zip: the code package (it must contain only the package directory with the agent, no framework);
+  - ECS7032P_Assignment1_Report_GroupA.pdf: the report.
+Decide whether these two files are ready to hand in, and list precisely what is wrong, missing or superfluous.
+
+Materials (read only; do not modify anything under /home/user/statistics; unzip, compile and write scratch files only under /tmp/claude-0/pkgcheck/):
+  - The brief: /home/user/statistics/Assignment 1 Guidelines.pdf (sections 2 "Generative AI" and 3 "Submission Requirements" are the rules for these files), the rubric /home/user/statistics/Assignment 1 - Rubric.pdf and /home/user/statistics/Assignment 1 - Assessment Overview.pdf.
+  - The TAG framework the package must run in: /home/user/statistics/TAG (its own copy of the package sits in src/main/java/groupA; ignore that copy and test the zip). The compiled framework is in /home/user/statistics/TAG/target/classes (it also contains old groupA classes: leave them out of the classpath) and the dependency classpath is in /home/user/statistics/TAG/cp.txt. Java 21 is installed.
+
+Check at least:
+  1. Compliance of groupA.zip with section 3 of the brief: contents (only the package directory, nothing of the framework), a README that explains how to run the agent (how to call its constructor, initialisation and parameters), a JSON configuration file for the competition (three players, 1 second per decision), everything needed to run the agent inside the package, nothing from players.mcts used or copied, the permitted base agent.
+  2. That the package compiles and runs on its own: unzip it into a copy of the framework without any other groupA classes, compile it against the framework classes, load the competition JSON with players.PlayerFactory.createPlayer and play at least one three-player game; also compile and run the constructor example of the README as written. Report the exact commands and results.
+  3. The README against the code and the JSON files: every class, method, parameter name, default value and configuration value it states, the paths it gives, and the commands it gives (run them where you can). Its results table against Table III of the report.
+  4. Cleanliness of the code and of the package for a marker: leftover development notes, references to files or classes that are not in the package, commented-out code, debugging output, stale or misleading comments, superfluous files. Also whether the comments explain the critical parts of the agent.
+  5. Consistency of the report with the package: everything the report says is in the code package (or elsewhere) must be true of these files; authors and student numbers; page limits (4 pages of main text; references and the generative-AI statement may spill onto page 5, at most 5 pages in total).
+  6. The generative-AI rules of section 2: acknowledgement, citation of the AI system, the prompts used, and whether GENAI_PROMPTS.md and the folder genai make the report's statement true.
+End with a prioritised list: first the problems that must be fixed before upload (each with the exact fix: file, current text, replacement text), then optional improvements, and finally a plain answer: are these two files ready to upload?
+Write your full report to /tmp/claude-0/pkgcheck/package_check.md and also return it in full as your final answer.

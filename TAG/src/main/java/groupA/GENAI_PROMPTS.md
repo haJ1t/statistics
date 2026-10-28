@@ -16,10 +16,18 @@ Claude Code tool (see the report's statement on the use of generative AI). This 
    Every time you finish the report, spawn another agent to check it independently and impartially, and do not leave
    the loop until you are sure it will get 100%."
 
-2. **The later candidate changes** (the five changes tested on seed block 7 before the in-class tournament; English
-   translation): "The lecturer will hold a tournament of our agents in class; as before, improve the agents'
-   performance quickly while following the lecturer's restrictions and recording what we did in the README; you have
-   4.5 hours, test everything in parallel."
+2. **The later candidate changes** (the five changes tested on seed block 7 before the in-class tournament; original
+   Turkish, verbatim):
+
+   > sikinti su hoca ajanlarimizi sinif icinde turnuva yaptircakmis daha oncesinde yaptigimiz gibi ajalnlari cok
+   > hizli sekilde hocanin kuydugu yasaklara uyarak ve yaptiklarimiz readme kaydederek ajanlarin performasini hizlica
+   > arttirmamiz gerek ama olay su an su ajanlari gelsitirmek icin 4.5 saatin var herseyi ona gore hizli sekilde ayni
+   > anda test ederek olabildigince hizli ama perfomasn arttirak gitmemiz gerek bitene kadar looptan cikma
+
+   English translation: "The problem is that the lecturer will hold a tournament of our agents in class; as before, we
+   need to improve the agents' performance quickly while following the lecturer's restrictions and recording what we
+   did in the README; you have 4.5 hours to develop the agents, so test everything in parallel, as fast as possible
+   while improving performance, and do not leave the loop until it is finished."
 
 3. **Other messages of the report session** asked for the work to be pushed to GitHub ("github bağladım şimdi push
    et" – "I connected GitHub, now push"; "yaptigin herseyi direk push et githuba repoda bulamadim" – "push everything
@@ -43,8 +51,8 @@ Claude Code tool (see the report's statement on the use of generative AI). This 
 ## Prompts written by Claude for its reviewer instances
 
 Following prompt 1, successive drafts of the report were marked by a separate Claude instance. Its prompt, written by the
-generating instance, followed this outline (abridged here; the verbatim prompt for each draft is in
-`genai/reviewer_prompt_draftN.txt`):
+generating instance, followed this outline (abridged here; the verbatim prompt for each marked draft, drafts 1–12 and
+14, is in `genai/reviewer_prompt_draftN.txt`):
 
 > You are an independent, strict marker for the QMUL module ECS7032P (AI in games), Assignment 1. Mark the group
 > report and code in the repository as the module's lecturer would, and tell us precisely what stands between it and
@@ -58,5 +66,13 @@ generating instance, followed this outline (abridged here; the verbatim prompt f
 > with a plain answer: would this get 85% or more, and what stands between it and 90%+?
 
 The reviewers' written reports were the instructions for the revisions; they are in `genai/review_draftN.md`
-(N = the draft that was marked). The final draft's rewritten sections were checked once more
-(`genai/reviewer_prompt_draft15_check.txt`, `genai/review_draft15_check.md`).
+(N = the draft that was marked). The rewritten sections of draft 15 were checked once more
+(`genai/reviewer_prompt_draft15_check.txt`, `genai/review_draft15_check.md`); the submitted report applies that
+check's corrections, adds the authors' names and was then matched to the submitted package (where the per-game
+results are kept, and the full translation of prompt 2).
+
+Following prompt 3, a further Claude instance checked the two submission files (this package and the report) against
+the brief; its prompt and report are `genai/package_check_prompt.txt` and `genai/package_check.md`, and the
+corrections it found and we verified were applied to the README, to comments in the code and to this file.
+
+Paths in the files of `genai/` refer to the authors' development repository, which is not part of the submission.

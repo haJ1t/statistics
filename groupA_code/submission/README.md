@@ -4,16 +4,17 @@ ECS7032P Assignment 1, group A: Halit Ozger (230625112), Weronika Podgorska (230
 (241076864).
 
 `SushiMCTSPlayer` plays Sushi Go! in TAG with decoupled information-set MCTS and a model of the game's scoring. It is
-a modified copy of TAG's `players.basicMCTS.BasicMCTSPlayer`, one of the permitted base agents. It does not use, copy
-or import anything from the advanced MCTS agent (`players.mcts`), and everything it needs is in this package: no file
-of the framework is changed. Our report describes the method and the experiments.
+a modified copy of TAG's `players.basicMCTS.BasicMCTSPlayer` (BasicMCTS in the brief's list of permitted base
+agents). It does not use, copy or import anything from the advanced MCTS agent (`players.mcts.MCTSPlayer`), and
+everything it needs is in this package: no file of the framework is changed. Our report describes the method and the
+experiments.
 
 ## Files
 
 | File | Contents |
 |---|---|
 | `SushiMCTSPlayer.java` | the agent (copied from `BasicMCTSPlayer`): parameters for the table size, search loop, time guard |
-| `SushiTreeNode.java` | the search (copied from `BasicTreeNode`); every change is marked `MODIFICATION <id>` |
+| `SushiTreeNode.java` | the search (copied from `BasicTreeNode`); changes are marked `MODIFICATION <id>` or named after their switch |
 | `SushiMCTSParams.java` | the parameters (copied from `BasicMCTSParams`); every modification is a switch |
 | `SushiGoHeuristic.java` | the evaluation H of a position |
 | `CardValueModel.java` | the model of Sushi Go!'s scoring: estimated final scores and marginal card values |
@@ -21,12 +22,14 @@ of the framework is changed. Our report describes the method and the experiments
 | `OpponentModel.java` | an online opponent model (Q; implemented, off in the final agent) |
 | `json/competition/SushiMCTS_1000ms.json` | **the competition file**: 1 s per decision |
 | `json/SushiMCTS_500ms.json` | the same agent for a limit of 500 ms per decision |
+| `json/SushiMCTS_100ms.json` | the final agent at 100 ms per decision, the budget of most experiments in the report |
 | `GENAI_PROMPTS.md`, `genai/` | the prompts of our use of generative AI (see the statement at the end of the report) |
 
 ## Requirements
 
-TAG from November 2024 or later (the agent calls `SGGameState.isHandKnown`) and Java 21, as for TAG itself. Copy this
-folder to `src/main/java/groupA` in TAG and compile TAG as usual (`mvn compile` or the IDE). Nothing else is needed.
+A TAG version that has `SGGameState.isHandKnown` and `SGGameState.getCurrentSimultaneousPlayers`, such as the copy
+provided for the module, and Java 21, as for TAG itself. Copy this folder to `src/main/java/groupA` in TAG and compile
+TAG as usual (`mvn compile` or the IDE). Nothing else is needed.
 
 ## Running the agent
 
@@ -44,7 +47,7 @@ AbstractPlayer agent = PlayerFactory.createPlayer("src/main/java/groupA/json/com
 ```
 
 From the command line, for example a three-player tournament between all agent files in one folder (copy the
-competition file into it):
+competition file into it; `mvn package` builds `target/TAG.jar`):
 
 ```
 java -jar target/TAG.jar RunGames game=SushiGo nPlayers=3 playerDirectory=<folder> mode=random matchups=100
@@ -73,7 +76,7 @@ AbstractPlayer agent = new SushiMCTSPlayer(p);
 
 Without a `fourPlayer` block this agent plays four-player games with the same settings; the four-player settings
 are easiest to take from the JSON files. `new SushiMCTSPlayer()` has every modification switched off and plays like
-BasicMCTS.
+BasicMCTS with the default `BasicMCTSParams`.
 
 ## How the agent chooses a card
 
@@ -103,21 +106,21 @@ ids are those of Table I of the report.
 | H | evaluation tanh(Δ/σ) with Δ = w · (lead over the best opponent) + (1 − w) · (lead over the mean opponent), from the card-value model's estimated scores | `SushiGoHeuristic`, `CardValueModel` | yes / yes |
 | B | ε-greedy rollouts: every player plays its card with the highest marginal value, a random card with probability ε = 0.2 | `SushiTreeNode.playOut` | yes / yes |
 | R | rollouts end when the current round has been scored | `SushiTreeNode.finishRollout` | yes / yes |
-| P | one branch per distinct card | `CardValueModel.distinctActions` | yes / yes |
+| P | one branch per distinct card | `CardValueModel.distinctActions` (with I: `distinctCards`) | yes / yes |
 | M | max^n backups: every player maximises its own value | `SushiTreeNode` | yes / yes |
 | S | decoupled UCT with one node per turn: each player selects by UCB over its own card statistics | `SushiTreeNode` | yes / yes |
 | I | single-observer information-set search: one open-loop tree, hidden cards dealt again in every iteration | `SushiTreeNode.informationSetIteration` | yes / yes |
 | X0 | card-model constants tuned for four players | `heuristic.args` of the `fourPlayer` block | – / yes |
-| W2 | value for four players: w = 1, finished games valued by the gap to the winner, σ smaller in later rounds, opponents play for their lead over the others' mean | `SushiGoHeuristic.valuesOf`, `SushiTreeNode` | – / yes (≥ 500 ms) |
+| W2 | value for four players: w = 1, finished games valued by the gap to the winner (V, `terminalScale`), σ smaller in later rounds (`sigmaRoundDecay`), opponents play for their lead over the others' mean (`opponentScoreValue`) | `SushiGoHeuristic.valuesOf`, `SushiTreeNode` | – / yes (≥ 500 ms) |
 | F, L | fast simulation on `SushiSim`, 8 rollouts per leaf | `SushiSim`, `SushiTreeNode.simIteration` | – / yes (≥ 500 ms) |
 | A | progressive bias | `SushiTreeNode` | no |
 | D | up to 4 determinised trees (replaced by I) | `SushiMCTSPlayer` | no |
 
-Further switches, tested and off in the final agent: O (opponents not searched), G (MAST rollouts), U (one tree per
-player), K (opponents limited to their best cards), E (several independent trees), Q (online opponent model) and N
-(denying the next player its favourite card in the rollouts). Our previous version v3 (H, B, D, P, R, M) is a
-configuration of the same code; v2 (H, A, B, D), the opponent in our experiments, was a separate copy of our earlier
-code and is not needed to run the agent.
+Further switches, tested and off in the final agent: O (opponents not searched), U (one tree per player), K (opponents
+limited to their best cards), E (several independent trees) and N (denying the next player its favourite card in the
+rollouts); G (MAST rollouts) and Q (online opponent model) are implemented but were not evaluated. Our previous version
+v3 (H, B, D, P, R, M) is a configuration of the same code; v2 (H, A, B, D), the opponent in our experiments, was a
+separate copy of our earlier code and is not needed to run the agent.
 
 ## Parameters
 
@@ -132,18 +135,19 @@ code and is not needed to run the agent.
 | `useActionPruning` | false | true | true | P |
 | `useMaxN` | false | true | true | M |
 | `useDecoupledUCT` | false | true | true | S (needs M) |
-| `useInformationSets` | false | true | true | I (needs S) |
+| `useInformationSets` | false | true | true | I (needs M) |
 | `terminalScale`, `sigmaRoundDecay`, `opponentScoreValue` | 0, 0, false | 0, 0, false | 2, 0.5, true | W2 (with w = 1 in `args`) |
 | `useFastSim`, `leafRollouts` | false, 1 | false, 1 | true, 8 | F and L (F needs I, R and `SushiGoHeuristic`) |
 | `fourPlayer` | none | the block | – | parameters for games with four or more players |
 
-The other keys belong to the modifications that are off; each is explained next to its field in `SushiMCTSParams`.
+The other keys of the JSON files are BasicMCTS's own (`rolloutLength`, `maxTreeDepth`), TAG's (`breakMS`) or switches
+of modifications that are off, explained next to their fields in `SushiMCTSParams`.
 
 ## Time limits
 
 TAG measures a player's thinking time as the CPU time of its thread (real time on Windows). The budget in our files is
 CPU time, as in BasicMCTS, and the wall-clock guard also stops the search after 925 ms (450 ms) of real time. In our
-timing runs, which recorded every decision of our agent, a decision with the 1 s file never used more than 900 ms of
+timing runs, which recorded every decision of our agent, a decision with the 1 s file used at most about 900 ms of
 CPU time and took 925 ms of real time at the median; the rare longer ones were pauses of the Java virtual machine
 (garbage collection, compilation), which a larger heap, for example `-Xmx4g`, makes rarer when many games run at
 once.
@@ -161,7 +165,9 @@ agent; Table III of the report):
 | 4 players, 100 ms | 44.4 [40.1, 48.8] | −0.61 ± 0.43 | 25% |
 | 4 players, 500 ms | 36.5 [32.4, 40.8] | −1.83 ± 0.45 | 25% |
 
-Score margin: our score minus the best opponent's score (± 95% CI).
+Score margin: our score minus the best opponent's score (± 95% CI). The 100 ms rows used `json/SushiMCTS_100ms.json`
+(with four players it has K = 0.5 and X0 with w = 0.7, without W2, F and L); the other rows used the settings of the
+competition files with that CPU budget and no wall-clock guard.
 
 ## Use of generative AI
 

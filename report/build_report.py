@@ -786,10 +786,12 @@ B.append(("pai", "We used Claude {claude} (Anthropic), through the Claude Code t
           "intervals and hedges for non-significant trends, the comparison with TAG's DUCT agent, the lead-heuristic "
           "ablation, v3 on the held-out deals, the four-player diagnostics, correct figure references, this statement's "
           "citation and prompts, claims no stronger than the statistics and the selection bias of v3's development "
-          "run. The later candidate changes were tested with the prompt “The lecturer "
-          "will hold a tournament of our agents in class; as before, improve the agents' performance quickly while "
-          "following the lecturer's restrictions and recording what we did in the README; you have 4.5 hours, test "
-          "everything in parallel.” The prompts of earlier development sessions are not reproduced here; they asked "
+          "run. The later candidate changes were tested with the prompt (translated from Turkish; original in "
+          "GENAI_PROMPTS.md) “The problem is that the lecturer will hold a tournament of our agents in class; as "
+          "before, we need to improve the agents' performance quickly while following the lecturer's restrictions and "
+          "recording what we did in the README; you have 4.5 hours to develop the agents, so test everything in "
+          "parallel, as fast as possible while improving performance, and do not leave the loop until it is "
+          "finished.” The prompts of earlier development sessions are not reproduced here; they asked "
           "Claude to implement and test the modifications of Table I and to run the experiments of Section IV."))
 B.append(("h5", "References"))
 B.append(("refs",))

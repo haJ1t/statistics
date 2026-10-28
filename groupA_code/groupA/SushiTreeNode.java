@@ -18,8 +18,8 @@ import static utilities.Utils.noise;
 /**
  * SushiTreeNode - copied from players.basicMCTS.BasicTreeNode (permitted base agent).
  * <p>
- * The structure of BasicTreeNode is kept (closed-loop tree: every node stores its own state,
- * a single scalar value from the root player's point of view, paranoid opponents in UCB).
+ * With every switch off, the structure of BasicTreeNode is kept (closed-loop tree: every node stores its own
+ * state, a single scalar value from the root player's point of view, paranoid opponents in UCB).
  * Changes are marked with "MODIFICATION A" / "B" / "P" / "O" / "M" / "R" / "S" / "I" / "G" and are switched
  * on/off from SushiMCTSParams, so that the ablation study runs exactly the same code. The later modifications
  * (F, L, U, K, V, N, Q) are described where they are implemented.
@@ -59,7 +59,7 @@ import static utilities.Utils.noise;
  *    child depends on our own card only, not on the joint choice).
  * G: MAST (Finnsson and Bjoernsson 2008) on top of I. The root keeps, per player and card, the mean value of
  *    the iterations in which that player played that card; in the rollouts this value (times mastWeight, shrunk
- *    towards the player's mean) is added to the card value of B. Tested; off by default.
+ *    towards the player's mean) is added to the card value of B. Implemented but not evaluated; off by default.
  */
 class SushiTreeNode {
     // Root node of tree

@@ -41,9 +41,9 @@ import static utilities.Utils.noise;
  */
 public class SushiMCTSPlayer extends AbstractPlayer {
 
-    /** Number of determinisations used at the last decision (for logging / analysis). */
+    /** Number of determinisations used at the last decision (diagnostics; not used by the search). */
     public int lastDeterminisations = 1;
-    /** Total MCTS iterations at the last decision (for logging / analysis). */
+    /** Total MCTS iterations at the last decision (diagnostics; not used by the search). */
     public int lastIterations = 0;
 
     public SushiMCTSPlayer() {
@@ -110,7 +110,8 @@ public class SushiMCTSPlayer extends AbstractPlayer {
                 ? System.nanoTime() + params.wallTimeLimitMS * 1_000_000L : Long.MAX_VALUE;
 
         if (m <= 1) {
-            // Identical to BasicMCTSPlayer: one tree on the state we were given
+            // As in BasicMCTSPlayer: one tree on the state we were given (with I that tree samples the hidden
+            // cards again in every iteration)
             SushiTreeNode root = new SushiTreeNode(this, null, gameState, rnd);
             root.mctsSearch(params.budget, params.breakMS, wallDeadline);
             lastIterations = root.getIterations();

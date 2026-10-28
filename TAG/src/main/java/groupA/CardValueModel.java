@@ -15,15 +15,17 @@ import java.util.Set;
 /**
  * CardValueModel - the single piece of Sushi Go domain knowledge used by the agent.
  * <p>
- * It is shared by three components so that they all "agree" about what a good card is:
+ * It is shared by the components so that they all "agree" about what a good card is:
  * <ul>
  *   <li>SushiGoHeuristic (H): estimated final-round score of every player,</li>
  *   <li>Progressive Bias (A): prior value of an action when a tree node is expanded,</li>
- *   <li>Informed rollouts (B): epsilon-greedy policy for ALL players (opponent model).</li>
+ *   <li>Informed rollouts (B): epsilon-greedy policy for ALL players (opponent model),</li>
+ *   <li>action pruning (P) and the information-set tree (I): identical cards are merged;</li>
+ *   <li>the fast simulation (F) and the switches K, N and Q use the same card values.</li>
  * </ul>
  * All methods are pure arithmetic on public game-state counters: they never call the
  * forward model, so they do not consume FM-call budget (they do consume CPU time, which
- * is why we always report iterations per decision under BUDGET_TIME).
+ * counts against a BUDGET_TIME budget).
  * <p>
  * IMPORTANT (TAG scoring): Tempura pairs, Sashimi triples, Dumplings and Nigiri are added to
  * the player's score at the moment a card is REVEALED (SGCard.onReveal), so getGameScore()
