@@ -9,17 +9,17 @@ off by default) and tested it together with five other ideas, none of which beat
 files still play exactly as version 4**. Version 3 (H + B + D + P + M + R, K 0.5) is also still inside unchanged: every new idea is a
 switch in `SushiMCTSParams` that is off by default, and the final JSON files switch on the ones that were kept.
 
-**Win rate of the final agent** against v2 (our previous agent) and TAG's tuned ISMCTS on seed block 7 (game
-seeds 7–506; these deals overlap the development deals of seeds 1 and 2). The held-out validation on seed block
-100 000, which shares no deal with any earlier run, is in `experiments_v5/RESULTS.md` and in the report:
+**Win rate of the final agent** against v2 (our previous agent) and TAG's tuned ISMCTS. The main estimate is
+the held-out validation on seed block 100 000, which shares no deal with any earlier run (`experiments_v5`, runs
+`r2_val_*`, 500 games each). Seed block 7 (game seeds 7–506) overlaps the development deals of seeds 1 and 2:
 
-| Setting | Games | **v4 (final)** win % [95 % CI] | Score margin | for comparison: v3, development deals |
+| Setting | **v4 (final), held-out deals** win % [95 % CI] | v4 on seed block 7 (games) | Score margin, seed block 7 | for comparison: v3, development deals |
 |---|---|---|---|---|
-| 3 players, 100 ms | 500 | **55.0** [50.6, 59.3] | +1.00 ± 0.44 | 50.1 (44.8 on seed block 7, 46.5 on the held-out deals) |
-| 3 players, 500 ms | 500 | **49.4** [45.0, 53.8] | +0.40 ± 0.39 | 40.7 |
-| 3 players, 900 ms | 250 | **56.0** [49.8, 62.0] | +1.06 ± 0.62 | 32.8 |
-| 4 players, 100 ms | 500 | **46.8** [42.5, 51.2] | −0.28 ± 0.46 | 38.6 |
-| 4 players, 500 ms | 500 | **41.4** [37.2, 45.8] | −1.53 ± 0.46 | 35.4 |
+| 3 players, 100 ms | **52.6** [48.2, 56.9] | 55.0 [50.6, 59.3] (500) | +1.00 ± 0.44 | 50.1 (44.8 on seed block 7, 46.5 on the held-out deals) |
+| 3 players, 500 ms | **47.2** [42.9, 51.6] | 49.4 [45.0, 53.8] (500) | +0.40 ± 0.39 | 40.7 |
+| 3 players, 900 ms | **44.8** [40.5, 49.2] | 56.0 [49.8, 62.0] (250) | +1.06 ± 0.62 | 32.8 |
+| 4 players, 100 ms | **44.4** [40.1, 48.8] | 46.8 [42.5, 51.2] (500) | −0.28 ± 0.46 | 38.6 |
+| 4 players, 500 ms | **36.5** [32.4, 40.8] | 41.4 [37.2, 45.8] (500) | −1.53 ± 0.46 | 35.4 |
 
 Chance is 33.3 % with 3 players and 25 % with 4. *Score margin* = our score minus the best opponent's score
 (points per game, ± 95 % CI). Our agent sits in every seat equally often; v2 and TAG's ISMCTS fill the other
