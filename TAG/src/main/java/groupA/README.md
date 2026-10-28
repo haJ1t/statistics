@@ -283,10 +283,12 @@ Pairing helps little in Sushi Go (the win/loss correlation of two agents on the 
 difference between two 500-game runs has a CI of about ±5.7 win points, between two 250-game runs about ±8.
 The score margin is usually the more sensitive measure and was used for screening.
 
-**Development and validation.** Every decision was made on the deals of seeds 1 and 2. The final configuration
-was then played on seed block 7. Game g of a run uses deal seed s + g, so seed block 7 (game seeds 7–506) overlaps
-the development deals (seeds 1–501): these runs are a second measurement, not a clean hold-out. The held-out
-validation uses seed block 100 000 (`experiments_v5`, runs `r2_val_*`), which no earlier run touched.
+**Development and validation.** Every decision was made on seeds 1 and 2. The final configuration was then
+played on seed block 7. Game g of a run uses deal seed s + g, so seed block 7 (game seeds 7–506) shares seed numbers
+with the development seeds 1–501. The three-player development runs before 19 October used TAG's own deals, which
+differ from the fixed deals used since, so no three-player decision saw the deals of seed block 7; the four-player
+settings, however, were chosen on fixed seed-1 and seed-2 deals that seed block 7 repeats. The held-out validation
+uses seed block 100 000 (`experiments_v5`, runs `r2_val_*`), which no earlier run touched.
 
 **Number of games.** 500 games per condition, except the 3-player / 900 ms runs in development and on seed
 block 7 and the 4-player / 500 ms development runs, which have 250. A 3-player game at 900 ms needs about 3 × 27 decisions × 0.9 s ≈ 73 s of CPU time and a

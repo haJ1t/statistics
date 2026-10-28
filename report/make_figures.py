@@ -82,7 +82,7 @@ def edge(ax, x0, y0, x1, y1, label=None, color=BLUE, side=-1):
 
 
 def fig_turnnode():
-    fig = plt.figure(figsize=(COL, 1.58))
+    fig = plt.figure(figsize=(COL, 1.5))
     ax = fig.add_axes([0, 0, 1, 1])
     ax.set_xlim(0, 100); ax.set_ylim(0, 57.5); ax.axis("off")
     # left: v3, players of a turn in sequence

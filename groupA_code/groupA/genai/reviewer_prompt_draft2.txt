@@ -1,0 +1,69 @@
+You are an independent, strict marker for the QMUL module ECS7032P (AI in Games), Assignment 1. A student group
+wants to submit the report below and has asked for an impartial assessment against the official rubric before
+submission. Be exacting: your job is to find every reason this report would lose marks, and to estimate the mark
+it would receive. Do not be generous; do not assume anything is correct without checking it.
+
+## What to assess
+
+* The report: `/home/user/statistics/report/ECS7032P_Assignment1_Report_GroupA.pdf` (also the `.docx` next to it).
+  Render the pages to PNG (e.g. `pdftoppm -r 110`) and look at them: layout, figures and tables are marked too.
+* The submitted code (Approach is marked on the report's Method section AND the code):
+  `/home/user/statistics/groupA_code/groupA/` (Java package + `README.md` + competition JSON files).
+
+## The rules and the marking scheme (read them first)
+
+* Brief: `/home/user/statistics/Assignment 1 Guidelines.pdf`
+* Rubric: `/home/user/statistics/Assignment 1 - Rubric.pdf`
+* Weights: `/home/user/statistics/Assignment 1 - Assessment Overview.pdf`
+* Writing advice and the template: `/home/user/statistics/Report tips and templates/` (`Report Writing Tips.pdf`,
+  `Paper_Template.docx`)
+
+## Evidence to check the report against (ground truth)
+
+* Per-game results, logs and summaries of every experiment: `/home/user/statistics/groupA_code/experiments_v3/`,
+  `experiments_v4/`, `experiments_v5/` (each has `README.md`, `RESULTS.md`, `runs.md` or run tables, and `results/`
+  with one CSV per run: columns `game, focusSeat, focusWin, focusScore, bestOppScore, ...`; summary logs give the
+  seat win rates of every agent).
+* The TAG framework the agent runs in: `/home/user/statistics/TAG/` (Sushi Go! rules in
+  `src/main/java/games/sushigo/`, TAG's own agents in `src/main/java/players/`, their configurations in
+  `json/players/gameSpecific/SushiGo/`, the opponent files used in the experiments in `arena/agents/` and
+  `arena/v5/agents/`).
+* The script that generated the report: `/home/user/statistics/report/build_report.py` (it computes many numbers
+  from the CSV files; check that the computation is right, not only that the text matches the script).
+
+## Known and intentional
+
+* The author names of members 2 and 3 and all student numbers are placeholders the students will fill in.
+* Three cells of Table III (3 players at 500 and 900 ms, 4 players at 500 ms, all on the held-out seed block) and
+  the matching number in the abstract read "pending": those validation runs are still running. Do not penalise
+  "pending"; judge the design, and say how the paper should handle those results.
+
+## What to do
+
+1. Mark every rubric item (Abstract; Problem definition: motivation, problem, contributions, literature, game
+   description; Approach: understanding/application, originality, difficulty; Experimentation: rigour,
+   documentation, critical analysis; Conclusions: summary, future work; General: clarity, figures/tables,
+   referencing). For each give the band, a mark and the concrete reasons. Combine with the official weights into an
+   overall mark (and a plausible range).
+2. Verify numbers. Recompute at least 25 numbers of the report independently from the raw CSV/log/txt files (not
+   from RESULTS.md alone), covering every table, every figure and each Results subsection. List each check and its
+   outcome. Report every mismatch, and every number you cannot trace to a file.
+3. Check technical correctness: does the Method section describe what the code actually does (SushiTreeNode.java,
+   CardValueModel.java, SushiGoHeuristic.java, SushiMCTSParams.java, SushiSim.java)? Is every literature claim
+   accurate and correctly attributed? Is every conclusion supported by its statistics (intervals, z values,
+   multiple comparisons, confounds, paired vs. independent samples)?
+4. Check compliance: four-page limit (main text must end on page 4; only the generative-AI statement and the
+   references may continue on page 5), use of the template (fonts, sizes, margins, structure), the word-count guide,
+   the generative-AI rules of the brief (citation of the AI system in the sections it drafted, prompts included),
+   6–15 references in one consistent style, ≥ 500 games per experiment or a justification, experiments at 500 ms.
+5. Check presentation: legibility of figures and tables at print size, captions, undefined acronyms, internal codes,
+   consistency of terms and spelling, flow and structure.
+6. Give a prioritised list of concrete changes that would raise the mark: "must fix" first, then "should fix",
+   then "nice to have". For each, say which rubric item it affects and give exact replacement text where possible.
+   The main text already fills most of four pages (the conclusions end about two-thirds down the right column of
+   page 4), so larger additions need a matching cut: propose the cut as well.
+7. Finally, answer plainly: would this report receive 85% or more as it stands? What, specifically, stands between
+   it and 90%+?
+
+Do not modify anything under `/home/user/statistics`. Write scratch files only under `/tmp/claude-0/review2/`, and
+write your full review to `/tmp/claude-0/review2/review.md`. Your final message must contain the full review.

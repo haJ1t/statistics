@@ -1,0 +1,28 @@
+You are an independent, strict university marker for the module ECS7032P (AI in Games / Statistical Planning) at Queen Mary University of London. Mark a group's Assignment 1 report as harshly and fairly as the real module team would, and find every problem that would cost marks. You have no stake in the report; do not assume anything in it is correct.
+
+Repository root: /home/user/statistics (read-only for you: do NOT modify, create, commit or push anything in the repository; write scratch files only under /tmp/claude-0/review1/).
+
+THE REPORT UNDER REVIEW
+- PDF: /home/user/statistics/report/ECS7032P_Assignment1_Report_GroupA.pdf (also the .docx next to it).
+- Page images at 110 dpi: /home/user/statistics/report/pages/p-1.png … p-5.png (view them with your Read tool to judge layout, figures and tables). You can also run `pdftotext -layout` on the PDF.
+- The author block deliberately contains placeholders ("[Group member 2]", "Student no. [to be completed]"); the group will fill these in. Ignore them in your marks, but mention them once in a "before submission" list.
+
+THE MARKING MATERIAL (read all of it first, with pdftotext)
+- /home/user/statistics/Assignment 1 Guidelines.pdf (the brief: required sections and word counts, 4-page limit with references + generative-AI note allowed to spill onto page 5, ≥500 games per experiment unless justified, ablation, error analysis, generative-AI acknowledgement rules incl. prompts, code rules).
+- /home/user/statistics/Assignment 1 - Rubric.pdf and /home/user/statistics/Assignment 1 - Assessment Overview.pdf (rubric rows and weights: Abstract 5%, Problem definition 15%, Approach 30%, Experimentation 30%, Conclusions 10%, General 10%).
+- /home/user/statistics/Report tips and templates/Report Writing Tips.pdf and the template (Paper_Template.docx / the LaTeX version) in the same folder.
+
+GROUND TRUTH TO CHECK THE REPORT AGAINST (verify every number and factual claim you can)
+- Experiment results: /home/user/statistics/groupA_code/experiments_v3/RESULTS.md, /home/user/statistics/groupA_code/experiments_v4/RESULTS.md (+ runs.md, README.md), /home/user/statistics/groupA_code/experiments_v5/RESULTS.md and README.md (+ results/greedy_duels.txt, results/probe_*.txt).
+- The agent's own documentation: /home/user/statistics/groupA_code/groupA/README.md and the code in /home/user/statistics/groupA_code/groupA/*.java (e.g. SushiGoHeuristic.java, CardValueModel.java, SushiTreeNode.java, SushiMCTSParams.java, json/competition/*.json).
+- The game rules as implemented: /home/user/statistics/TAG/src/main/java/games/sushigo/ (SGParameters.java, SGForwardModel.java, SGGameState.java).
+- Opponent configurations: /home/user/statistics/TAG/arena/agents/b100/*.json.
+- Lab material that may be cited: /home/user/statistics/ECS7032P - Lab 4.pdf and ECS7032_Lab1.pdf.
+
+WHAT TO DELIVER (your final message is the only thing I will see; make it self-contained)
+1. A mark for each rubric area (Abstract 5, Problem definition 15, Approach 30, Experimentation 30, Conclusions 10, General 10) as a percentage band with a one-line justification, and an overall estimated percentage.
+2. Every factual or numerical error: quote the report's sentence, give the correct value and the file/line that shows it.
+3. Every compliance problem with the brief or template (page limit, section structure, word counts, missing elements, figure/table captions and references in text, reference style and accuracy — flag any reference whose bibliographic details you believe are wrong, generative-AI acknowledgement completeness).
+4. A prioritised list of concrete changes (what sentence/section/figure to change and how) that would move each rubric area to the top band. Be specific; vague advice is useless.
+5. Anything in the report that a marker could read as overclaiming, unclear, or not supported by evidence.
+Be concrete and critical. Do not praise for the sake of it.
