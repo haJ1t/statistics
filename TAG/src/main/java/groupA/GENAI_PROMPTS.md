@@ -21,9 +21,21 @@ Claude Code tool (see the report's statement on the use of generative AI). This 
    performance quickly while following the lecturer's restrictions and recording what we did in the README; you have
    4.5 hours, test everything in parallel."
 
-3. **Other messages of the report session** only asked for the work to be pushed to GitHub: "github bağladım şimdi
-   push et" ("I connected GitHub, now push") and "yaptigin herseyi direk push et githuba repoda bulamadim" ("push
-   everything you did straight to GitHub, I could not find it in the repository").
+3. **Other messages of the report session** asked for the work to be pushed to GitHub ("github bağladım şimdi push
+   et" – "I connected GitHub, now push"; "yaptigin herseyi direk push et githuba repoda bulamadim" – "push everything
+   you did straight to GitHub, I could not find it in the repository"), for the authors to be added ("grup üyelerinin
+   isimlerini ekle ve numaralarinida Halit Ozger 230625112 Weronika podgorska 230394735 Hakan Coskun 241076864" – "add
+   the group members' names and their numbers too: …") and for the submission files to be prepared:
+
+   > simdi bu bilgyasarin masaustune zip yada klasor olarak hocaya vericegimiz sekilde butun kurallara uyaraktan
+   > briefteki eksikzik yada ne fazla butun dosylari upload_ready isminde zip yada klasor olarak burayara ver kod
+   > kismida ayni sekil icinde gereksiz notlar falan kalmasin tam hocaya vermeiz gerekn temiz sekilde bu bilgisayarin
+   > msasutune koy
+
+   English translation: "Now, following all the rules, give me here, as a zip or folder named upload_ready, all the
+   files the way we will hand them to the lecturer, with whatever the brief says is missing or extra fixed, and put it
+   on this computer's desktop; the code part too should be clean, with no unnecessary notes left, exactly as we must
+   give it to the lecturer." This prompt produced the package's README and its final contents.
 
 4. **Earlier development sessions** asked Claude to implement and test the modifications listed in Table I of the
    report and in this package's README, and to run the experiments of Section IV; their prompts are not reproduced.

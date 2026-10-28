@@ -686,8 +686,8 @@ B.append(("table", "Experimental setup", [0.72, 2.66],
            ["Games", "500 per condition; 250 at 900 ms (development and seed block 7) and in four-player development "
                      "at 500 ms (45–70 s of CPU time per game)"],
            ["Hardware, records", "development, ablation and first seed-7 runs: 18-core laptop; later runs: "
-                                 "4-core machine; per-game results and logs of all " + str(NRUNS) + " runs: folder results "
-                                 "of our code package"]],
+                                 "4-core machine; per-game results and logs of all " + str(NRUNS) + " runs: available from "
+                                 "the authors"]],
           None))
 p("Each game is an independent trial whose outcome for our agent is 1 for a win, "
   "1/<i>j</i> for a <i>j</i>-way shared first place and 0 otherwise. Win rates are reported with Wilson 95% "

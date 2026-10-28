@@ -71,12 +71,12 @@ public class SushiGoHeuristic implements IStateHeuristic {
         this.model = model;
     }
 
-    /** View of a state with this heuristic's card-model constants (also used by the rollout policy). */
     /** The constants of the card-value model of this heuristic. */
     CardValueModel.Config model() {
         return model;
     }
 
+    /** View of a state with this heuristic's card-model constants (also used by the rollout policy). */
     public CardValueModel.View view(SGGameState s) {
         return new CardValueModel.View(s, model);
     }

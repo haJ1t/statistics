@@ -58,7 +58,7 @@ public class SushiMCTSParams extends PlayerParameters {
     public boolean useOpponentBias = false;         // Modification Q: per-opponent card-type biases learned during the game steer its simulated picks
     public double opponentBiasTemperature = 2.0;    // Q: T of the choice model P(c) ~ exp((value + bias) / T), in points
     public double opponentBiasPrior = 3.0;          // Q: standard deviation s of the Gaussian prior of every bias, in points
-    public double rolloutDenial = 0.0;              // Modification N (v5): weight of denying the next player its best card in the rollout policy (0 = off)
+    public double rolloutDenial = 0.0;              // Modification N: weight of denying the next player its best card in the rollout policy (0 = off)
     // Search parameters for games with four or more players (null = these parameters). The budget fields (budgetType,
     // budget, breakMS, wallTimeLimitMS) always come from these parameters, so one JSON keeps one time limit.
     public SushiMCTSParams fourPlayer = null;

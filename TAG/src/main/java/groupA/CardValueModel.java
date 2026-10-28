@@ -431,11 +431,12 @@ public final class CardValueModel {
     }
 
     /**
-     * MODIFICATION N (v5, denial or "hate drafting"): the cards p leaves in its hand go to the next player q (TAG passes
-     * hand i to player i - 1). If p takes q's favourite card of this hand, q has to settle for its second-best card
-     * there, so every card value mv[c] of p's hand gets lambda * max(0, v_q(c) - max_{c' != c} v_q(c')), where v_q is
-     * q's marginal value of the card when it picks from this hand next turn (one card fewer). Only q's single best card
-     * gets a bonus; with two copies of it the bonus is 0, as taking one leaves the other.
+     * MODIFICATION N (denial or "hate drafting"; tested, off in the final agent): the cards p leaves in its hand go to
+     * the next player q (TAG passes hand i to player i - 1). If p takes q's favourite card of this hand, q has to
+     * settle for its second-best card there, so every card value mv[c] of p's hand gets lambda * max(0, v_q(c) -
+     * max_{c' != c} v_q(c')), where v_q is q's marginal value of the card when it picks from this hand next turn (one
+     * card fewer). Only q's single best card gets a bonus; with two copies of it the bonus is 0, as taking one leaves
+     * the other.
      */
     public static void addDenial(View view, int p, double[] mv, double lambda) {
         List<SGCard> hand = view.s.getPlayerHands().get(p).getComponents();

@@ -21,7 +21,8 @@ import static utilities.Utils.noise;
  * The structure of BasicTreeNode is kept (closed-loop tree: every node stores its own state,
  * a single scalar value from the root player's point of view, paranoid opponents in UCB).
  * Changes are marked with "MODIFICATION A" / "B" / "P" / "O" / "M" / "R" / "S" / "I" / "G" and are switched
- * on/off from SushiMCTSParams, so that the ablation study runs exactly the same code.
+ * on/off from SushiMCTSParams, so that the ablation study runs exactly the same code. The later modifications
+ * (F, L, U, K, V, N, Q) are described where they are implemented.
  * <p>
  * A: Progressive Bias (Chaslot et al., 2008). Each child stores a prior b(a) = tanh(mv(a)/scale),
  *    where mv is the marginal value of the card for the player who plays it (CardValueModel).

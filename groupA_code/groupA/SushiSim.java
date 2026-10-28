@@ -17,7 +17,7 @@ import java.util.Random;
  * both cards in the order chosen, then the Chopsticks go back into the hand); Tempura, Sashimi, Dumplings and Nigiri
  * (on an unused Wasabi) score on reveal; every hand passes to the player with the next lower id; Maki score at the end
  * of the round and Pudding at the end of the game, with TAG's tie rules; a new round is dealt from the draw pile
- * (SGForwardModel._startRound). SushiSimCheck (experiments) compares it with the forward model move by move.
+ * (SGForwardModel._startRound). We checked it against the forward model move by move.
  * <p>
  * A card is stored as its kind: 0, 1, 2 = Maki with 1, 2, 3 rolls, then Tempura, Sashimi, Dumpling, Squid, Salmon
  * and Egg Nigiri, Wasabi, Chopsticks, Pudding.
