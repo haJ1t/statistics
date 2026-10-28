@@ -129,7 +129,7 @@ def fig_budget():
     styles = {"v2": (GREY, "s"), "v3": (ORANGE, "^"), "final (v4)": (BLUE, "o")}
     held = {"final (v4)": ["r2_val_3p100", "r2_val_3p500", "r2_val_3p900"],
             "v3": ["r2_v3_3p100", "r2_v3_3p500", None]}
-    fig, ax = plt.subplots(figsize=(COL, 1.6))
+    fig, ax = plt.subplots(figsize=(COL, 1.5))
     fig.subplots_adjust(left=0.115, right=0.985, bottom=0.22, top=0.8)
     xs = [0, 1, 2]
     for k, (name, labels) in enumerate(dev.items()):
@@ -154,7 +154,7 @@ def fig_budget():
             ax.errorbar(hx, hy, yerr=[lo, hi], fmt=m, mfc="white", mec=c, color=c, ms=3.4, capsize=1.8,
                         elinewidth=0.7, label=f"{name.split(' ')[0]}, held-out")
     ax.axhline(100 / 3, color="black", lw=0.6, ls=":")
-    ax.text(2.33, 100 / 3 + 0.8, "chance", fontsize=7, ha="right", va="bottom")
+    ax.text(2.33, 100 / 3 + 0.8, "chance 33.3%", fontsize=7, ha="right", va="bottom")
     ax.set_xticks(xs, [f"{b} ms" for b in budgets])
     ax.set_xlabel("CPU time per decision", fontsize=7.5, labelpad=1.5)
     ax.set_xlim(-0.3, 2.35); ax.set_ylim(10, 70)
@@ -196,7 +196,7 @@ def fig_effects():
     ys0 = [n1 + 2.5 + i for i in range(n0)][::-1]
     ys1 = list(range(n1))[::-1]
     ys = ys0 + ys1
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(COL, 2.1), sharey=True,
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(COL, 2.0), sharey=True,
                                  gridspec_kw={"width_ratios": [1.15, 1], "wspace": 0.08})
     fig.subplots_adjust(left=0.45, right=0.975, bottom=0.17, top=0.985)
     sig = {}   # filled marker: significant after a Holm correction within its group, for each measure
