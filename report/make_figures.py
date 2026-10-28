@@ -127,9 +127,9 @@ def fig_budget():
     dev = {"v2": ["s1_ref", "f5_ref", "f9_ref"], "v3": ["abl_T4", "f5_finalT4", "f9_finalT4"],
            "final (v4)": ["d1_I", "f5_I", "f9_I"]}
     styles = {"v2": (GREY, "s"), "v3": (ORANGE, "^"), "final (v4)": (BLUE, "o")}
-    held = {"final (v4)": ["r2_val_3p100", "r2_val_3p500", ["r2_val_3p900_all", "r2_val_3p900"]],
+    held = {"final (v4)": ["r2_val_3p100", "r2_val_3p500", "r2_val_3p900"],
             "v3": ["r2_v3_3p100", "r2_v3_3p500", None]}
-    fig, ax = plt.subplots(figsize=(COL, 1.7))
+    fig, ax = plt.subplots(figsize=(COL, 1.6))
     fig.subplots_adjust(left=0.115, right=0.985, bottom=0.22, top=0.8)
     xs = [0, 1, 2]
     for k, (name, labels) in enumerate(dev.items()):
@@ -196,7 +196,7 @@ def fig_effects():
     ys0 = [n1 + 2.5 + i for i in range(n0)][::-1]
     ys1 = list(range(n1))[::-1]
     ys = ys0 + ys1
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(COL, 2.2), sharey=True,
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(COL, 2.1), sharey=True,
                                  gridspec_kw={"width_ratios": [1.15, 1], "wspace": 0.08})
     fig.subplots_adjust(left=0.45, right=0.975, bottom=0.17, top=0.985)
     sig = {}   # filled marker: significant after a Holm correction within its group, for each measure

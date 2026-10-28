@@ -280,18 +280,18 @@ intervals are valid as such. Since 19 October the harness re-deals every game fr
 shuffled with the game seed (`Arena.canonicalDeal`), so runs with the same seed play the same deals and seats.
 Runs from before are marked †; a "paired" difference involving them is an ordinary two-sample difference.
 Pairing helps little in Sushi Go (the win/loss correlation of two agents on the same deal is 0.0–0.2): a
-difference between two 500-game runs has a CI of about ±5.5 win points, between two 250-game runs about ±8.
-The score margin is about twice as precise and was used for screening.
+difference between two 500-game runs has a CI of about ±5.7 win points, between two 250-game runs about ±8.
+The score margin is usually the more sensitive measure and was used for screening.
 
 **Development and validation.** Every decision was made on the deals of seeds 1 and 2. The final configuration
 was then played on seed block 7. Game g of a run uses deal seed s + g, so seed block 7 (game seeds 7–506) overlaps
 the development deals (seeds 1–501): these runs are a second measurement, not a clean hold-out. The held-out
 validation uses seed block 100 000 (`experiments_v5`, runs `r2_val_*`), which no earlier run touched.
 
-**Number of games.** 500 games per condition, except 3 players / 900 ms and the 4-player / 500 ms development
-runs, which have 250. A 3-player game at 900 ms needs about 3 × 27 decisions × 0.9 s ≈ 73 s of CPU time and a
+**Number of games.** 500 games per condition, except the 3-player / 900 ms runs in development and on seed
+block 7 and the 4-player / 500 ms development runs, which have 250. A 3-player game at 900 ms needs about 3 × 27 decisions × 0.9 s ≈ 73 s of CPU time and a
 4-player game at 500 ms 4 × 24 × 0.5 s ≈ 48 s; on our 18-core laptop a 250-game run took 45–75 minutes with
-8 games in parallel, and the study has about 100 runs. We therefore used 250 games at these budgets and
+8 games in parallel, and the study has about 160 runs. We therefore used 250 games at these budgets and
 report the correspondingly wider intervals (about ±6 instead of ±4.4 points for a win rate). The final
 4-player / 500 ms agent was validated with 500 games.
 
