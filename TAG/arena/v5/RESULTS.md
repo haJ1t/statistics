@@ -32,7 +32,7 @@ same deals and seats; ± is 1.96 standard errors of the per-game differences.
 ### Stronger field: v4 against two TAG ISMCTS (3 players, 100 ms, seed 7)
 
 v4 vs 2 x ISMCTS   n= 300 win  54.2 [48.5, 59.7]  margin +1.66 ± 0.69
-v4 vs 2 x ISMCTS, with r2_field_3p100b (500) missing
+v4 vs 2 x ISMCTS, with r2_field_3p100b (500) n= 500 win  51.3 [46.9, 55.7]  margin +1.41 ± 0.51
 
 ### The competition files on this machine (wall-clock guard on, 3 game threads)
 

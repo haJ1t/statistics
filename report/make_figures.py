@@ -9,6 +9,7 @@ import os
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 from matplotlib.patches import FancyBboxPatch, Circle
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -44,6 +45,17 @@ def mean_se(xs):
     n = len(xs)
     m = sum(xs) / n
     return m, math.sqrt(sum((x - m) ** 2 for x in xs) / (n - 1) / n)
+
+
+def holm(zs, alpha=0.05):
+    """which two-sided tests with these z values are significant after a Holm correction"""
+    ps = [math.erfc(abs(z) / math.sqrt(2)) for z in zs]
+    sig = [False] * len(ps)
+    for rank, i in enumerate(sorted(range(len(ps)), key=lambda j: ps[j])):
+        if ps[i] > alpha / (len(ps) - rank):
+            break
+        sig[i] = True
+    return sig
 
 
 def paired(base, other):
@@ -149,7 +161,12 @@ def fig_budget():
     ax.set_ylabel("win rate (%)", fontsize=7.5)
     ax.tick_params(labelsize=7.5)
     ax.grid(axis="y", lw=0.3, alpha=0.6)
-    ax.legend(loc="lower center", bbox_to_anchor=(0.5, 1.0), fontsize=7, frameon=False, ncol=3, handlelength=1.5,
+    # legend filled column by column: development runs in the first row, held-out markers below their agent
+    h, lab = ax.get_legend_handles_labels()
+    blank = Line2D([], [], alpha=0)
+    want = ("v2", None, "v3", "v3, held-out", "final (v4)", "final, held-out")
+    ax.legend([h[lab.index(x)] if x in lab else blank for x in want], [x if x in lab else "" for x in want],
+              loc="lower center", bbox_to_anchor=(0.5, 1.0), fontsize=7, frameon=False, ncol=3, handlelength=1.5,
               borderaxespad=0.1, columnspacing=1.0, labelspacing=0.25)
     for s in ("top", "right"):
         ax.spines[s].set_visible(False)
@@ -163,8 +180,8 @@ def fig_effects():
     spec = [  # label, base, run, group
         ("− heuristic H (own score / 50)", base4, os.path.join(R4, "A_noH.csv"), 0),
         ("− decoupled tree S, info sets I", base4, os.path.join(R4, "A_noSI.csv"), 0),
-        ("− round-end rollouts R", base4, os.path.join(R4, "A_noR.csv"), 0),
-        ("− informed rollouts B", base4, os.path.join(R4, "A_noB.csv"), 0),
+        ("− round-end rollouts R (10 moves)", base4, os.path.join(R4, "A_noR.csv"), 0),
+        ("− informed rollouts B (random)", base4, os.path.join(R4, "A_noB.csv"), 0),
         ("− info sets I (determinisation)", base4, os.path.join(R4, "A_noI.csv"), 0),
         ("H → TAG lead heuristic", base5, os.path.join(R5, "r2_lead_3p100.csv"), 1),
         ("+ 3-player constants X3", base5, os.path.join(R5, "v5_X3_3p100.csv"), 1),
@@ -181,11 +198,18 @@ def fig_effects():
     ys = ys0 + ys1
     fig, (a1, a2) = plt.subplots(1, 2, figsize=(COL, 2.2), sharey=True,
                                  gridspec_kw={"width_ratios": [1.15, 1], "wspace": 0.08})
-    fig.subplots_adjust(left=0.425, right=0.975, bottom=0.17, top=0.985)
-    for y, (lab, dw, cw, dm, cm, g) in zip(ys, rows):
+    fig.subplots_adjust(left=0.45, right=0.975, bottom=0.17, top=0.985)
+    sig = {}   # filled marker: significant after a Holm correction within its group, for each measure
+    for g in (0, 1):
+        idx = [i for i, r in enumerate(rows) if r[5] == g]
+        for m, (d, c) in enumerate(((1, 2), (3, 4))):
+            for i, x in zip(idx, holm([rows[i][d] / (rows[i][c] / 1.96) for i in idx])):
+                sig[i, m] = x
+    for i, (y, (lab, dw, cw, dm, cm, g)) in enumerate(zip(ys, rows)):
         col = RED if g == 0 else BLUE
-        a1.errorbar(dw, y, xerr=cw, fmt="o", color=col, ms=2.8, capsize=1.6, elinewidth=0.7)
-        a2.errorbar(dm, y, xerr=cm, fmt="o", color=col, ms=2.8, capsize=1.6, elinewidth=0.7)
+        for m, (a, d, c) in enumerate(((a1, dw, cw), (a2, dm, cm))):
+            a.errorbar(d, y, xerr=c, fmt="o", color=col, mfc=col if sig[i, m] else "white", mec=col, ms=2.8,
+                       capsize=1.6, elinewidth=0.7)
     sep = n1 + 0.75
     top_label, bot_label = max(ys0) + 1.05, n1 - 0.05 + 0.75
     for a in (a1, a2):
