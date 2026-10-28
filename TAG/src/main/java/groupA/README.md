@@ -95,7 +95,7 @@ on, 3 game threads on the 4 cores, opponents with the same budget), on the deals
 | `SushiMCTS_1000ms.json` | 3 | 135 | 51.1 [42.8, 59.4] | 52.6 % (900 ms, old machine) |
 | `SushiMCTS_500ms.json` | 4 | 40 | 46.3 [31.8, 61.3] | 48.8 % (500 ms, old machine) |
 
-Against a stronger field – the v4 agent against **two** TAG ISMCTS agents (3 players, 100 ms, seed 7, 300 games) – it won **54.2 %** [48.5, 59.7] (score margin +1.66 ± 0.69; each ISMCTS seat 22.9 %, chance 33.3 %), about as often as against one ISMCTS and v2, so its lead does not depend on the weaker v2 opponent.
+Against a stronger field – the v4 agent against **two** TAG ISMCTS agents (3 players, 100 ms, seed 7, 500 games; `v5_field_3p100_all.csv`, joined from a 300-game and a 200-game run) – it won **51.3 %** [46.9, 55.7] (score margin +1.41 ± 0.51; each ISMCTS seat 24.3 %, chance 33.3 %), about as often as against one ISMCTS and v2, so its lead does not depend on the weaker v2 opponent.
 
 **Timing on a small machine.** Every decision of our agent in 3 games per file (`arena.WallProbe`, the other
 experiments paused), with the JVM's default settings (G1, default heap), as a plain TAG run gets them:
@@ -231,11 +231,15 @@ or by hand (3-player part of the final agent):
 
 ```java
 SushiMCTSParams p = new SushiMCTSParams();
-p.heuristic = new groupA.SushiGoHeuristic();     // defaults: sigma 15, w 0.7, alpha 0.5, T 4
-p.K = 0.5;
-p.useInformedRollout = true;  p.useActionPruning = true;  p.useMaxN = true;  p.rolloutToRoundEnd = true;
-p.useDecoupledUCT = true;     p.useInformationSets = true;
-p.budgetType = PlayerConstants.BUDGET_TIME;  p.budget = 900;  p.wallTimeLimitMS = 925;
+// set registered parameter values (not the fields directly), so that copies of p keep them
+p.setParameterValue("heuristic", new groupA.SushiGoHeuristic());   // defaults: sigma 15, w 0.7, alpha 0.5, T 4
+p.setParameterValue("K", 0.5);
+for (String b : new String[]{"useInformedRollout", "useActionPruning", "useMaxN", "rolloutToRoundEnd",
+        "useDecoupledUCT", "useInformationSets"})
+    p.setParameterValue(b, true);
+p.setParameterValue("budgetType", PlayerConstants.BUDGET_TIME);
+p.setParameterValue("budget", 900);
+p.setParameterValue("wallTimeLimitMS", 925);
 AbstractPlayer agent = new SushiMCTSPlayer(p);
 ```
 
@@ -293,7 +297,7 @@ uses seed block 100 000 (`experiments_v5`, runs `r2_val_*`), which no earlier ru
 **Number of games.** 500 games per condition, except the 3-player / 900 ms runs in development and on seed
 block 7 and the 4-player / 500 ms development runs, which have 250. A 3-player game at 900 ms needs about 3 × 27 decisions × 0.9 s ≈ 73 s of CPU time and a
 4-player game at 500 ms 4 × 24 × 0.5 s ≈ 48 s; on our 18-core laptop a 250-game run took 45–75 minutes with
-8 games in parallel, and the study has about 160 runs. We therefore used 250 games at these budgets and
+8 games in parallel, and the study has about 165 runs. We therefore used 250 games at these budgets and
 report the correspondingly wider intervals (about ±6 instead of ±4.4 points for a win rate). The final
 4-player / 500 ms agent was validated with 500 games.
 
@@ -355,7 +359,7 @@ The best settings for 3 and 4 players differ, so the agent switches parameters b
   them, yet more search helps little: on 73 positions from random 4-player games the 500 ms tree has 704 joint
   actions at the root, 53 % of the depth-1 nodes are visited only once and the mean depth is 1.5, and doubling
   the time or the rollouts per leaf changes the chosen card in only 2.7 % and 5.5 % of the positions, no more
-  often than re-running the same search (5.5 %; `experiments_v5/results/bench4.txt`, `treestats4.txt`,
+  often than re-running the search (5.5 % with the same seed, 9.6 % with another; `experiments_v5/results/bench4.txt`, `treestats4.txt`,
   `agree4.txt`, made with `arena/v5/run_treestats.sh`). The search is essentially a decoupled bandit at the root
   plus rollouts, and its quality is limited by the rollout policy and the evaluation, not by the number of
   iterations. L8 spends the extra speed on better leaf estimates instead.
@@ -395,9 +399,10 @@ the tree to their 3 best cards (K) also lost at 4 players / 100 ms (49.6 → 43.
 −0.71 ± 0.58).
 
 **At 4 players the model, not the search effort, limits the agent.** With the final settings, two searches
-with different seeds choose the same card in 93–96 % of 74 test positions (taken from random games;
-`Agree4` in `experiments_v4/dev`), and a search with 16 rollouts per leaf or with 1000 ms chooses the same
-card as the 500 ms search just as often (93 %). More time, more rollouts per leaf or several trees therefore
+with the same seed choose the same card in 94.5 % of 73 positions taken from random games, and 90.4 % with
+different seeds; a search with 16 rollouts per leaf or with 1000 ms chooses the same card as the 500 ms search
+in 94.5 % and 97.3 % of them (`experiments_v5/results/agree4.txt`; an earlier check on 74 positions, `Agree4`
+in `experiments_v4/dev`, gave 93–96 %). More time, more rollouts per leaf or several trees therefore
 change few decisions; the result depends on how well the rollout policy and the value function model the
 opponents' play.
 
