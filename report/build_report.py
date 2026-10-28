@@ -339,6 +339,7 @@ FOUR = {"cfg3": [run(R4f(x + ".csv")) for x in ("q4_I", "q4_Io", "val_q5")],
         "depth1": paired(R4f("q5_FL8.csv"), R4f("q5_FL8d1.csv")),
         "b100": paired(R4f("q5_FL8.csv"), R4f("q5_X0b100.csv")),
         "t1000": paired(R4f("q5_FL8.csv"), R4f("q5_FL8t1000K14.csv")),
+        "own500": two_sample([R4f("q5_X0b100.csv")], [R4f("q5_X0.csv")]),   # our agent alone 500 vs 100 ms
         "x0_3p": two_sample([R4f("d1_I.csv")], [R4f("d1_X0.csv")])}       # X0 alone with three players, 100 ms
 FOUR["inter"] = diff(FOUR["cost3"], FOUR["w2"])
 SI4 = {100: two_sample([R4f("q4_final.csv")], [R4f("q4_I.csv"), R4f("q4_Io.csv")]),   # S + I over v3, four players
@@ -439,7 +440,7 @@ ABSTRACT = (
     + f" and our previous agent, and {v('4p100')}% and {v('4p500')}% of four-player games (100, 500 ms; chance 25%). "
     "At 100 ms, " + ("the evaluation and the decoupled tree each raise" if SI_SIG else "the evaluation raises")
     + " its win rate significantly. "
-    + (f"With more time ISMCTS catches up: our lead over it per seat falls from {_LEAD3[0]:.1f} to {_LEAD3[1]:.1f} "
+    + (f"With more time for all agents, ISMCTS closes in: our lead per seat falls from {_LEAD3[0]:.1f} to {_LEAD3[1]:.1f} "
        "percentage points (three players, 100–900 ms)." if len(_LEAD3) == 2 and _LEAD3[1] < _LEAD3[0] else _END))
 
 KEYWORDS = "Monte Carlo tree search, information sets, simultaneous moves, card games, Sushi Go!, TAG"
@@ -568,7 +569,7 @@ p("Determinisation, or perfect-information Monte Carlo (PIMC) sampling, samples 
   "avoids strategy fusion by searching one tree over the searcher's information sets and sampling the hidden "
   "information anew in every iteration. In its single-observer form the opponents' choices in the tree are not "
   "conditioned on their own private information; the multiple-observer form models it with one tree per player at "
-  "a higher cost {cowling}, an idea TAG's advanced MCTS agent offers as MultiTree MCTS {goodman}.")
+  "a higher cost {cowling}, as in TAG's MultiTree MCTS {goodman}.")
 p("Simultaneous moves can be modelled as hidden sequential moves (partially observable moves in ISMCTS {cowling}) "
   "or handled by decoupled UCT (DUCT): every player chooses its own action at a node "
   "from its own bandit statistics and the joint action leads to a child {lanctot}. UCB-based DUCT need not converge "
@@ -684,8 +685,8 @@ B.append(("table", "Experimental setup", [0.72, 2.66],
                      "<i>s</i> = 7; held-out <i>s</i> = 100 000, disjoint from all other deals"],
            ["Games", "500 per condition; 250 at 900 ms (development and seed block 7) and in four-player development "
                      "at 500 ms (45–70 s of CPU time per game)"],
-           ["Hardware, records", "development, ablation and seed-7 runs: 18-core laptop; other runs: 4-core "
-                                 "machine; per-game results and logs of all " + str(NRUNS) + " runs: folder results "
+           ["Hardware, records", "development, ablation and first seed-7 runs: 18-core laptop; later runs: "
+                                 "4-core machine; per-game results and logs of all " + str(NRUNS) + " runs: folder results "
                                  "of our code package"]],
           None))
 p("Each game is an independent trial whose outcome for our agent is 1 for a win, "
@@ -701,7 +702,7 @@ p("Each game is an independent trial whose outcome for our agent is 1 for a win,
   "group of FIGREF_EFFECTS, and treat the four-player comparisons (" + str(N4RUNS) + " of our "
   + str(NRUNS) + " runs) as exploratory. We expected (E1) every component to improve both measures, (E2) the "
   "decoupled information-set tree to matter more at longer budgets and (E3) the best settings to depend on the "
-  "number of players; E2 arose from the development runs" + (" and is tested on the held-out deals." if RISE else
+  "number of players; E2 came from development runs" + (" and is tested on held-out deals." if RISE else
                                                               "."))
 
 # ------------------------------------------------------------------ IV
@@ -737,8 +738,8 @@ if len(_NS) == 1:
               ["Setting", "Opponents", "Win % [CI]", "Margin", "ISMCTS"],
               [[a, b, fmt_run(r), fmt_margin(r), _ism(a, b)] for a, b, r in _T3],
               f"Setting: players / ms per decision; {_NS.pop()} games each. Deals: held-out seed block 100 000; "
-              "<sup>a</sup> seed block 7. Margin: our score minus the best opponent's (points, ± 95% CI). ISMCTS: its "
-              "win % per seat. Chance 33.3% (3p), 25% (4p)."))
+              "<sup>a</sup> seed block 7. Margin: our score minus the best opponent's (± 95% CI). ISMCTS: win % per "
+              "seat. Chance 33.3% (3p), 25% (4p)."))
 else:
     B.append(("table", "Final agent on held-out deals and against other agents", [0.42, 0.94, 0.40, 0.94, 0.69],
               ["Setting", "Opponents", "Games", "Win % [95% CI]", "Margin"],
@@ -857,7 +858,7 @@ def text_ablation():
           f"{zf(SALONE['zw'])}, unadjusted), and I adds a further, "
           "non-significant 3.8 ± 5.7 pp, consistent with Long et al.'s analysis {long} for a game that reveals its hidden information within two "
           "turns of each round. P and M were not ablated in the final agent (S requires M; I already merges identical "
-          "cards); a 2<sup>4</sup> factorial around v3 (16 × 500 games, independent deals) confirmed R (+8.7 ± 2.1 pp) "
+          "cards); a 2<sup>4</sup> factorial around v3 (16 × 500 games, independent deals) supported R (+8.7 ± 2.1 pp) "
           "and M (+4.1 ± 2.1 pp).")
     return s
 
@@ -870,7 +871,7 @@ def text_last_study():
             f"{lo} to {hi} pp (each ±{ci:.1f}), although one of them, card constants tuned for three players (X3), is "
             "the much stronger greedy policy (45.0% of games against two X0 players), consistent with simulation "
             "balancing {silver}; in another, denial, every simulated player also values taking the card the next "
-            f"player wants most. Rollouts to the game end with a win-gap value cost {fpp(LAST['R3V2'], sign=False)}.")
+            f"player wants most. Game-end rollouts with a win-gap value cost {fpp(LAST['R3V2'], sign=False)}.")
 
 
 def _and(xs):
@@ -886,14 +887,14 @@ def text_budget():
          "more.")
     if RISE and V3H["3p500"]:
         z = RISE["zw"]
-        s += ((" The held-out deals support this" if z >= 1.96 else " The held-out deals do not support this")
+        s += ((" The held-out deals support this (E2)" if z >= 1.96 else " The held-out deals do not support this (E2)")
               + f": adding S and I to v3 gained {fpp(GAIN['3p100'], z=False)} at 100 ms and "
               f"{fpp(GAIN['3p500'], z=False)} at 500 ms (difference {fpp(RISE, z=False)}, <i>z</i> = {zf(z)}"
               + (f"; 80% power only for {1.43 * RISE['dwci']:.0f} pp" if abs(z) < 1.96 else "") + ")"
               + (f", as v3 and the final agent lost {V3H['3p100']['win'] - V3H['3p500']['win']:.1f} and "
                  f"{-BUD['3p500']['dw']:.1f} pp from 100 to 500 ms" if abs(z) < 1.96 else "") + ".")
-    s += (f" The development rise is probably overstated: v3's {DEV['v3'][0]['win']:.1f}% at 100 ms was the best of "
-          "16 factorial cells (45.1–49.4% on new seeds).")
+    s += (f" The development rise is probably overstated: v3's {DEV['v3'][0]['win']:.1f}% at 100 ms topped 16 "
+          "factorial cells (45.1–49.4% on new seeds).")
     return s
 
 
@@ -916,10 +917,10 @@ def text_budget2():
               "the extra time favoured ISMCTS over our agent.")
     it = [ITER.get((b, "v4")) for b in (100, 500, 900)]
     if all(it) and down:
-        s += (f" Our agent's iterations per decision rose from {it[0] / 1000:.1f}k to {it[1] / 1000:.1f}k and "
-              f"{it[2] / 1000:.1f}k, yet its win rate fell; plausibly, more iterations cannot correct the bias of our "
-              "hand-made rollouts and evaluation, while ISMCTS, without such a model, keeps gaining, and our "
-              "parameters were tuned at 100 ms.")
+        s += (f" Our agent's iterations per decision rose from {num(round(it[0], -2))} to {num(round(it[2], -2))}, "
+              "yet its win rate fell; plausibly, more iterations cannot correct the bias of our "
+              "hand-made rollouts and evaluation, while ISMCTS, without such a model, gained up to 500 ms; our "
+              "parameters were also tuned at 100 ms.")
     return s
 
 
@@ -927,8 +928,8 @@ def text_four():
     f = FOUR
     kept = [f["x0"], f["w2"], f["fl500"]]
     return (f"With four players S and I added {fpp(SI4[100], z=False)} over v3 at 100 ms and "
-            f"{fpp(SI4[500], z=False)} at 500 ms (development, independent samples). No four-player setting gained "
-            f"significantly in development ({min(x['dw'] for x in kept):+.1f} to {max(x['dw'] for x in kept):+.1f} pp "
+            f"{fpp(SI4[500], z=False)} at 500 ms (development, independent samples). No setting tuned for four players "
+            f"gained significantly in development ({min(x['dw'] for x in kept):+.1f} to {max(x['dw'] for x in kept):+.1f} pp "
             f"at the budgets where we kept them, each ±{min(x['dwci'] for x in kept):.0f}–"
             f"{max(x['dwci'] for x in kept):.0f} pp; F + L lost {fpp(f['fl100'], z=False, sign=False)} at 100 ms); we "
             f"kept each where its estimate was positive. The same settings (X0, W2, <i>K</i> = 1) cost "
@@ -940,31 +941,31 @@ def text_four():
 def text_four2():
     f = FOUR
     p4 = POOL4 if BUD4 else SEED7_4P
-    s = ("With four players our agent gained from its own extra time only up to 500 ms: against 500 ms opponents our "
-         f"100 ms agent won {fpp(f['b100'], z=False, sign=False)} less than our 500 ms agent and a tree cut to depth 1 "
-         f"lost {fpp(f['depth1'], z=False, sign=False)}, but 1000 ms (with <i>K</i> = 1.37) brought no detectable gain "
-         f"({fpp(f['t1000'], z=False)}; 80% power only for {1.43 * f['t1000']['dwci']:.0f} pp; 250 development deals "
-         f"each). Our 500 ms agent with every agent at 500 ms won {fpp(p4, z=False, sign=False)} "
+    s = ("With four players, extra time for our agent alone brought no detectable gain: against 500 ms opponents, 500 "
+         f"instead of 100 ms changed its win rate by {fpp(f['own500'], z=False)} (same settings) and 1000 instead of "
+         f"500 ms (with <i>K</i> = 1.37) by {fpp(f['t1000'], z=False)} (250 development games each; 80% power only for "
+         f"about {1.43 * f['t1000']['dwci']:.0f} pp), although depth matters: at 500 ms a tree cut to depth 1 lost "
+         f"{fpp(f['depth1'], z=False, sign=False)}. Our 500 ms agent with every agent at 500 ms won {fpp(p4, z=False, sign=False)} "
          + ("less" if p4["dw"] < 0 else "more") + " than our 100 ms agent with every agent at 100 ms"
          + (f" (<i>z</i> = {zf(POOL4['zw'])}; seed block 7 and held-out deals pooled)" if BUD4 else " on seed block 7")
          + (f", while TAG's ISMCTS rose from {SEATS4[100]['tagmcts.json']:.1f}% to {SEATS4[500]['tagmcts.json']:.1f}% "
             f"of its seats; at 500 ms our {VAL['4p500']['win']:.1f}% is no longer clearly above its share"
             if _ism_gained(SEATS4) and BUD4 else "")
-         + f". Both agents did better on seed block 7 ({OLD['4p100']['win']:.1f}% and {OLD['4p500']['win']:.1f}%), "
+         + f". Both agents did better on seed block 7 (100 ms: {OLD['4p100']['win']:.1f}%, 500 ms: "
+         f"{OLD['4p500']['win']:.1f}%), "
          "whose deals overlap those used to tune them.")
     if DIAG:
-        s += (f" The tree statistics suggest why: on {DIAG['states']} positions from random-play "
-              f"games the 500 ms tree has {DIAG['kids']} joint-move children at the root on average, {DIAG['once']}% "
-              f"visited once, and doubling the time or the rollouts per leaf changed the card in "
+        s += (f" The tree statistics suggest why 1000 ms did not help: on {DIAG['states']} random-play positions "
+              f"the 500 ms tree has {DIAG['kids']} joint-move children at the root on average, {DIAG['once']}% "
+              f"visited once, and doubling time or rollouts per leaf changed the card in "
               f"{count73(DIAG['t1000'])} and {count73(DIAG['L16'])} positions, no more often than reruns "
               f"({count73(DIAG['rerun'])} and {count73(DIAG['seedSame'])}).")
     return s
 
 
 def text_fig_budget_caption():
-    who = "the final agent and v3" if V3H["3p100"] or V3H["3p500"] else "the final agent"
-    return ("Three-player win rate against v2 and TAG's ISMCTS. Lines: development runs (seed 1, independent samples; "
-            f"250 games at 900 ms); open markers: {who} on the held-out deals; bars: Wilson 95% intervals.")
+    return ("Three-player win rate against v2 and TAG's ISMCTS. Lines: development (seed 1, independent samples; "
+            f"250 games at 900 ms); open markers: held-out deals; bars: Wilson 95% intervals.")
 
 def text_fig_effects_caption():
     return ("Paired effects (three players, 100 ms, seed block 7, 500 games each; ± 95% CI; filled: significant after "
@@ -982,14 +983,15 @@ def text_conclusion_1():
             f"{fpp(POOL500, z=False, sign=False)} less than at 100 ms"
             + (f" (and, less clearly, {fpp(POOL900, z=False, sign=False)} less at 900 ms)"
                if POOL900 and POOL900["dw"] < 0 else "")
-            + (f", while TAG's ISMCTS gained {ISM500['d']:.1f} pp of its seats" if ISM500 and ISM500["sig"] else "")
+            + (f", while TAG's ISMCTS won {ISM500['d']:.1f} pp more of its seats" if ISM500 and ISM500["sig"] else "")
             + (f", and the decoupled tree's value showed no sign of growing ({fpp(RISE, z=False)}, held-out)"
                if RISE and abs(RISE["zw"]) < 1.96 and RISE["dw"] <= 1 else "") + "."
             if POOL500 and POOL500["dw"] < 0 else "")
-    s = ("For RQ1, the lead-based evaluation H matters most (28.3 pp of wins without it, "
-         f"{abs(LEAD['dw']):.1f} pp with TAG's lead heuristic instead), then the decoupled information-set tree "
+    s = ("For RQ1, the lead-based evaluation H matters most (28.3 pp without it, "
+         f"{abs(LEAD['dw']):.1f} pp with TAG's lead heuristic), then the decoupled information-set tree "
          f"({fpp(SI_POOL, z=False)} over v3's sequential, determinised tree, two deal sets pooled); round-end rollouts, "
-         "informed rollouts and information sets alone raise the score margin but not detectably the win rate."
+         "card-value rollouts and information sets alone raise the final agent's score margin but not detectably its "
+         "win rate."
          + lead
          + " For RQ3, settings tuned for four players hurt with three, and with four players time beyond 500 ms rarely "
          "changes the wide, shallow tree's decision (both exploratory).")
@@ -997,14 +999,14 @@ def text_conclusion_1():
 
 
 def text_conclusion_2():
-    return ("Our opponents were framework agents and our own previous version; H, B and R were ablated only with "
+    return ("Our opponents were framework agents and our own previous version; the leave-one-out ablation used only "
             "three players at 100 ms; the four-player 500 ms settings "
             "were kept on non-significant 250-game gains; every agent got the same extra time, so RQ2 measures our "
             "agent's scaling relative to ISMCTS's; and CPU-time budgets hide wall-clock effects. As hand-tuned "
             "changes to the model no longer move the agent, future work should learn the evaluation from game "
-            "outcomes; regret matching or EXP3 "
+            "outcomes; regret matching and EXP3 "
             "deserve a test, as decoupled UCT is best overall but not in every game {tak} and was the most "
-            "exploitable in Goofspiel {lanctot}; and opponent models fitted to observed picks (untested, in our code) could replace the single greedy policy that now models all players.")
+            "exploitable in Goofspiel {lanctot}; and opponent models fitted to observed picks (an untested option in our code) could replace the greedy policy that now models all players.")
 
 
 PLACEHOLDERS = {
@@ -1152,13 +1154,13 @@ def add_table(doc, anchor, caption, widths, header, rows, note, num, mar=50):
             par.alignment = WD_ALIGN_PARAGRAPH.LEFT if ci <= 1 else WD_ALIGN_PARAGRAPH.CENTER
             add_runs(par, cite(v, num))
             tcPr = cell._tc.get_or_add_tcPr()
-            mar = OxmlElement("w:tcMar")
+            tcm = OxmlElement("w:tcMar")
             for side in ("left", "right"):
                 e = OxmlElement(f"w:{side}")
                 e.set(qn("w:w"), str(mar))
                 e.set(qn("w:type"), "dxa")
-                mar.append(e)
-            tcPr.append(mar)
+                tcm.append(e)
+            tcPr.append(tcm)
             if ri == 0:
                 tb = OxmlElement("w:tcBorders")
                 border(tb, "bottom", sz=6)
@@ -1328,7 +1330,7 @@ def build():
             r = par.add_run(f"\t({b[2]})")
             r.font.name = "Times New Roman"
         elif kind == "table":
-            add_table(doc, anchor, b[1], b[2], b[3], b[4], b[5], num, mar=30 if len(b[2]) >= 5 else 50)
+            add_table(doc, anchor, b[1], b[2], b[3], b[4], b[5], num, mar=30)
         elif kind == "fig":
             par = new_par(doc, anchor, "Normal")
             par.alignment = WD_ALIGN_PARAGRAPH.CENTER
