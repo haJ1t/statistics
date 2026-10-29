@@ -767,9 +767,8 @@ B.append(("pai", "As the module's rules permit, we used Claude {claude} (Anthrop
           "write and modify the Java code of our agent on top of BasicMCTS, to write and run the experiment and "
           "statistics scripts, and to draft the text, tables and figures of this paper from the results of our runs. A "
           "second Claude instance checked drafts against the brief and the rubric, and its findings were used in the "
-          "revisions. Every number in the paper was computed from the result files of our runs. The prompts are "
-          "listed in GENAI_PROMPTS.md in our code package (those of the early development sessions only in summary). "
-          "The authors take full responsibility for the code and the paper, including any errors."))
+          "revisions. Every number in the paper was computed from the result files of our runs. The authors take full "
+          "responsibility for the code and the paper, including any errors."))
 B.append(("h5", "References"))
 B.append(("refs",))
 

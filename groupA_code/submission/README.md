@@ -23,7 +23,6 @@ experiments.
 | `json/competition/SushiMCTS_1000ms.json` | **the competition file**: 1 s per decision |
 | `json/SushiMCTS_500ms.json` | the same agent for a limit of 500 ms per decision |
 | `json/SushiMCTS_100ms.json` | the final agent at 100 ms per decision, the budget of most experiments in the report |
-| `GENAI_PROMPTS.md` | the prompts of our use of generative AI (see the statement at the end of the report) |
 
 ## Requirements
 
