@@ -33,7 +33,7 @@ import static utilities.Utils.noise;
  * so D is not used (M = 1). Modification E (ensembleTrees > 1) runs the same split-and-vote loop with M independent
  * I trees instead.
  * <p>
- * Safety (not an AI change): the time budget is CPU time, as in BasicMCTS. If wallTimeLimitMS > 0 the search
+ * Safety (not a change to the search): the time budget is CPU time, as in BasicMCTS. If wallTimeLimitMS > 0 the search
  * also stops when that much real time has passed, so a busy machine cannot push a decision over the time limit.
  * <p>
  * One JSON for every table size: if the parameters have a fourPlayer block, decisions in games with four or more

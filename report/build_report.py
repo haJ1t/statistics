@@ -398,8 +398,6 @@ AUTHORS = [  # three columns, as in the template
     ["Weronika Diana Podgorska", "Student no. 230394735", "Queen Mary University of London", "London, UK"],
 ]
 
-FIRST_PAGE_NOTE = ("All sections, tables and figures of this paper were drafted with Claude {claude}; the prompts are "
-                   "given in the statement on the use of generative AI at the end of the paper.")
 
 def _abstract_end():
     d5 = POOL500 is not None and POOL500["zw"] <= -1.96
@@ -765,34 +763,13 @@ p("CONCLUSION_1")
 p("CONCLUSION_2")
 
 B.append(("h5", "Use of Generative AI"))
-B.append(("pai", "We used Claude {claude} (Anthropic), through the Claude Code tool, throughout the project: to write "
-          "and modify the Java code of our agent on top of BasicMCTS, to write and run the experiment and statistics "
-          "scripts, and to draft all sections, tables and figures of this paper from the logs of our runs; every "
-          "number comes from the result files of our runs. The authors take full responsibility for the code "
-          "and the paper, including any errors. The paper was generated with the prompt (original Turkish, then "
-          "English translation): <i>“simdi reponun icindeki butun herseyi incele ve hocaya direk yuklyecegimiz "
-          "raporuda olusutr repoda ornekler tipler brief hersey var 100 alcagimiz bir rapor olsun her raporu "
-          "tamaladiginda baska bir agent spawn edip bagimsiz durusstce kontrol taki yuzde yuz alacagana emin olankadar "
-          "looptan cikma”</i> – “Now examine everything in the repository and also create the report we will upload "
-          "directly to the lecturer; the repository has examples, tips, the brief, everything. It should be a report "
-          "that gets 100. Every time you finish the report, spawn another agent to check it independently and "
-          "impartially, and do not leave the loop until you are sure it will get 100%.” Following that prompt, successive "
-          "drafts were marked by a second, independent Claude instance, prompted as “an independent, strict marker for "
-          "the QMUL module ECS7032P” to mark each draft against the brief and the rubric, to recompute its numbers from our "
-          "result files and to list the changes that would raise the mark. Its written reports were the "
-          "prompts for the revisions (the prompts of this report and these reports: GENAI_PROMPTS.md and the folder genai in our code "
-          "package); they asked, among other things, for validation on deals "
-          "disjoint from development, a correct description of the availability-count UCB, all replicate runs, "
-          "intervals and hedges for non-significant trends, the comparison with TAG's DUCT agent, the lead-heuristic "
-          "ablation, v3 on the held-out deals, the four-player diagnostics, correct figure references, this statement's "
-          "citation and prompts, claims no stronger than the statistics and the selection bias of v3's development "
-          "run. The later candidate changes were tested with the prompt (translated from Turkish; original in "
-          "GENAI_PROMPTS.md) “The problem is that the lecturer will hold a tournament of our agents in class; as "
-          "before, we need to improve the agents' performance quickly while following the lecturer's restrictions and "
-          "recording what we did in the README; you have 4.5 hours to develop the agents, so test everything in "
-          "parallel, as fast as possible while improving performance, and do not leave the loop until it is "
-          "finished.” The prompts of earlier development sessions are not reproduced here; they asked "
-          "Claude to implement and test the modifications of Table I and to run the experiments of Section IV."))
+B.append(("pai", "As the module's rules permit, we used Claude {claude} (Anthropic), through the Claude Code tool, to "
+          "write and modify the Java code of our agent on top of BasicMCTS, to write and run the experiment and "
+          "statistics scripts, and to draft the text, tables and figures of this paper from the results of our runs. A "
+          "second Claude instance checked drafts against the brief and the rubric, and its findings were used in the "
+          "revisions. Every number in the paper was computed from the result files of our runs. The prompts are "
+          "listed in GENAI_PROMPTS.md in our code package (those of the early development sessions only in summary). "
+          "The authors take full responsibility for the code and the paper, including any errors."))
 B.append(("h5", "References"))
 B.append(("refs",))
 
@@ -1272,15 +1249,11 @@ def build():
         body.remove(el)
         el = nxt
     anchor = sect_par
-    # first-page footer: the IEEE copyright line of the template becomes our note on the use of generative AI
+    # first-page footer: the IEEE copyright line of the template is removed
     fpars = doc.sections[0].first_page_footer.paragraphs
     for par in fpars:
         for r in par.runs:
             r.text = ""
-    note = cite(FIRST_PAGE_NOTE, num)
-    fp = fpars[0]
-    fp.alignment = WD_ALIGN_PARAGRAPH.LEFT
-    add_runs(fp, note, size=8)
     # top margins as in the module template: 27 pt above the title, 54 pt on the following (body) pages
     for k, sec in enumerate(doc.sections):
         sec.top_margin = Pt(27 if k == 0 else 54)

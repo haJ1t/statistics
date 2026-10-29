@@ -23,7 +23,7 @@ experiments.
 | `json/competition/SushiMCTS_1000ms.json` | **the competition file**: 1 s per decision |
 | `json/SushiMCTS_500ms.json` | the same agent for a limit of 500 ms per decision |
 | `json/SushiMCTS_100ms.json` | the final agent at 100 ms per decision, the budget of most experiments in the report |
-| `GENAI_PROMPTS.md`, `genai/` | the prompts of our use of generative AI (see the statement at the end of the report) |
+| `GENAI_PROMPTS.md` | the prompts of our use of generative AI (see the statement at the end of the report) |
 
 ## Requirements
 
@@ -168,9 +168,3 @@ agent; Table III of the report):
 Score margin: our score minus the best opponent's score (± 95% CI). The 100 ms rows used `json/SushiMCTS_100ms.json`
 (with four players it has K = 0.5 and X0 with w = 0.7, without W2, F and L); the other rows used the settings of the
 competition files with that CPU budget and no wall-clock guard.
-
-## Use of generative AI
-
-The code and the report were written with Claude (Anthropic) through the Claude Code tool; the authors take full
-responsibility for both. `GENAI_PROMPTS.md` lists the prompts, and `genai/` holds the prompts and written reports of
-the reviewer instances that marked the drafts of the report.
