@@ -18,77 +18,62 @@ AI_NOTE = ("Use of generative AI: as our report states, we used Claude (Anthropi
 
 PEOPLE = [
     ("Hakan Coskun", "241076864", [
-        ("My role.",
-         "As group leader I organised the project and divided the workload so that each of us carried an equal share: "
-         "Halit took the code, Weronika most of the research, and I coordinated, joined the research and led our "
-         "decisions. Early on we agreed to build on BasicMCTS, the permitted base agent, with every modification "
-         "as a switch, so that one code base supports the ablations. With the group I set the "
-         "research questions (which adaptations make the agent stronger, and how their value changes with the time "
-         "per decision and the number of players) and planned the experimental protocol: 500 games per condition, "
-         "95% intervals, budgets from 100 to 900 ms, three and four players, and a final validation on deals never "
-         "used in development. I also kept the report one coherent story rather than three separate projects."),
-        ("My teammates.",
-         "Halit was responsible for the code side: the agent package in TAG, the experiments and the competition "
-         "files. Weronika did most of the research, on information-set MCTS, determinisation, decoupled UCT and "
-         "max-n, and her findings settled our main technical choices."),
-        ("Reflection.",
-         "The most useful lesson was how much evidence a claim needs: with 500 games a win rate still has an "
-         "interval of about ±4.4 percentage points, so several promising changes turned out to be noise. Planning "
-         "the held-out validation paid off: our agent won 52.6% of three-player games on unseen deals, within "
-         "sampling error of our earlier results. Next time I would fix the deal sets earlier, as our first "
-         "comparisons used different deals and could not be paired."),
+        "As group leader I organised the project and divided the work so that each of us carried an equal share. "
+        "Early on we agreed to build on BasicMCTS, the permitted base agent, with every modification as a switch, so "
+        "that one code base supports the ablations. With the group I set the research questions (which adaptations "
+        "make the agent stronger, and how their value changes with the time per decision and the number of players) "
+        "and planned the experimental protocol: 500 games per condition, 95% intervals, budgets from 100 to 900 ms, "
+        "three and four players, and a final validation on deals never used in development. I also kept the report "
+        "one coherent story rather than three separate projects.",
+        "Halit turned our plan into working code, ran the experiments and prepared the competition files, while "
+        "Weronika's research on hidden information and simultaneous moves gave the agent its technical direction.",
+        "The most useful lesson was how much evidence a claim needs: with 500 games a win rate still has an interval "
+        "of about ±4.4 percentage points, so several promising changes turned out to be noise. Planning the held-out "
+        "validation paid off: our agent won 52.6% of three-player games on unseen deals, within sampling error of our "
+        "earlier results. Next time I would fix the deal sets earlier, as our first comparisons used different deals "
+        "and could not be paired.",
     ]),
     ("Halit Ozger", "230625112", [
-        ("My role.",
-         "I was responsible for the code side, an equal share of the work next to Hakan's coordination and "
-         "Weronika's research. I set up TAG and our package and built the agent as a modified copy of BasicMCTS "
-         "within the rules: nothing from the advanced MCTS agent, no change to the framework, everything inside the "
-         "groupW package. As our report states, we wrote the code with Claude; my part was to direct that work, turn "
-         "the team's design into concrete modifications (card-value rollouts, round-end rollouts, max-n backups, "
-         "decoupled selection over information sets and separate four-player settings), keep each one as a switch "
-         "and test it. I oversaw the experiments behind the report, 167 runs, and checked their results. I also "
-         "prepared the competition file for the 1-second limit, with a wall-clock guard, and checked that the agent "
-         "compiles and plays in a fresh copy of TAG."),
-        ("My teammates.",
-         "Hakan led the group: he divided the work, planned the experiments and led our decisions. Weronika did "
-         "most of the research and made our technical decisions possible, above all treating each turn as "
-         "simultaneous and re-sampling the hidden cards in every iteration."),
-        ("Reflection.",
-         "Building the agent taught me that the evaluation matters more than the details of the search: without our "
-         "heuristic the agent lost 28.3 percentage points, more than any change to the search gained. I also learned "
-         "that more thinking time does not automatically help: our lead shrank at 500 ms while TAG's ISMCTS gained. "
-         "Next time I would test at the competition's time limit earlier."),
+        "We split the work equally three ways, and my part was the code. I set up TAG and our package and built the "
+        "agent as a modified copy of BasicMCTS within the rules: nothing from the advanced MCTS agent, no change to "
+        "the framework, everything inside the groupW package. As our report states, we wrote the code with Claude; "
+        "my part was to direct that work, turn the team's design into concrete modifications (card-value rollouts, "
+        "round-end rollouts, max-n backups, decoupled selection over information sets and separate four-player "
+        "settings), keep each one as a switch and test it. I oversaw the experiments behind the report, 167 runs, "
+        "and checked their results. I also prepared the competition file for the 1-second limit, with a wall-clock "
+        "guard, and checked that the agent compiles and plays in a fresh copy of TAG.",
+        "For what to build I relied on Weronika's reading of the literature, and for what to test and when, on "
+        "Hakan's plan and his decisions as group leader.",
+        "Building the agent taught me that the evaluation matters more than the details of the search: without our "
+        "heuristic the agent lost 28.3 percentage points, more than any change to the search gained. I also learned "
+        "that more thinking time does not automatically help: our lead shrank at 500 ms while TAG's ISMCTS gained. "
+        "Next time I would test at the competition's time limit earlier.",
     ]),
     ("Weronika Diana Podgorska", "230394735", [
-        ("My role.",
-         "I carried most of the research, an equal share of the work next to Hakan's coordination and Halit's code. "
-         "I studied how Sushi Go! is modelled in TAG and what makes it hard for plain MCTS: hidden hands, "
-         "simultaneous card choices and several players. I then read the literature on each problem: "
-         "determinisation and information-set MCTS for hidden information, decoupled UCT and its alternatives for "
-         "simultaneous moves, max-n backups for several players, and simulation balancing for rollout policies. I "
-         "summarised what each method would mean for our agent, and these summaries were the basis of our main "
-         "technical decisions: one tree node per turn in which every player chooses from its own statistics, hidden "
-         "cards re-sampled in every iteration instead of a few fixed samples, and an evaluation based on the lead "
-         "over the best opponent, since only first place wins."),
-        ("My teammates.",
-         "Hakan led the group, divided the workload and led our research and decisions. Halit handled the code "
-         "side: the agent in TAG, the experiments and the competition files."),
-        ("Reflection.",
-         "The research showed me that the right method depends on the game. Decoupled selection over information "
-         "sets improved our agent by 8.2 percentage points over its sequential, determinised predecessor, while "
-         "TAG's own agent of this kind, without our card model, was not detectably better than our previous "
-         "version. I also learned to read every result together with its error bars. Next time I would also test "
-         "the alternatives to decoupled UCT, regret matching and EXP3, which our report leaves as future work."),
+        "We shared the work equally, and my part was most of the research. I studied how Sushi Go! is modelled in "
+        "TAG and what makes it hard for plain MCTS: hidden hands, simultaneous card choices and several players. I "
+        "then read the literature on each problem: determinisation and information-set MCTS for hidden information, "
+        "decoupled UCT and its alternatives for simultaneous moves, max-n backups for several players, and "
+        "simulation balancing for rollout policies. I summarised what each method would mean for our agent, and "
+        "these summaries were the basis of our main technical decisions: one tree node per turn in which every "
+        "player chooses from its own statistics, hidden cards re-sampled in every iteration instead of a few fixed "
+        "samples, and an evaluation based on the lead over the best opponent, since only first place wins.",
+        "Hakan kept the project on schedule, shared out the work and made the final calls with us, and Halit turned "
+        "the methods I found into code and tested them.",
+        "The research showed me that the right method depends on the game. Decoupled selection over information "
+        "sets improved our agent by 8.2 percentage points over its sequential, determinised predecessor, while TAG's "
+        "own agent of this kind, without our card model, was not detectably better than our previous version. I also "
+        "learned to read every result together with its error bars. Next time I would also test the alternatives "
+        "to decoupled UCT, regret matching and EXP3, which our report leaves as future work.",
     ]),
 ]
-
 
 def words(text):
     return len(re.findall(r"\S+", text))
 
 
 def build(name, number, parts):
-    body = [f"{lead} {text}" for lead, text in parts] + [AI_NOTE]
+    body = list(parts) + [AI_NOTE]
     n = sum(words(t) for t in body)
     assert n <= 300, (name, n)
     doc = Document()
@@ -115,10 +100,8 @@ def build(name, number, parts):
     gr.italic = True
     g.paragraph_format.space_after = Pt(14)
 
-    for lead, text in parts:
-        p = doc.add_paragraph()
-        p.add_run(lead + " ").bold = True
-        p.add_run(text)
+    for text in parts:
+        p = doc.add_paragraph(text)
         p.paragraph_format.alignment = 3  # justify
     note = doc.add_paragraph()
     nr = note.add_run(AI_NOTE)
