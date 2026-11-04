@@ -18,53 +18,42 @@ AI_NOTE = ("Use of generative AI: as our report states, we used Claude (Anthropi
 
 PEOPLE = [
     ("Hakan Coskun", "241076864", [
-        "As group leader I organised the project and divided the work so that each of us carried an equal share. "
-        "Early on we agreed to build on BasicMCTS, the permitted base agent, with every modification as a switch, so "
-        "that one code base supports the ablations. With the group I set the research questions (which adaptations "
-        "make the agent stronger, and how their value changes with the time per decision and the number of players) "
-        "and planned the experimental protocol: 500 games per condition, 95% intervals, budgets from 100 to 900 ms, "
-        "three and four players, and a final validation on deals never used in development. I also kept the report "
-        "one coherent story rather than three separate projects.",
-        "Halit turned our plan into working code, ran the experiments and prepared the competition files, while "
-        "Weronika's research on hidden information and simultaneous moves gave the agent its technical direction.",
-        "The most useful lesson was how much evidence a claim needs: with 500 games a win rate still has an interval "
-        "of about ±4.4 percentage points, so several promising changes turned out to be noise. Planning the held-out "
-        "validation paid off: our agent won 52.6% of three-player games on unseen deals, within sampling error of our "
-        "earlier results. Next time I would fix the deal sets earlier, as our first comparisons used different deals "
-        "and could not be paired.",
+        "In the first weeks all three of us experimented with the TAG code and each tried an agent of our own, "
+        "which taught us how the framework and Sushi Go! work. As group leader I then divided the work between us "
+        "so that each of us carried an equal share. My own part was research and decisions: I researched "
+        "strategies for Sushi Go! and the search methods used for card games, compared them with the agents we had "
+        "tried, and made the decision on which idea we would develop: BasicMCTS, the permitted base agent, extended "
+        "with a model of how much each card is worth and a search that suits hidden hands and simultaneous moves.",
+        "Halit then worked on this idea and turned it into our final agent, while Weronika studied the agents in "
+        "depth so that our comparisons were sound.",
+        "Leading the group taught me that agreeing early on one central idea, and testing it carefully, works "
+        "better than trying many unrelated ones.",
     ]),
     ("Halit Ozger", "230625112", [
-        "We split the work equally three ways, and my part was the code. I set up TAG and our package and built the "
-        "agent as a modified copy of BasicMCTS within the rules: nothing from the advanced MCTS agent, no change to "
-        "the framework, everything inside the groupW package. As our report states, we wrote the code with Claude; "
-        "my part was to direct that work, turn the team's design into concrete modifications (card-value rollouts, "
-        "round-end rollouts, max-n backups, decoupled selection over information sets and separate four-player "
-        "settings), keep each one as a switch and test it. I oversaw the experiments behind the report, 167 runs, "
-        "and checked their results. I also prepared the competition file for the 1-second limit, with a wall-clock "
-        "guard, and checked that the agent compiles and plays in a fresh copy of TAG.",
-        "For what to build I relied on Weronika's reading of the literature, and for what to test and when, on "
-        "Hakan's plan and his decisions as group leader.",
-        "Building the agent taught me that the evaluation matters more than the details of the search: without our "
-        "heuristic the agent lost 28.3 percentage points, more than any change to the search gained. I also learned "
-        "that more thinking time does not automatically help: our lead shrank at 500 ms while TAG's ISMCTS gained. "
-        "Next time I would test at the competition's time limit earlier.",
+        "We began by each building a first agent of our own in TAG, to learn the framework and the game. Once "
+        "Hakan had compared the options and we had chosen one idea, my part, an equal share of the work, "
+        "was to build it. I set up our package and developed the agent as a modified copy of BasicMCTS within the "
+        "module's rules: nothing from the advanced MCTS agent, no change to the framework, everything inside the "
+        "groupW package. As our report states, we wrote the code with Claude; my part was to direct that work, turn "
+        "the chosen design into concrete modifications, keep each one as a switch so that it could be tested on its "
+        "own, and run and check the experiments. I also prepared the competition file and checked that the agent "
+        "compiles and plays in a fresh copy of TAG.",
+        "Weronika's research on the agents showed us how to compare ours with them properly, and Hakan's research "
+        "and decision gave the code its direction.",
+        "Building the idea step by step showed me how much a good evaluation of a position matters, and that more "
+        "thinking time does not automatically make an agent stronger.",
     ]),
     ("Weronika Diana Podgorska", "230394735", [
-        "We shared the work equally, and my part was most of the research. I studied how Sushi Go! is modelled in "
-        "TAG and what makes it hard for plain MCTS: hidden hands, simultaneous card choices and several players. I "
-        "then read the literature on each problem: determinisation and information-set MCTS for hidden information, "
-        "decoupled UCT and its alternatives for simultaneous moves, max-n backups for several players, and "
-        "simulation balancing for rollout policies. I summarised what each method would mean for our agent, and "
-        "these summaries were the basis of our main technical decisions: one tree node per turn in which every "
-        "player chooses from its own statistics, hidden cards re-sampled in every iteration instead of a few fixed "
-        "samples, and an evaluation based on the lead over the best opponent, since only first place wins.",
-        "Hakan kept the project on schedule, shared out the work and made the final calls with us, and Halit turned "
-        "the methods I found into code and tested them.",
-        "The research showed me that the right method depends on the game. Decoupled selection over information "
-        "sets improved our agent by 8.2 percentage points over its sequential, determinised predecessor, while TAG's "
-        "own agent of this kind, without our card model, was not detectably better than our previous version. I also "
-        "learned to read every result together with its error bars. Next time I would also test the alternatives "
-        "to decoupled UCT, regret matching and EXP3, which our report leaves as future work.",
+        "During the first weeks each of us played with the framework and wrote a simple agent. We then shared "
+        "the work equally, and my part was in-depth research on the agents, so that we could compare them properly. "
+        "I studied how TAG's agents and the methods behind them work, such as BasicMCTS, information-set MCTS, "
+        "decoupled UCT for simultaneous moves and the simpler framework agents, and what each of them assumes "
+        "about hidden cards and the other players. This told us which agents to compare ours with and how to make "
+        "the comparison fair: the same time per decision for every agent, every seat played equally often and "
+        "enough games for clear results. It also helped with the technical details of our own agent.",
+        "Hakan weighed up the strategies and chose our approach, and Halit built the agent from it.",
+        "The research showed me that the right method depends on the game, and that a fair comparison needs as "
+        "much care as the agent itself.",
     ]),
 ]
 
